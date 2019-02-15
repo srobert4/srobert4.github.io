@@ -48,6 +48,24 @@
     </item>
     
     <item>
+      <title>licorice</title>
+      <link>/tags/licorice/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
+      
+      <guid>/tags/licorice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>neuroscience</title>
+      <link>/tags/neuroscience/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
+      
+      <guid>/tags/neuroscience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>plot</title>
       <link>/tags/plot/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
@@ -57,11 +75,29 @@
     </item>
     
     <item>
+      <title>realtime</title>
+      <link>/tags/realtime/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
+      
+      <guid>/tags/realtime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>regression</title>
       <link>/tags/regression/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
       <guid>/tags/regression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software</title>
+      <link>/tags/software/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
+      
+      <guid>/tags/software/</guid>
       <description></description>
     </item>
     

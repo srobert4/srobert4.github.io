@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>licorice on Samantha Robertson</title>
+    <link>/tags/licorice/</link>
+    <description>Recent content in licorice on Samantha Robertson</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Apr 2018 00:00:00 -0700</lastBuildDate>
+    
+	<atom:link href="/tags/licorice/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>An Open-Source Realtime Computation Platform</title>
+      <link>/publication/licorice-one/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
+      
+      <guid>/publication/licorice-one/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

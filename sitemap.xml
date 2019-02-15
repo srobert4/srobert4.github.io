@@ -36,6 +36,14 @@
     
     <url>
     
+      <loc>/publication/licorice-one/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/talk/example/</loc>
       <lastmod>2017-01-01T00:00:00-08:00</lastmod>
     </url>
@@ -68,24 +76,8 @@
     
     <url>
     
-      <loc>/publication/person-re-id/</loc>
-      <lastmod>2015-09-01T00:00:00-07:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/post/2015-07-23-r-rmarkdown/</loc>
       <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/publication/clothing-search/</loc>
-      <lastmod>2013-07-01T00:00:00-07:00</lastmod>
     </url>
     
   
@@ -100,16 +92,7 @@
     <url>
     
       <loc>/publication_types/1/</loc>
-      <lastmod>2013-07-01T00:00:00-07:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/publication_types/2/</loc>
-      <lastmod>2015-09-01T00:00:00-07:00</lastmod>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -178,8 +161,8 @@
     
     <url>
     
-      <loc>/authors/ga-cushen/</loc>
-      <lastmod>2015-09-01T00:00:00-07:00</lastmod>
+      <loc>/authors/paul-nuyujukian/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -187,8 +170,8 @@
     
     <url>
     
-      <loc>/authors/ms-nixon/</loc>
-      <lastmod>2013-07-01T00:00:00-07:00</lastmod>
+      <loc>/authors/pavan-mehrotra/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -214,7 +197,7 @@
     <url>
     
       <loc>/publication_types/</loc>
-      <lastmod>2013-07-01T00:00:00-07:00</lastmod>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -223,7 +206,7 @@
     <url>
     
       <loc>/publication/</loc>
-      <lastmod>2015-09-01T00:00:00-07:00</lastmod>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
     </url>
     
   
@@ -256,8 +239,26 @@
     
     <url>
     
+      <loc>/authors/sabar-dasgupta/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/</loc>
       <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/samantha-robertson/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -297,6 +298,24 @@
     
     <url>
     
+      <loc>/tags/licorice/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/neuroscience/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/tags/plot/</loc>
       <lastmod>2015-07-23T21:13:14-05:00</lastmod>
       <priority>0</priority>
@@ -306,8 +325,26 @@
     
     <url>
     
+      <loc>/tags/realtime/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/tags/regression/</loc>
       <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/software/</loc>
+      <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
