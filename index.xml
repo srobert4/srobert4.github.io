@@ -6,8 +6,83 @@
     <description>Recent content in Samantha Robertson on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Feb 2019 00:00:00 -0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A SimVascular Plug-in</title>
+      <link>/project/simvascular/</link>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      
+      <guid>/project/simvascular/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;SimVascular is an open-source software project partly based in the Stanford Cardiovascular Biomechanics Computation Lab, where I spent the Summer of 2018 with support from the Stanford Bioengineering REU program. SimVascular enables segmentation of medical image data to develop 3-dimensional cardiovascular models, which can then be used for patient-specific simulation and analysis of bloodflow.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Overview&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;My summer project involved developing a GUI plug-in for the software that would allow researchers to rapidly prototype and run simulations on lumped parameter models of the cardiovascular system. Lumped parameter modelling uses electrical circuit diagrams as an analogy to the cardiovascular system, allowing analysis of fundamental quantities such as pressure and flow. These models are often used in early stages of model development, as the simulations are relatively computationally inexpensive. They are also often used to provide boundary conditions to more complex, 3-D models.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Motivation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Under the current architecture, researchers had to manually derive the ODEs that governed their LPN models, and write custom simulation code. This was extremely tedious for large models. In order to use lumped parameter models as boundary conditions, researchers needed to edit FORTRAN code. My goal was to streamline this process by designing a simple drag-and-drop graphical user interface within SimVascular. This interface allows researchers to quickly and easily design models, run simulations, and visualize the results all within the easy-to-use plug-in.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Execution&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The simulator plug-in is written in C++ with Qt for easy integration into the existing SimVascular architecture. Promising future directions involve specialization of the simulator for cardiovascular modelling by including large components such as a &lt;a href=&#34;https://en.wikipedia.org/wiki/Windkessel_effect&#34; target=&#34;_blank&#34;&gt;Windkessel model&lt;/a&gt; or even a &amp;ldquo;heart model&amp;rdquo;, which are composed of multiple traditional electrical components.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>LiCoRICE</title>
+      <link>/project/licorice/</link>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      
+      <guid>/project/licorice/</guid>
+      <description>&lt;p&gt;LiCoRICE is an &lt;strong&gt;open-source, realtime computation platform specialized for systems neuroscience experimentation&lt;/strong&gt;. It has been developed in the Brain Interfacing Lab is now the system used to run the group&amp;rsquo;s closed-loop brain interface experiments. The platform is written in &lt;strong&gt;C and Python&lt;/strong&gt;, and is specifically designed with a modular architecture to allow easy prototyping of models by experimenters using only Python.&lt;/p&gt;
+
+&lt;p&gt;I joined the LiCoRICE project in the Summer of 2017. My role has been focused on specializing the platform for systems neuroscience, which has included:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Testing and implementing graphics (using Pygame) and USB joystick input to the system&lt;/li&gt;
+&lt;li&gt;Developing a realistic systems neuroscience simulation experiment. This includes writing LiCoRICE modules to generate synthetic neural activity from joystick movement input and to decode this synthetic neural data using a pre-trained Kalman filter with steady state gain.&lt;/li&gt;
+&lt;li&gt;Organizing, executing and collecting data from a human trial of the simulation with 7 human participants&lt;/li&gt;
+&lt;li&gt;Analysis of the experimental data and comparison to previous findings to validate the system&lt;/li&gt;
+&lt;li&gt;Contribution to the conference paper published in LCTES&amp;rsquo; 18, and more significantly to a second publication currently in progress, focusing on the systems neuroscience applications of the system.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Race, Wealth and Education in America</title>
+      <link>/project/race-educ/</link>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      
+      <guid>/project/race-educ/</guid>
+      <description>&lt;p&gt;Students in &lt;a href=&#34;https://datalab.stanford.edu&#34; target=&#34;_blank&#34;&gt;Data Challenge Lab&lt;/a&gt;, the data science intensive course taught by Bill Behrman and Hadley Wickham, pursue a quarter-long data exploration and analysis project of their choice using the Tidyverse R skills they learn in the course. My project explored the dataset released by the &lt;a href=&#34;https://cepa.stanford.edu/seda/overview&#34; target=&#34;_blank&#34;&gt;Stanford Education Data Archive&lt;/a&gt; along with the publication &lt;a href=&#34;https://cepa.stanford.edu/sites/default/files/wp16-10-v201712.pdf&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;The Geography of Racial/Ethic Test Score Gaps&lt;/em&gt;&lt;/a&gt;, (Reardon, Kalogrides and Shores, 2017). Using a number of creative data visualization techniques, including some inspired by the &lt;a href=&#34;https://www.nytimes.com/interactive/2016/04/29/upshot/money-race-and-success-how-your-school-district-compares.html&#34; target=&#34;_blank&#34;&gt;New York Times interactive&lt;/a&gt; based on the paper, I was able to explore the education achievement gap between students of different races and with parents of different income and education levels geographically, by subject and by student age.&lt;/p&gt;
+
+&lt;p&gt;I am unable to share any results or code in accordance with the class policy and the &lt;a href=&#34;https://communitystandards.stanford.edu/policies-and-guidance/honor-code&#34; target=&#34;_blank&#34;&gt;Stanford Honor Code&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Stanford Open Policing Project</title>
+      <link>/project/opp/</link>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      
+      <guid>/project/opp/</guid>
+      <description>&lt;p&gt;In the Fall of 2018, I worked with the researchers at the &lt;a href=&#34;https://openpolicing.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Open Policing Project&lt;/a&gt; (OPP) in the &lt;a href=&#34;https://policylab.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Computational Policy Lab&lt;/a&gt;, to implement and run the Veil of Darkness Test, as proposed by &lt;a href=&#34;https://www.rand.org/pubs/reprints/RP1253.html&#34; target=&#34;_blank&#34;&gt;Grogger &amp;amp; Ridgeway in 2006&lt;/a&gt; using the large OPP dataset.  The premise of the test is that the race of a driver is less visible to the police when it is dark outside than when it is light. Therefore, in the presence of racial bias, there should be a greater disparity in the racial breakdown of drivers stopped during daylight hours than at night. There are a number of factors to control for, most critically time of day, location of the stop.&lt;/p&gt;
+
+&lt;p&gt;My responsibilities included:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Finding states and cities for which the data had the necessary covariates for the test, e.g. driver race and stop location&lt;/li&gt;
+&lt;li&gt;Developing raw data visualizations to provide context and intuition for regression models&lt;/li&gt;
+&lt;li&gt;Implementing the test in R for a large dataset aggregated across cities and states&lt;/li&gt;
+&lt;li&gt;Analysing the results of the visualizations and regression models and drawing conclusions about the existence of racial bias and the statistical strengths and limitations of the method&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Display Jupyter Notebooks with Academic</title>
@@ -134,33 +209,6 @@ rm Untitled.md
 &lt;/ul&gt;
 
 &lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>External Project</title>
-      <link>/project/external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
-      
-      <guid>/project/external-project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Internal Project</title>
-      <link>/project/internal-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0700</pubDate>
-      
-      <guid>/project/internal-project/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
 </description>
     </item>
     
