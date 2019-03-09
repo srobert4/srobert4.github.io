@@ -683,7 +683,9 @@ classes %&gt;%
   scale_y_continuous(limits = c(0, 42), expand = c(0,0)) +
   theme_minimal() +
   theme(
-    legend.position = &quot;bottom&quot;
+    legend.position = &quot;bottom&quot;,
+    
+    legend.direction = &quot;vertical&quot;,
   ) +
   coord_flip() +
   labs(

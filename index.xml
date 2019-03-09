@@ -233,7 +233,9 @@ classes %&amp;gt;%
   scale_y_continuous(limits = c(0, 42), expand = c(0,0)) +
   theme_minimal() +
   theme(
-    legend.position = &amp;quot;bottom&amp;quot;
+    legend.position = &amp;quot;bottom&amp;quot;,
+    
+    legend.direction = &amp;quot;vertical&amp;quot;,
   ) +
   coord_flip() +
   labs(
