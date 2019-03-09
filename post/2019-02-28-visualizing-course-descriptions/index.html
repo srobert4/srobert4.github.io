@@ -386,7 +386,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    10 min read
+    9 min read
   </span>
   
 
@@ -662,6 +662,7 @@ classes %&gt;%
   ) +
   theme(
     legend.position = &quot;bottom&quot;,
+    legend.direction = &quot;vertical&quot;,
     axis.ticks.x = element_blank(),
     axis.text.x = element_blank()
   ) +
@@ -669,7 +670,7 @@ classes %&gt;%
     x = &quot;Quarter&quot;,
     y = &quot;Units&quot;,
     color = NULL,
-    title = &quot;Through my degree I&#39;ve taken more classes in Engineering and fewer in Humanities and Sciences&quot;
+    title = &quot;Over Time I&#39;ve started to take more classes in Engineering\nand fewer in Humanities and Sciences&quot;
   )</code></pre>
 <p><img src="/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>…what about by Department?</p>
@@ -752,46 +753,8 @@ head(explore_courses, 2) %&gt;% knitr::kable()</code></pre>
 <p>Now we can join this to <code>classes</code>:</p>
 <pre class="r"><code>classes_with_descriptions &lt;-
   classes %&gt;% 
-  left_join(explore_courses, by = c(&quot;dept&quot;, &quot;code&quot;))
-
-head(classes_with_descriptions, 2) %&gt;% knitr::kable()</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">dept</th>
-<th align="left">code</th>
-<th align="left">school</th>
-<th align="right">units</th>
-<th align="right">quarter</th>
-<th align="right">code_numeric</th>
-<th align="left">title</th>
-<th align="left">desc</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">ESF</td>
-<td align="left">6A</td>
-<td align="left">Office Of Vice Provost For Undergraduate Education</td>
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="left">Education as Self-Fashioning: The Wind of Freedom</td>
-<td align="left">Stanford’s unofficial motto, “the wind of freedom blows,” engraved in German on the university seal, invites us the ponder freedom in the context of education. What is the relation between freedom and the “liberal” arts? Does studying free your mind? Does free will even exist? If so, how does education help you develop its potential? This course will look at various authors – from antiquity through the 20th century – who have thought about the blessings, burdens, and obligations of human freedom. Beginning with Eve in the Garden of Eden, we will explore how exercising freedom in your personal choices and conduct not only determines your fate as an individual but carries with it a measure of responsibility for the world. We will place special emphasis on the implications of such responsibility in our own time.</td>
-</tr>
-<tr class="even">
-<td align="left">LAWGEN</td>
-<td align="left">116N</td>
-<td align="left">Law School</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">116</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-</tbody>
-</table>
-<p>Even in the first six results, there are some <code>NA</code> values resulting from the join. A concern is that the matching of <code>dept</code> and <code>code</code> isn’t working due to a formatting quirk. Sadly, it’s even worse… Explore Courses deletes classes after they haven’t been offered for a while!</p>
+  left_join(explore_courses, by = c(&quot;dept&quot;, &quot;code&quot;))</code></pre>
+<p>Even in the first few results, there are some <code>NA</code> values resulting from the join. A concern is that the matching of <code>dept</code> and <code>code</code> isn’t working due to a formatting quirk. Sadly, it’s even worse… Explore Courses deletes classes after they haven’t been offered for a while!</p>
 <pre class="r"><code>classes_with_descriptions %&gt;% 
   filter(is.na(desc)) %&gt;% 
   knitr::kable()</code></pre>

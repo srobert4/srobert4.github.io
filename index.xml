@@ -212,6 +212,7 @@ classes %&amp;gt;%
   ) +
   theme(
     legend.position = &amp;quot;bottom&amp;quot;,
+    legend.direction = &amp;quot;vertical&amp;quot;,
     axis.ticks.x = element_blank(),
     axis.text.x = element_blank()
   ) +
@@ -219,7 +220,7 @@ classes %&amp;gt;%
     x = &amp;quot;Quarter&amp;quot;,
     y = &amp;quot;Units&amp;quot;,
     color = NULL,
-    title = &amp;quot;Through my degree I&amp;#39;ve taken more classes in Engineering and fewer in Humanities and Sciences&amp;quot;
+    title = &amp;quot;Over Time I&amp;#39;ve started to take more classes in Engineering\nand fewer in Humanities and Sciences&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;…what about by Department?&lt;/p&gt;
@@ -302,46 +303,8 @@ head(explore_courses, 2) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now we can join this to &lt;code&gt;classes&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions &amp;lt;-
   classes %&amp;gt;% 
-  left_join(explore_courses, by = c(&amp;quot;dept&amp;quot;, &amp;quot;code&amp;quot;))
-
-head(classes_with_descriptions, 2) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;school&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;units&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;quarter&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;code_numeric&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;title&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;desc&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;ESF&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;6A&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Office Of Vice Provost For Undergraduate Education&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Education as Self-Fashioning: The Wind of Freedom&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Stanford’s unofficial motto, “the wind of freedom blows,” engraved in German on the university seal, invites us the ponder freedom in the context of education. What is the relation between freedom and the “liberal” arts? Does studying free your mind? Does free will even exist? If so, how does education help you develop its potential? This course will look at various authors – from antiquity through the 20th century – who have thought about the blessings, burdens, and obligations of human freedom. Beginning with Eve in the Garden of Eden, we will explore how exercising freedom in your personal choices and conduct not only determines your fate as an individual but carries with it a measure of responsibility for the world. We will place special emphasis on the implications of such responsibility in our own time.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;LAWGEN&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;116N&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Law School&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;116&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Even in the first six results, there are some &lt;code&gt;NA&lt;/code&gt; values resulting from the join. A concern is that the matching of &lt;code&gt;dept&lt;/code&gt; and &lt;code&gt;code&lt;/code&gt; isn’t working due to a formatting quirk. Sadly, it’s even worse… Explore Courses deletes classes after they haven’t been offered for a while!&lt;/p&gt;
+  left_join(explore_courses, by = c(&amp;quot;dept&amp;quot;, &amp;quot;code&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Even in the first few results, there are some &lt;code&gt;NA&lt;/code&gt; values resulting from the join. A concern is that the matching of &lt;code&gt;dept&lt;/code&gt; and &lt;code&gt;code&lt;/code&gt; isn’t working due to a formatting quirk. Sadly, it’s even worse… Explore Courses deletes classes after they haven’t been offered for a while!&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions %&amp;gt;% 
   filter(is.na(desc)) %&amp;gt;% 
   knitr::kable()&lt;/code&gt;&lt;/pre&gt;
