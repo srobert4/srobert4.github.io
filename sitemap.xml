@@ -4,14 +4,6 @@
     
     <url>
     
-      <loc>/post/2015-07-23-r-rmarkdown/</loc>
-      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/post/2019-02-28-visualizing-course-descriptions/</loc>
       <lastmod>2019-02-28T00:00:00+00:00</lastmod>
     </url>
@@ -46,14 +38,6 @@
     
       <loc>/project/opp/</loc>
       <lastmod>2019-02-15T00:00:00-08:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/post/jupyter/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -100,14 +84,6 @@
     
     <url>
     
-      <loc>/post/getting-started/</loc>
-      <lastmod>2018-01-13T00:00:00-08:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/author/admin/</loc>
     </url>
     
@@ -131,24 +107,6 @@
     
     <url>
     
-      <loc>/tags/academic/</loc>
-      <lastmod>2018-01-13T00:00:00-08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/authors/admin/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/author/</loc>
       <priority>0</priority>
     </url>
@@ -158,7 +116,6 @@
     <url>
     
       <loc>/authors/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -295,7 +252,7 @@
     <url>
     
       <loc>/tags/</loc>
-      <lastmod>2018-01-13T00:00:00-08:00</lastmod>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
