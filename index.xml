@@ -234,8 +234,7 @@ classes %&amp;gt;%
   theme_minimal() +
   theme(
     legend.position = &amp;quot;bottom&amp;quot;,
-    
-    legend.direction = &amp;quot;vertical&amp;quot;,
+    legend.direction = &amp;quot;vertical&amp;quot;
   ) +
   coord_flip() +
   labs(
