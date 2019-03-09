@@ -4,6 +4,22 @@
     
     <url>
     
+      <loc>/post/2015-07-23-r-rmarkdown/</loc>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/2019-02-28-visualizing-course-descriptions/</loc>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/project/simvascular/</loc>
       <lastmod>2019-02-15T00:00:00-08:00</lastmod>
     </url>
@@ -92,15 +108,14 @@
     
     <url>
     
-      <loc>/post/2015-07-23-r-rmarkdown/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <loc>/author/admin/</loc>
     </url>
     
   
     
     <url>
     
-      <loc>/author/admin/</loc>
+      <loc>/post/2019-03-07-swdchallenge/</loc>
     </url>
     
   
@@ -159,6 +174,15 @@
     
     <url>
     
+      <loc>/tags/d3/</loc>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/authors/paul-nuyujukian/</loc>
       <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
@@ -178,7 +202,7 @@
     <url>
     
       <loc>/post/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -211,17 +235,8 @@
     
     <url>
     
-      <loc>/categories/r/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/r-markdown/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <loc>/tags/r/</loc>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -247,7 +262,7 @@
     <url>
     
       <loc>/</loc>
-      <lastmod>2019-02-15T00:00:00-08:00</lastmod>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -341,6 +356,15 @@
     
     <url>
     
+      <loc>/tags/data-visualization/</loc>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/tags/eda/</loc>
       <lastmod>2019-02-15T00:00:00-08:00</lastmod>
       <priority>0</priority>
@@ -386,26 +410,8 @@
     
     <url>
     
-      <loc>/tags/plot/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/tags/realtime/</loc>
       <lastmod>2019-02-15T00:00:00-08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/regression/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -442,6 +448,24 @@
     
       <loc>/tags/statistics/</loc>
       <lastmod>2019-02-15T00:00:00-08:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/text-analysis/</loc>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/tidyverse/</loc>
+      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
