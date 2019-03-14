@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content=" Coming soon… My first #SWDchallenge submission  ">
+  <meta name="description" content="This month I decided to take part in the Storytelling With Data monthly challenge for the first time! The dataset we were given to explore contains global aid exchanges between 47 countries across the world across the years 1973-2013. The goal is to create visualizations that answers the broad question: Who Donates?, as well as some bonus questions about distribution of donations geographically, temporally and by purpose of donation. Here’s my initial attempt!">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/2019-03-07-swdchallenge/">
@@ -122,19 +122,20 @@
   
   <meta property="og:site_name" content="Samantha Robertson">
   <meta property="og:url" content="/post/2019-03-07-swdchallenge/">
-  <meta property="og:title" content="#SWDChallenge | Samantha Robertson">
-  <meta property="og:description" content=" Coming soon… My first #SWDchallenge submission  "><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:title" content="#SWDChallenge March 2019 | Samantha Robertson">
+  <meta property="og:description" content="This month I decided to take part in the Storytelling With Data monthly challenge for the first time! The dataset we were given to explore contains global aid exchanges between 47 countries across the world across the years 1973-2013. The goal is to create visualizations that answers the broad question: Who Donates?, as well as some bonus questions about distribution of donations geographically, temporally and by purpose of donation. Here’s my initial attempt!"><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
+  <meta property="article:published_time" content="2019-03-14T00:00:00&#43;00:00">
   
+  <meta property="article:modified_time" content="2019-03-14T00:00:00&#43;00:00">
   
+
   
 
   
 
-  
-
-  <title>#SWDChallenge | Samantha Robertson</title>
+  <title>#SWDChallenge March 2019 | Samantha Robertson</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -353,7 +354,7 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">#SWDChallenge</h1>
+  <h1 itemprop="name">#SWDChallenge March 2019</h1>
 
   
 
@@ -362,8 +363,8 @@
 
 
 
-<meta content="" itemprop="datePublished">
-<meta content="" itemprop="dateModified">
+<meta content="2019-03-14 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-03-14 00:00:00 &#43;0000 UTC" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -376,7 +377,7 @@
     
       
     
-    <time>Jan 1, 0001</time>
+    <time>Mar 14, 2019</time>
   </span>
   
 
@@ -385,7 +386,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    4 min read
   </span>
   
 
@@ -400,7 +401,7 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=%23SWDChallenge&amp;url=%2fpost%2f2019-03-07-swdchallenge%2f"
+         href="https://twitter.com/intent/tweet?text=%23SWDChallenge%20March%202019&amp;url=%2fpost%2f2019-03-07-swdchallenge%2f"
          target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
       </a>
@@ -414,21 +415,21 @@
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-03-07-swdchallenge%2f&amp;title=%23SWDChallenge"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-03-07-swdchallenge%2f&amp;title=%23SWDChallenge%20March%202019"
          target="_blank" rel="noopener">
         <i class="fab fa-linkedin-in"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-03-07-swdchallenge%2f&amp;title=%23SWDChallenge"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-03-07-swdchallenge%2f&amp;title=%23SWDChallenge%20March%202019"
          target="_blank" rel="noopener">
         <i class="fab fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=%23SWDChallenge&amp;body=%2fpost%2f2019-03-07-swdchallenge%2f">
+         href="mailto:?subject=%23SWDChallenge%20March%202019&amp;body=%2fpost%2f2019-03-07-swdchallenge%2f">
         <i class="fas fa-envelope"></i>
       </a>
     </li>
@@ -467,13 +468,258 @@
       
 
 
-<div id="coming-soon-my-first-swdchallenge-submission" class="section level1">
-<h1>Coming soon… My first #SWDchallenge submission</h1>
+<p>This month I decided to take part in the <a href="http://www.storytellingwithdata.com/swdchallenge">Storytelling With Data monthly challenge</a> for the first time! The dataset we were given to explore contains global aid exchanges between 47 countries across the world across the years 1973-2013. The goal is to create visualizations that answers the broad question: <strong>Who Donates?</strong>, as well as some bonus questions about distribution of donations geographically, temporally and by purpose of donation. Here’s my initial attempt! Along with some code. (The only package I use here is <code>tidyverse</code>).</p>
+<div id="the-data" class="section level3">
+<h3>The Data</h3>
+<p>The data provided is nice and clean, so all we are left to do is read it in using <code>read_csv()</code>. I changed some variable names to make it nicer to work with, and noticed that there are a few negative quantities of money in the data, which I drop since they are impossible. Here’s a glimpse of what the data looks like:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">id</th>
+<th align="right">year</th>
+<th align="left">donor</th>
+<th align="left">recipient</th>
+<th align="right">amount</th>
+<th align="right">purpose_code</th>
+<th align="left">purpose_desc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2414478</td>
+<td align="right">1977</td>
+<td align="left">Saudi Arabia</td>
+<td align="left">India</td>
+<td align="right">348718518</td>
+<td align="right">23030</td>
+<td align="left">Power generation/renewable sources</td>
+</tr>
+<tr class="even">
+<td align="left">2414509</td>
+<td align="right">1977</td>
+<td align="left">Saudi Arabia</td>
+<td align="left">Brazil</td>
+<td align="right">191647004</td>
+<td align="right">23040</td>
+<td align="left">Electrical transmission/ distribution</td>
+</tr>
+<tr class="odd">
+<td align="left">2414635</td>
+<td align="right">1983</td>
+<td align="left">Saudi Arabia</td>
+<td align="left">India</td>
+<td align="right">79371799</td>
+<td align="right">21030</td>
+<td align="left">Rail transport</td>
+</tr>
+<tr class="even">
+<td align="left">2414665</td>
+<td align="right">1984</td>
+<td align="left">Saudi Arabia</td>
+<td align="left">Taiwan</td>
+<td align="right">212202942</td>
+<td align="right">21030</td>
+<td align="left">Rail transport</td>
+</tr>
+<tr class="odd">
+<td align="left">2414667</td>
+<td align="right">1984</td>
+<td align="left">Saudi Arabia</td>
+<td align="left">Korea</td>
+<td align="right">134511154</td>
+<td align="right">21040</td>
+<td align="left">Water transport</td>
+</tr>
+<tr class="even">
+<td align="left">2414684</td>
+<td align="right">1985</td>
+<td align="left">Saudi Arabia</td>
+<td align="left">India</td>
+<td align="right">128074768</td>
+<td align="right">23000</td>
+<td align="left">Energy generation and supply, combinations of activities</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="who-donates" class="section level3">
+<h3>Who Donates?</h3>
+<p>One of the challenges in answering this question is how to summarize across time. I chose to look at the proportion of the total money contributed to global aid that each country contributed and received.</p>
+<pre class="r"><code>donated &lt;-
+  data %&gt;% 
+  group_by(donor) %&gt;% 
+  summarise(donated = sum(amount)) %&gt;% 
+  mutate(prop_donated = donated / sum(donated)) %&gt;% 
+  select(country = donor, prop_donated)
+
+received &lt;-
+  data %&gt;% 
+  group_by(recipient) %&gt;% 
+  summarise(received = sum(amount)) %&gt;% 
+  mutate(prop_received = received / sum(received)) %&gt;% 
+  select(country = recipient, prop_received)
+
+aid &lt;-
+  donated %&gt;% 
+  full_join(received, by = c(&quot;country&quot;)) %&gt;% 
+  mutate_at(vars(-country), ~if_else(is.na(.), 0, .)) %&gt;% 
+  gather(-country, key = direction, value = proportion_of_aid) %&gt;% 
+  mutate(direction = str_extract(direction, &quot;[^_]+$&quot;))
+
+country_order &lt;-
+  aid %&gt;% 
+  spread(direction, proportion_of_aid) %&gt;% 
+  mutate(diff = donated - received) %&gt;% 
+  arrange(diff) %&gt;% 
+  pull(country)
+
+aid &lt;-
+  aid %&gt;% 
+   mutate(country = factor(country, levels = country_order, ordered = TRUE))
+
+segments &lt;-
+  aid %&gt;% 
+  spread(direction, proportion_of_aid)
+
+aid %&gt;% 
+  ggplot(aes(y = country)) +
+  geom_segment(
+    aes(yend = country, x = donated, xend = received), 
+    color = &quot;grey40&quot;,
+    data = segments
+  ) +
+  geom_point(aes(x = proportion_of_aid, color = direction), size = 2) +
+  scale_y_discrete(expand = expand_scale(0)) +
+  scale_x_sqrt(
+    labels = scales::percent, 
+    expand = expand_scale(0), 
+    limits = c(0,0.4),
+    breaks = c(0, 0.01, 0.025, 0.05, 0.1, 0.2, 0.3, 0.4)
+  ) +
+  scale_color_brewer(type = &quot;qual&quot;, palette = &quot;Set1&quot;, labels = str_to_title) +
+  theme_minimal() +
+  theme(legend.position = &quot;top&quot;) +
+  coord_cartesian(clip = &quot;off&quot;) +
+  labs(
+    y = NULL,
+    x = glue::glue(&quot;Percentage of Total Aid {min(pull(data, year))} - {max(pull(data, year))}&quot;),
+    color = NULL,
+    title = &quot;The United States and Japan are the world&#39;s major donors&quot;,
+    subtitle = &quot;India has received almost 40% of all global aid&quot;
+  )</code></pre>
+<p><img src="/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Excuse the squished y-axis. I played around with it for a while and eventually gave up. Any hints are very welcome!</p>
+</div>
+<div id="has-the-amount-donated-changed-over-time" class="section level3">
+<h3>Has the Amount Donated Changed Over Time?</h3>
+<p>In keeping with the same metric, proportion of aid contributed and received, we can also look at the trends over time. I’ve highlighted the top three donors and recipients in the figure. Interestingly, it seems that receiving tends to be steadier over time, while donations see more anomalous spikes</p>
+<pre class="r"><code>donated &lt;-
+  data %&gt;% 
+  group_by(donor, year) %&gt;% 
+  summarise(donated = sum(amount)) %&gt;% 
+  ungroup() %&gt;% 
+  mutate(prop_donated = donated / sum(donated)) %&gt;% 
+  select(country = donor, year, prop_donated)
+
+received &lt;-
+  data %&gt;% 
+  group_by(recipient, year) %&gt;% 
+  summarise(received = sum(amount)) %&gt;% 
+  ungroup() %&gt;% 
+  mutate(prop_received = received / sum(received)) %&gt;% 
+  select(country = recipient, year, prop_received)
+
+timeseries &lt;-
+  donated %&gt;% 
+  full_join(received, by = c(&quot;country&quot;, &quot;year&quot;)) %&gt;% 
+  mutate_at(vars(prop_donated, prop_received), ~if_else(is.na(.), 0, .)) %&gt;% 
+  gather(prop_donated, prop_received, key = direction, value = proportion) %&gt;% 
+  mutate(
+    proportion = if_else(direction == &quot;prop_donated&quot;, proportion, -proportion)
+  )
+  
+top_3 &lt;- 
+  aid %&gt;% 
+  filter(direction == &quot;donated&quot;) %&gt;% 
+  top_n(3, proportion_of_aid) %&gt;% 
+  pull(country)
+
+bottom_3 &lt;-
+  aid %&gt;% 
+  filter(direction == &quot;received&quot;) %&gt;% 
+  top_n(3, proportion_of_aid) %&gt;% 
+  pull(country)
+
+timeseries_main &lt;-
+  timeseries %&gt;%
+  filter(country %in% top_3 &amp; direction == &quot;prop_donated&quot; | 
+           country %in% bottom_3 &amp; direction == &quot;prop_received&quot;)
+
+country_order &lt;- 
+  timeseries_main %&gt;% 
+  filter(year == max(pull(data, year))) %&gt;% 
+  arrange(desc(proportion)) %&gt;% 
+  pull(country)
+
+timeseries_main &lt;-
+  timeseries_main %&gt;% 
+  mutate(country = factor(country, levels = country_order, ordered = TRUE))
+
+labeller &lt;-
+  function(y) {
+    y = if_else(y &lt; 0, -y, y)
+    scales::percent(y)
+  }
+
+timeseries %&gt;% 
+  unite(group, country, direction, remove = FALSE) %&gt;% 
+  ggplot(aes(year, proportion)) +
+  geom_line(aes(group = group), alpha = 0.2) +
+  geom_line(aes(color = country), data = timeseries_main) +
+  scale_x_continuous(breaks = seq(1970, 2015, by = 5)) +
+  scale_y_continuous(labels = labeller) +
+  scale_color_brewer(type = &quot;qual&quot;, palette = &quot;Dark2&quot;) +
+  theme_minimal() +
+  labs(
+    x = NULL,
+    color = NULL,
+    y = NULL,
+    title = &quot;Contributions from significant donors is not constant over time&quot;,
+    subtitle = &quot;Major events like war and recession drive spikes in aid&quot;
+  ) +
+  annotate(
+    geom = &quot;text&quot;,
+    x = 1974,
+    y = 0.0275,
+    label = &quot;Proportion Donated&quot;,
+    hjust = 0
+  ) +
+  annotate(
+    geom = &quot;text&quot;,
+    x = 1974,
+    y = -0.0175,
+    label = &quot;Proportion Received&quot;,
+    hjust = 0
+  )</code></pre>
+<p><img src="/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 
     </div>
 
     
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/data-visualization/">data-visualization</a>
+  
+  <a class="badge badge-light" href="/tags/tidyverse/">tidyverse</a>
+  
+</div>
+
+
 
 
     
@@ -577,6 +823,16 @@
 
 
       
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/2019-02-28-visualizing-course-descriptions/">Visualizing Course Descriptions</a></li>
+          
+        </ul>
+      </div>
       
     
 

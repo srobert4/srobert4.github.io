@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>/post/2019-03-07-swdchallenge/</loc>
+      <lastmod>2019-03-14T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/post/2019-02-28-visualizing-course-descriptions/</loc>
       <lastmod>2019-02-28T00:00:00+00:00</lastmod>
     </url>
@@ -91,13 +99,6 @@
     
     <url>
     
-      <loc>/post/2019-03-07-swdchallenge/</loc>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/publication_types/1/</loc>
       <lastmod>2018-04-15T00:00:00-07:00</lastmod>
       <priority>0</priority>
@@ -159,7 +160,7 @@
     <url>
     
       <loc>/post/</loc>
-      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <lastmod>2019-03-14T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -193,7 +194,7 @@
     <url>
     
       <loc>/tags/r/</loc>
-      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <lastmod>2019-03-14T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -219,7 +220,7 @@
     <url>
     
       <loc>/</loc>
-      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <lastmod>2019-03-14T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -314,7 +315,7 @@
     <url>
     
       <loc>/tags/data-visualization/</loc>
-      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <lastmod>2019-03-14T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -422,7 +423,7 @@
     <url>
     
       <loc>/tags/tidyverse/</loc>
-      <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <lastmod>2019-03-14T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

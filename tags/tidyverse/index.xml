@@ -6,10 +6,19 @@
     <description>Recent content in tidyverse on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>#SWDChallenge March 2019</title>
+      <link>/post/2019-03-07-swdchallenge/</link>
+      <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-03-07-swdchallenge/</guid>
+      <description>This month I decided to take part in the Storytelling With Data monthly challenge for the first time! The dataset we were given to explore contains global aid exchanges between 47 countries across the world across the years 1973-2013. The goal is to create visualizations that answers the broad question: Who Donates?, as well as some bonus questions about distribution of donations geographically, temporally and by purpose of donation. Here’s my initial attempt!</description>
+    </item>
     
     <item>
       <title>Visualizing Course Descriptions</title>

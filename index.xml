@@ -6,8 +6,255 @@
     <description>Recent content in Samantha Robertson on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>#SWDChallenge March 2019</title>
+      <link>/post/2019-03-07-swdchallenge/</link>
+      <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-03-07-swdchallenge/</guid>
+      <description>
+
+
+&lt;p&gt;This month I decided to take part in the &lt;a href=&#34;http://www.storytellingwithdata.com/swdchallenge&#34;&gt;Storytelling With Data monthly challenge&lt;/a&gt; for the first time! The dataset we were given to explore contains global aid exchanges between 47 countries across the world across the years 1973-2013. The goal is to create visualizations that answers the broad question: &lt;strong&gt;Who Donates?&lt;/strong&gt;, as well as some bonus questions about distribution of donations geographically, temporally and by purpose of donation. Here’s my initial attempt! Along with some code. (The only package I use here is &lt;code&gt;tidyverse&lt;/code&gt;).&lt;/p&gt;
+&lt;div id=&#34;the-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The Data&lt;/h3&gt;
+&lt;p&gt;The data provided is nice and clean, so all we are left to do is read it in using &lt;code&gt;read_csv()&lt;/code&gt;. I changed some variable names to make it nicer to work with, and noticed that there are a few negative quantities of money in the data, which I drop since they are impossible. Here’s a glimpse of what the data looks like:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;id&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;year&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;donor&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;recipient&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;amount&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;purpose_code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;purpose_desc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414478&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1977&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;348718518&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23030&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Power generation/renewable sources&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414509&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1977&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Brazil&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;191647004&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23040&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Electrical transmission/ distribution&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414635&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1983&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;79371799&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21030&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Rail transport&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414665&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1984&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Taiwan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;212202942&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21030&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Rail transport&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414667&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1984&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Korea&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;134511154&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21040&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Water transport&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414684&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1985&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;128074768&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23000&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Energy generation and supply, combinations of activities&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;who-donates&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Who Donates?&lt;/h3&gt;
+&lt;p&gt;One of the challenges in answering this question is how to summarize across time. I chose to look at the proportion of the total money contributed to global aid that each country contributed and received.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;donated &amp;lt;-
+  data %&amp;gt;% 
+  group_by(donor) %&amp;gt;% 
+  summarise(donated = sum(amount)) %&amp;gt;% 
+  mutate(prop_donated = donated / sum(donated)) %&amp;gt;% 
+  select(country = donor, prop_donated)
+
+received &amp;lt;-
+  data %&amp;gt;% 
+  group_by(recipient) %&amp;gt;% 
+  summarise(received = sum(amount)) %&amp;gt;% 
+  mutate(prop_received = received / sum(received)) %&amp;gt;% 
+  select(country = recipient, prop_received)
+
+aid &amp;lt;-
+  donated %&amp;gt;% 
+  full_join(received, by = c(&amp;quot;country&amp;quot;)) %&amp;gt;% 
+  mutate_at(vars(-country), ~if_else(is.na(.), 0, .)) %&amp;gt;% 
+  gather(-country, key = direction, value = proportion_of_aid) %&amp;gt;% 
+  mutate(direction = str_extract(direction, &amp;quot;[^_]+$&amp;quot;))
+
+country_order &amp;lt;-
+  aid %&amp;gt;% 
+  spread(direction, proportion_of_aid) %&amp;gt;% 
+  mutate(diff = donated - received) %&amp;gt;% 
+  arrange(diff) %&amp;gt;% 
+  pull(country)
+
+aid &amp;lt;-
+  aid %&amp;gt;% 
+   mutate(country = factor(country, levels = country_order, ordered = TRUE))
+
+segments &amp;lt;-
+  aid %&amp;gt;% 
+  spread(direction, proportion_of_aid)
+
+aid %&amp;gt;% 
+  ggplot(aes(y = country)) +
+  geom_segment(
+    aes(yend = country, x = donated, xend = received), 
+    color = &amp;quot;grey40&amp;quot;,
+    data = segments
+  ) +
+  geom_point(aes(x = proportion_of_aid, color = direction), size = 2) +
+  scale_y_discrete(expand = expand_scale(0)) +
+  scale_x_sqrt(
+    labels = scales::percent, 
+    expand = expand_scale(0), 
+    limits = c(0,0.4),
+    breaks = c(0, 0.01, 0.025, 0.05, 0.1, 0.2, 0.3, 0.4)
+  ) +
+  scale_color_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Set1&amp;quot;, labels = str_to_title) +
+  theme_minimal() +
+  theme(legend.position = &amp;quot;top&amp;quot;) +
+  coord_cartesian(clip = &amp;quot;off&amp;quot;) +
+  labs(
+    y = NULL,
+    x = glue::glue(&amp;quot;Percentage of Total Aid {min(pull(data, year))} - {max(pull(data, year))}&amp;quot;),
+    color = NULL,
+    title = &amp;quot;The United States and Japan are the world&amp;#39;s major donors&amp;quot;,
+    subtitle = &amp;quot;India has received almost 40% of all global aid&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Excuse the squished y-axis. I played around with it for a while and eventually gave up. Any hints are very welcome!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;has-the-amount-donated-changed-over-time&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Has the Amount Donated Changed Over Time?&lt;/h3&gt;
+&lt;p&gt;In keeping with the same metric, proportion of aid contributed and received, we can also look at the trends over time. I’ve highlighted the top three donors and recipients in the figure. Interestingly, it seems that receiving tends to be steadier over time, while donations see more anomalous spikes&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;donated &amp;lt;-
+  data %&amp;gt;% 
+  group_by(donor, year) %&amp;gt;% 
+  summarise(donated = sum(amount)) %&amp;gt;% 
+  ungroup() %&amp;gt;% 
+  mutate(prop_donated = donated / sum(donated)) %&amp;gt;% 
+  select(country = donor, year, prop_donated)
+
+received &amp;lt;-
+  data %&amp;gt;% 
+  group_by(recipient, year) %&amp;gt;% 
+  summarise(received = sum(amount)) %&amp;gt;% 
+  ungroup() %&amp;gt;% 
+  mutate(prop_received = received / sum(received)) %&amp;gt;% 
+  select(country = recipient, year, prop_received)
+
+timeseries &amp;lt;-
+  donated %&amp;gt;% 
+  full_join(received, by = c(&amp;quot;country&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
+  mutate_at(vars(prop_donated, prop_received), ~if_else(is.na(.), 0, .)) %&amp;gt;% 
+  gather(prop_donated, prop_received, key = direction, value = proportion) %&amp;gt;% 
+  mutate(
+    proportion = if_else(direction == &amp;quot;prop_donated&amp;quot;, proportion, -proportion)
+  )
+  
+top_3 &amp;lt;- 
+  aid %&amp;gt;% 
+  filter(direction == &amp;quot;donated&amp;quot;) %&amp;gt;% 
+  top_n(3, proportion_of_aid) %&amp;gt;% 
+  pull(country)
+
+bottom_3 &amp;lt;-
+  aid %&amp;gt;% 
+  filter(direction == &amp;quot;received&amp;quot;) %&amp;gt;% 
+  top_n(3, proportion_of_aid) %&amp;gt;% 
+  pull(country)
+
+timeseries_main &amp;lt;-
+  timeseries %&amp;gt;%
+  filter(country %in% top_3 &amp;amp; direction == &amp;quot;prop_donated&amp;quot; | 
+           country %in% bottom_3 &amp;amp; direction == &amp;quot;prop_received&amp;quot;)
+
+country_order &amp;lt;- 
+  timeseries_main %&amp;gt;% 
+  filter(year == max(pull(data, year))) %&amp;gt;% 
+  arrange(desc(proportion)) %&amp;gt;% 
+  pull(country)
+
+timeseries_main &amp;lt;-
+  timeseries_main %&amp;gt;% 
+  mutate(country = factor(country, levels = country_order, ordered = TRUE))
+
+labeller &amp;lt;-
+  function(y) {
+    y = if_else(y &amp;lt; 0, -y, y)
+    scales::percent(y)
+  }
+
+timeseries %&amp;gt;% 
+  unite(group, country, direction, remove = FALSE) %&amp;gt;% 
+  ggplot(aes(year, proportion)) +
+  geom_line(aes(group = group), alpha = 0.2) +
+  geom_line(aes(color = country), data = timeseries_main) +
+  scale_x_continuous(breaks = seq(1970, 2015, by = 5)) +
+  scale_y_continuous(labels = labeller) +
+  scale_color_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Dark2&amp;quot;) +
+  theme_minimal() +
+  labs(
+    x = NULL,
+    color = NULL,
+    y = NULL,
+    title = &amp;quot;Contributions from significant donors is not constant over time&amp;quot;,
+    subtitle = &amp;quot;Major events like war and recession drive spikes in aid&amp;quot;
+  ) +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 1974,
+    y = 0.0275,
+    label = &amp;quot;Proportion Donated&amp;quot;,
+    hjust = 0
+  ) +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 1974,
+    y = -0.0175,
+    label = &amp;quot;Proportion Received&amp;quot;,
+    hjust = 0
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Visualizing Course Descriptions</title>
@@ -442,7 +689,7 @@ plot(
   alpha = 50
 )&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Even restricting the graph to bigrams that occur at least 3 times, it’s still hard to really see the relationships here. Now’s when we use D3 to take this visualization to the next level. Since there’s so much more interaction possible with a D3 graph, we’ll lower the threshold to see a little more detail. Credit to&lt;/p&gt;
+&lt;p&gt;Even restricting the graph to bigrams that occur at least 3 times, it’s still hard to really see the relationships here. Now’s when we use D3 to take this visualization to the next level. Since there’s so much more interaction possible with a D3 graph, we’ll lower the threshold to see a little more detail.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threshold &amp;lt;- 1
 network &amp;lt;-  
   bigram_count %&amp;gt;%
@@ -619,21 +866,6 @@ forceNetwork(
 &lt;/ul&gt;
 
 &lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>#SWDChallenge</title>
-      <link>/post/2019-03-07-swdchallenge/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-03-07-swdchallenge/</guid>
-      <description>
-
-
-&lt;div id=&#34;coming-soon-my-first-swdchallenge-submission&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Coming soon… My first #SWDchallenge submission&lt;/h1&gt;
-&lt;/div&gt;
 </description>
     </item>
     
