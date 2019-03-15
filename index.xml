@@ -233,7 +233,7 @@ timeseries %&amp;gt;%
   labs(
     x = NULL,
     color = NULL,
-    y = NULL,
+    y = glue::glue(&amp;quot;Percentage of Total Aid {min(pull(data, year))} - {max(pull(data, year))}&amp;quot;),
     title = &amp;quot;Contributions from significant donors is not constant over time&amp;quot;,
     subtitle = &amp;quot;Major events like war and recession drive spikes in aid&amp;quot;
   ) +
