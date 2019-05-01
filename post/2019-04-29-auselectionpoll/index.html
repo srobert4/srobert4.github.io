@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.0.0">
+  <meta name="generator" content="Hugo 0.54.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Samantha Robertson">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see freerangestats’ exploration of the 2016 Australian Election Study featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.
+At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare?">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2019-04-29-auselectionpoll/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display:400,700|Fauna+One">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2019-04-29-auselectionpoll/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@SamRobe04746844">
+  <meta property="twitter:creator" content="@SamRobe04746844">
+  
+  <meta property="og:site_name" content="Samantha Robertson">
+  <meta property="og:url" content="/post/2019-04-29-auselectionpoll/">
+  <meta property="og:title" content="The Australian Election Study 2016 | Samantha Robertson">
+  <meta property="og:description" content="It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see freerangestats’ exploration of the 2016 Australian Election Study featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.
+At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare?"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-04-29T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-04-29T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>The Australian Election Study 2016 | Samantha Robertson</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Samantha Robertson</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">The Australian Election Study 2016</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-04-29 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-04-29 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Apr 29, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=The%20Australian%20Election%20Study%202016&amp;url=%2fpost%2f2019-04-29-auselectionpoll%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2019-04-29-auselectionpoll%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-04-29-auselectionpoll%2f&amp;title=The%20Australian%20Election%20Study%202016"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-04-29-auselectionpoll%2f&amp;title=The%20Australian%20Election%20Study%202016"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=The%20Australian%20Election%20Study%202016&amp;body=%2fpost%2f2019-04-29-auselectionpoll%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<p>It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see <a href="http://freerangestats.info/blog/2019/04/22/AES-intro">freerangestats’</a> exploration of the 2016 Australian Election Study featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.</p>
+<p><img src="/post/2019-04-29-auselectionpoll_files/auselecsurvey.png" style="width:100.0%" /></p>
+<p>At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare? I quickly realized that I have many qualms with this plot.</p>
+<p>First, it takes some hunting to find the correct answers to each question (they’re listed in the subtitle), and once you’ve found them you have to go through six facets and match responses to answers. The plot shows the proportion of respondents who answered True, False or Don’t Know to each question. In my opinion, it would be far more intutitive to show only what we really care about: who was right!</p>
+<p>Then there’s the choice of the stacked bar chart. Firstly, placing the “Don’t Know” responses at the middle, centered at 0, makes it almost impossible to see the percentages of “True” and “False” respondents, about whom we likely care far more. Secondly, the choice to make “False” go in the “negative” (labelled positive) direction on the axis, as well as the color choice, makes me intuitively assume that the orange indicates incorrect answers and green indicates correct.</p>
+<p>Finally, what set me off in the first place: we can’t compare between parties! The orientation of the facets makes it very difficult to compare in the horizontal direction, even if the bars did all start at zero.</p>
+<p>Here’s my proposed improvement on the visualization from freerangestats:</p>
+<p><img src="/post/2019-04-29-auselectionpoll_files/improved_auselecsurvey.png" style="width:100.0%" /></p>
+<p>It looks from this plot like the Greens voters have outdone everyone across the board, followed by voters for the coalition. We shouldn’t draw any conclusions too quickly though, keep reading to see the code and explore how education levels influence Australian voters’ knowledge of their parliament.</p>
+<div id="importing-and-wrangling-the-data" class="section level2">
+<h2>Importing and Wrangling the Data</h2>
+<pre class="r"><code># Libraries
+# =========
+library(tidyverse)
+library(haven)
+
+# Constants
+# =========
+FILE_DATA &lt;- &quot;~/Downloads/aes2016.sas7bdat&quot;
+QUESTION_ABBRS &lt;- c(
+  &quot;federation_1901&quot;, 
+  &quot;prop_rep&quot;, 
+  &quot;time_between_elections&quot;, 
+  &quot;constitution&quot;, 
+  &quot;deposit&quot;, 
+  &quot;num_members_hrp&quot;
+)
+QUESTION_LABELS &lt;- c(
+  &quot;Australia became a\nfederation in 1901\n(True)&quot;,
+  &quot;The Senate election is\nbased on proportional representation\n(True)&quot;,
+  &quot;The longest time allowed between\nFederal elections for the House\nof Representatives is four years\n(False)&quot;,
+  &quot;The Constitution can only be\nchanged by the High Court\n(False)&quot;,
+  &quot;No-one may stand for Federal\nparliament unless they pay a deposit\n(True)&quot;,
+  &quot;There are 75 members of\nthe House of Representatives\n(False)&quot;
+)
+QUESTION_LABELS_SHORT &lt;- c(
+  &quot;Federation&quot;,
+  &quot;Proportional Representation&quot;,
+  &quot;Years Between Elections&quot;,
+  &quot;Changing the Constitution&quot;,
+  &quot;Deposit to Stand\nfor Federal Election&quot;,
+  &quot;Number of Members\nin the House of Reps&quot;
+)
+
+PARTY_LEVELS &lt;- c(
+  &quot;Coalition&quot;, 
+  &quot;Labor Party (ALP)&quot;, 
+  &quot;Greens&quot;, 
+  &quot;Other (incl. no vote)&quot;
+)
+PARTY_COLORS &lt;- c(&quot;#1b4f9c&quot;, &quot;#e43340&quot;, &quot;#009c3d&quot;, &quot;grey60&quot;)
+
+EDUCATION_LEVELS &lt;- c(
+  &quot;some secondary&quot;,
+  &quot;secondary&quot;,
+  &quot;trade&quot;,
+  &quot;university&quot;
+)
+EDUCATION_LABELS &lt;- c(
+  &quot;Some secondary school\nor less&quot;,
+  &quot;Secondary school only&quot;,
+  &quot;Trade Qualification\nor other Diploma&quot;,
+  &quot;Bachelor&#39;s Degree\nor higher&quot;
+)
+
+# Functions
+# =========
+recode_truefalse &lt;- function(x, answer) {
+  recode(
+    x,
+    `1` = TRUE,
+    `2` = FALSE,
+    .default = NA
+  ) %in% answer
+}
+
+recode_party &lt;- function(x) {
+  recode(
+    x,
+    `1` = &quot;Coalition&quot;,
+    `2` = &quot;Labor Party (ALP)&quot;,
+    `3` = &quot;Coalition&quot;,
+    `4` = &quot;Greens&quot;,
+    `997` = NA_character_,
+    `998` = NA_character_,
+    .default = &quot;Other (incl. no vote)&quot;
+  )
+}
+
+recode_01 &lt;- function(x) {
+  if_else(x %in% 997:999, NA_real_, x)
+}
+
+import_vars &lt;- list(
+  weight = list(var = &quot;wt_enrol&quot;, fun = identity),
+  senate_vote = list(var = &quot;B9_2&quot;, fun = recode_party),
+  schooling = list(var = &quot;G1&quot;, fun = recode_01),
+  tertiary = list(var = &quot;G3&quot;, fun = recode_01),
+  federation_1901 = list(var = &quot;F10_1&quot;, fun = function(.) recode_truefalse(., TRUE)),
+  num_members_hrp = list(var = &quot;F10_2&quot;, fun = function(.) recode_truefalse(., FALSE)),
+  constitution = list(var = &quot;F10_3&quot;, fun = function(.) recode_truefalse(., FALSE)),
+  prop_rep = list(var = &quot;F10_4&quot;, fun = function(.) recode_truefalse(., TRUE)),
+  deposit = list(var = &quot;F10_5&quot;, fun = function(.) recode_truefalse(., TRUE)),
+  time_between_elections = list(var = &quot;F10_6&quot;, fun = function(.) recode_truefalse(., FALSE))
+)</code></pre>
+<p>The first step is to read in and wrangle the data. I downloaded the data in SAS format, so I use <code>haven::read_sas</code> to read the raw data. The list <code>import_vars</code> specifies the columns we would like to keep, the column names we would like to assign, and the functions we would like to apply to recode the survey response variables to a readable format.</p>
+<p>There are many encodings in the survey data that should be recoded. For example, AES encodes “Item skipped” and “Does not apply”, responses we would like to encode as <code>NA</code>, as numbers 997 and 999. I also define functions to redefine the “True”/“False”/“Don’t Know” responses into logical vectors representing whether the respondent answered correctly, and to give names to the political parties. I chose to collapse the Liberal Party and the National (Country) Party into the Coalition, and drop One Nation to make the visualizations easier to digest.</p>
+<p>I define my own <code>education</code> variable based on responses to two questions: “How old were you when you left secondary school?” and “Have you obtained a trade qualification, a degree or a diploma, or any other qualification since leaving school?”</p>
+<pre class="r"><code>df &lt;- 
+  read_sas(data_file = FILE_DATA)
+
+true_false &lt;-
+  import_vars %&gt;% 
+  map_dfc(~ .$fun(pull(df, .$var))) %&gt;% 
+  mutate(
+    education = 
+      case_when(
+        schooling &gt; 1 ~ &quot;some secondary&quot;,
+        tertiary == 1 ~ &quot;secondary&quot;,
+        tertiary %in% c(2, 3) ~ &quot;university&quot;,
+        tertiary %in% c(4, 5, 6, 7) ~ &quot;trade&quot;,
+        TRUE ~ NA_character_
+      ),
+    education = 
+      factor(
+        education, 
+        levels = EDUCATION_LEVELS,
+        labels =  EDUCATION_LABELS,
+        ordered = TRUE
+      ),
+    senate_vote = factor(senate_vote, levels = PARTY_LEVELS)
+  ) %&gt;% 
+  select(-schooling, -tertiary)</code></pre>
+</div>
+<div id="visualizing-responses-by-party" class="section level2">
+<h2>Visualizing Responses by Party</h2>
+<p>Now that the data has been cleaned up, I can create my version of the freerangestats visualization.</p>
+<pre class="r"><code>responses &lt;-
+  true_false %&gt;% 
+  drop_na() %&gt;% 
+  select(-weight, -education) %&gt;% 
+  group_by(senate_vote) %&gt;%
+  summarise_all(mean, na.rm = TRUE) %&gt;% 
+  gather(
+    key = &quot;question&quot;, 
+    value = &quot;prop_correct&quot;,
+    -senate_vote
+  ) %&gt;% 
+  mutate(
+    question = factor(
+      question, 
+      levels = QUESTION_ABBRS,
+      labels = QUESTION_LABELS
+    )
+  )
+
+responses %&gt;% 
+  ggplot(
+    aes(
+      reorder(question, -prop_correct), 
+      prop_correct, 
+      color = senate_vote
+    )
+  ) +
+  geom_hline(yintercept = 0.5, color = &quot;white&quot;, size = 2) +
+  geom_line(aes(group = senate_vote)) +
+  geom_point() +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  theme(
+    axis.text.x = element_text(size = 7),
+    legend.position = &quot;top&quot;,
+    legend.title = element_blank()
+  ) +
+  labs(
+    title = &quot;Australians&#39; Knowledge of Constitutional Issues&quot;,
+    subtitle = &quot;By Senate Vote in the 2013 Federal Election&quot;,
+    caption = &quot;Source: Australian Election Study 2016&quot;,
+    x = &quot;True/False Question (Answer)&quot;,
+    y = &quot;Percentage of respondents who answered correctly&quot;
+  )</code></pre>
+<p><img src="/post/2019-04-29-auselectionpoll_files/figure-html/plot1-1.png" width="100%" /></p>
+<p>I think this plot is an improvement for a few reasons:</p>
+<ul>
+<li><p>We can very easily compare between parties, and can very quickly identify parties by their official colors</p></li>
+<li><p>We can quickly see the percentage of <strong>correct</strong> respondents</p></li>
+<li><p>We can see which questions were easier and which were more difficult for the respondents</p></li>
+<li><p>The answers are listed with the questions</p></li>
+</ul>
+<p>There is some information lost, for example we can no longer see how many people said they didn’t know the answer, and it is much more difficult to figure out the raw responses. However, in my opinion this is far less important information in this context.</p>
+</div>
+<div id="controlling-for-education-level" class="section level2">
+<h2>Controlling for Education Level</h2>
+<p>The AES gives us lots of details about the respondents including their education level. Although the plot above appears to indicate that Greens voters know the most about the parliamentary system, I was wary to jump to this conclusion without controlling for the level of education of the voters.</p>
+<p>To make inferences about the enrolled population, we need to use the provided weights. Then we are able to calculate the proportion of the electorate and the proportion of voters for each of the Coalition, ALP and the Greens at each level of education.</p>
+<pre class="r"><code>total_ed_props &lt;-
+  true_false %&gt;% 
+  drop_na() %&gt;%
+  count(education, wt = weight) %&gt;% 
+  mutate(prop_educated = n / sum(n), group = &quot;All respondents&quot;)
+
+ed_props_by_party &lt;-
+  true_false %&gt;% 
+  drop_na() %&gt;% 
+  filter(senate_vote != &quot;Other (incl. no vote)&quot;) %&gt;% 
+  count(senate_vote, education, wt = weight) %&gt;% 
+  group_by(senate_vote) %&gt;% 
+  mutate(prop_educated = n / sum(n)) %&gt;% 
+  ungroup()</code></pre>
+<p>Plotting these proportions shows dramatic disparities:</p>
+<pre class="r"><code>ed_props_by_party %&gt;% 
+  ggplot(aes(education, prop_educated)) +
+  geom_line(
+    aes(group = group), 
+    color = &quot;grey60&quot;, 
+    data = total_ed_props
+  ) +
+  geom_point(color = &quot;grey60&quot;, data = total_ed_props) +
+  geom_line(aes(group = senate_vote, color = senate_vote)) +
+  geom_point(aes(color = senate_vote)) +
+  scale_y_continuous(
+    breaks = seq(0, 0.5, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  theme(
+    legend.position = &quot;top&quot;,
+    axis.text.x = element_text(size = 8)
+  ) +
+  labs(
+    title = &quot;The highly educated are far overrepresented amongst Greens voters&quot;,
+    subtitle = &quot;Over 55% of Greens voters are university graduates, compared to 37% of the\n enrolled population (shown in grey)&quot;,
+    x = NULL,
+    y = &quot;Percentage of voters by party\nweighted to match enrolled population&quot;,
+    color = NULL,
+    caption = &quot;Source: Australian Election Study 2016&quot;
+  )</code></pre>
+<p><img src="/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<p>As we see in the plot above, university graduates are far overrepresented amongst Greens voters, while voters for Labor and the Coalition are reflective of national trends in education levels.</p>
+<p>To understand whether educational differences account for the variation in performance on the True/False questions, we need to do some further exploration. To simplify this, I decided to calculate a score for each respondent. A simple and interpretable score is the proportion of correct answers to the 6 True/False questions.</p>
+<pre class="r"><code>scores &lt;-
+  true_false %&gt;% 
+  drop_na() %&gt;% 
+  mutate(
+    frac_correct = (federation_1901 + prop_rep + time_between_elections +
+                        constitution + deposit + num_members_hrp) / 6
+  )</code></pre>
+<p>We can then visualize the distribution of scores at each education level.</p>
+<pre class="r"><code>scores %&gt;% 
+  ggplot(aes(education, frac_correct)) +
+  geom_hline(yintercept = 0.5, size = 2, color = &quot;white&quot;) +
+  geom_boxplot(varwidth = TRUE) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    x = &quot;Highest Level of Education Attained&quot;,
+    y = &quot;Percentage of questions answered correctly (of 6 total)&quot;,
+    title = &quot;Median Performance Increases with Education Level&quot;,
+    subtitle = &quot;But performance varies widely at all levels&quot;,
+    caption = &quot;Source: Australian Election Study 2016&quot;
+  )</code></pre>
+<p><img src="/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-4-1.png" width="100%" /></p>
+<p>Despite the wide variation at every level of education, it does appear that university graduates performed the best on the multiple choice questions, with the top half of respondents with a Bachelor’s degree or higher getting at least half of the questions correct.</p>
+<p>Finally, we can visualize the joint distribution of performance across the six questions, across the levels of education and across the party preferences. I chose to leave out those with less than a secondary school education, as this was a very small sample.</p>
+<pre class="r"><code>responses_with_ed &lt;-
+  true_false %&gt;% 
+  drop_na() %&gt;% 
+  select(-weight) %&gt;% 
+  filter(education != &quot;Some secondary school\nor less&quot;) %&gt;% 
+  group_by(senate_vote, education) %&gt;%
+  summarise_all(mean, na.rm = TRUE) %&gt;% 
+  gather(
+    key = &quot;question&quot;, 
+    value = &quot;prop_correct&quot;, 
+    -senate_vote, 
+    -education
+  ) %&gt;% 
+  mutate(
+    question = factor(
+      question, 
+      levels = QUESTION_ABBRS,
+      labels = QUESTION_LABELS_SHORT
+    )
+  )</code></pre>
+<pre class="r"><code>responses_with_ed %&gt;% 
+  ggplot(
+    aes(
+      reorder(question, -prop_correct), 
+      prop_correct, 
+      color = senate_vote
+    )
+  ) +
+  geom_hline(yintercept = 0.5, color = &quot;white&quot;, size = 2) +
+  geom_line(aes(group = senate_vote)) +
+  geom_point() +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  theme(
+    axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+    legend.position = &quot;top&quot;,
+    legend.title = element_blank()
+  ) +
+  labs(
+    title = &quot;Australians&#39; Knowledge of Constitutional Issues by 2013 Senate Vote and Education Level&quot;,
+    subtitle = &quot;University graduates outperform those less educated regardless of party affiliation&quot;,
+    caption = &quot;Source: Australian Election Study 2016&quot;,
+    x = &quot;Question Topic&quot;,
+    y = &quot;Percentage of respondents who answered correctly&quot;
+  ) +
+  facet_grid(cols = vars(education))</code></pre>
+<p><img src="/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-6-1.png" width="100%" /></p>
+<p>As we might’ve expected, the gap between voters across party preferences closes entirely with education level. Though it appears that accuracy amongst those with only a secondary school education does vary with party affiliation, this variation is much less pronounced amongst those with trade or other non-degree qualifications and completely indistinguishable amongst those with a university degree.</p>
+<p>I will certainly be continuing to explore this data. I’m excited to think more about why the variation remains amongst secondary school graduates, or perhaps how socioeconomic status comes into play. It would also be interesting to break down the Coalition into Liberal voters and National Party voters. I’ll also be looking into some longitudinal analysis with the AES data!</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/data-visualization/">data-visualization</a>
+  
+  <a class="badge badge-light" href="/tags/tidyverse/">tidyverse</a>
+  
+</div>
+
+
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_hua162f16de09a3951536942805fb74cf7_189781_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Samantha Robertson</a></h5>
+    <h6 class="card-subtitle">Undergraduate Student in Mathematical and Computational Science</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:srobert4@stanford.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/SamRobe04746844" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/srobert4" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/samantha-robertson-8a17a2166/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/2019-03-07-swdchallenge/">#SWDChallenge March 2019</a></li>
+          
+          <li><a href="/post/2019-02-28-visualizing-course-descriptions/">Visualizing Course Descriptions</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.c1b0baf12cd491effaeeb294faf1e83e.js"></script>
+
+  </body>
+</html>
+

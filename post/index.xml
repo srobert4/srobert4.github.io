@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The Australian Election Study 2016</title>
+      <link>/post/2019-04-29-auselectionpoll/</link>
+      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-04-29-auselectionpoll/</guid>
+      <description>It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see freerangestats’ exploration of the 2016 Australian Election Study featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.
+At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare?</description>
+    </item>
     
     <item>
       <title>#SWDChallenge March 2019</title>
