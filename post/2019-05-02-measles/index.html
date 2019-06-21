@@ -28,10 +28,12 @@
   
     
   
-  <meta name="description" content="First Year Ph.D. Student">
+  <meta name="description" content="library(tidyverse) ## ── Attaching packages ─────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 3.1.0 ✔ purrr 0.3.2 ## ✔ tibble 2.1.1 ✔ dplyr 0.8.0.1 ## ✔ tidyr 0.8.3 ✔ stringr 1.4.0 ## ✔ readr 1.3.1 ✔ forcats 0.4.0 ## ── Conflicts ────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() FILE_DATA &lt;- &quot;~/Desktop/NISPUF17.Rdata&quot; data source codebook
+load(FILE_DATA) df &lt;- as_tibble(NISPUF17) Variables of interest:
+ Identifiers &amp; Weights:  SEQNUMC - child identifier SEQNUMHH - household identifier  Demographic  AGEGRP - age category of child C1R - number of people in household EDUC1 - education of mother INCQ298A - income bracket of household RACEETHK - race and ethnicity of child  Geographic  STATE EST_GRANT - Area of residence according to the 56 core grantee areas  MMR Vaccine:  P_NUMMMR - number of measles containing shots by 36 months of age determined from provider info, excluding vaccinations after HH interview date.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/author/admin/">
+  <link rel="alternate" hreflang="en-us" href="/post/2019-05-02-measles/">
 
   
 
@@ -98,15 +100,15 @@
   
 
   
-  <link rel="alternate" href="/author/admin/index.xml" type="application/rss+xml" title="Samantha Robertson">
-  <link rel="feed" href="/author/admin/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/author/admin/">
+  <link rel="canonical" href="/post/2019-05-02-measles/">
 
   
   
@@ -121,19 +123,22 @@
   <meta property="twitter:creator" content="@SamRobe04746844">
   
   <meta property="og:site_name" content="Samantha Robertson">
-  <meta property="og:url" content="/author/admin/">
-  <meta property="og:title" content=" | Samantha Robertson">
-  <meta property="og:description" content="First Year Ph.D. Student"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/post/2019-05-02-measles/">
+  <meta property="og:title" content="Measles Vaccine | Samantha Robertson">
+  <meta property="og:description" content="library(tidyverse) ## ── Attaching packages ─────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 3.1.0 ✔ purrr 0.3.2 ## ✔ tibble 2.1.1 ✔ dplyr 0.8.0.1 ## ✔ tidyr 0.8.3 ✔ stringr 1.4.0 ## ✔ readr 1.3.1 ✔ forcats 0.4.0 ## ── Conflicts ────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() FILE_DATA &lt;- &quot;~/Desktop/NISPUF17.Rdata&quot; data source codebook
+load(FILE_DATA) df &lt;- as_tibble(NISPUF17) Variables of interest:
+ Identifiers &amp; Weights:  SEQNUMC - child identifier SEQNUMHH - household identifier  Demographic  AGEGRP - age category of child C1R - number of people in household EDUC1 - education of mother INCQ298A - income bracket of household RACEETHK - race and ethnicity of child  Geographic  STATE EST_GRANT - Area of residence according to the 56 core grantee areas  MMR Vaccine:  P_NUMMMR - number of measles containing shots by 36 months of age determined from provider info, excluding vaccinations after HH interview date."><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
   
   
-
   
 
   
 
-  <title> | Samantha Robertson</title>
+  
+
+  <title>Measles Vaccine | Samantha Robertson</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -331,25 +336,303 @@
 </nav>
 
 
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
 
 
-<div class="universal-wrapper pt-3">
-  <h1 itemprop="name"></h1>
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Measles Vaccine</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="" itemprop="datePublished">
+<meta content="" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Jan 1, 0001</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Measles%20Vaccine&amp;url=%2fpost%2f2019-05-02-measles%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2019-05-02-measles%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-05-02-measles%2f&amp;title=Measles%20Vaccine"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-05-02-measles%2f&amp;title=Measles%20Vaccine"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Measles%20Vaccine&amp;body=%2fpost%2f2019-05-02-measles%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
 </div>
 
 
-<section id="about" class="pt-5">
-  <div class="container">
+  
+
+</div>
+
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
+## ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+## ✔ tidyr   0.8.3       ✔ stringr 1.4.0  
+## ✔ readr   1.3.1       ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>FILE_DATA &lt;- &quot;~/Desktop/NISPUF17.Rdata&quot;</code></pre>
+<p><a href="https://www.cdc.gov/vaccines/imz-managers/nis/datasets.html">data source</a>
+<a href="https://www.cdc.gov/vaccines/imz-managers/nis/downloads/NIS-PUF17-CODEBOOK.pdf">codebook</a></p>
+<pre class="r"><code>load(FILE_DATA)
+df &lt;- as_tibble(NISPUF17)</code></pre>
+<p>Variables of interest:</p>
+<ul>
+<li>Identifiers &amp; Weights:
+<ul>
+<li>SEQNUMC - child identifier</li>
+<li>SEQNUMHH - household identifier</li>
+</ul></li>
+<li>Demographic
+<ul>
+<li>AGEGRP - age category of child</li>
+<li>C1R - number of people in household</li>
+<li>EDUC1 - education of mother</li>
+<li>INCQ298A - income bracket of household</li>
+<li>RACEETHK - race and ethnicity of child</li>
+</ul></li>
+<li>Geographic
+<ul>
+<li>STATE</li>
+<li>EST_GRANT - Area of residence according to the 56 core grantee areas</li>
+</ul></li>
+<li>MMR Vaccine:
+<ul>
+<li>P_NUMMMR - number of measles containing shots by 36 months of age determined from provider info, excluding vaccinations after HH interview date.</li>
+<li>MMR1_AGE - Age in months of first provider-reported measles containing shot</li>
+<li>DMMR1 - Age in days of first provider-reported measles containing shot</li>
+<li>D7 - Consent to obtain immunization records from provider</li>
+<li>N_PRVR - Number of providers responding with vaccination data</li>
+<li>PROV_FAC - Provider facility types</li>
+<li>INS_STAT2_I - Insurance status</li>
+</ul></li>
+</ul>
+
+    </div>
+
     
+
+
     
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_hua162f16de09a3951536942805fb74cf7_189781_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Samantha Robertson</a></h5>
+    <h6 class="card-subtitle">First Year Ph.D. Student</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:samantha_robertson@berkeley.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/SamRobe04746844" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/srobert4" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/samantha-robertson-8a17a2166/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+      
     
 
     
-    
-    
-</section>
 
+    
+
+
+  </div>
+</article>
 
 <div class="container">
   <footer class="site-footer">
