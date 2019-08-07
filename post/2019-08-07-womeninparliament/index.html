@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.0.0">
+  <meta name="generator" content="Hugo 0.54.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Samantha Robertson">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="This week’s RWeekly digest included an awesome dataset from the World Bank that documents the percentage of women in lower house parliament across the globe from 1997 to 2018. The dataset is nearly complete and also includes summary statistics for numerous geographic aggregations.
+All of my code to process and explore the data is available on my GitHub. There’s lots of interesting things to look at in this data, so I will leave most of the boring stuff out of this post.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2019-08-07-womeninparliament/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2019-08-07-womeninparliament/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@SamRobe04746844">
+  <meta property="twitter:creator" content="@SamRobe04746844">
+  
+  <meta property="og:site_name" content="Samantha Robertson">
+  <meta property="og:url" content="/post/2019-08-07-womeninparliament/">
+  <meta property="og:title" content="Women in Parliament Worldwide | Samantha Robertson">
+  <meta property="og:description" content="This week’s RWeekly digest included an awesome dataset from the World Bank that documents the percentage of women in lower house parliament across the globe from 1997 to 2018. The dataset is nearly complete and also includes summary statistics for numerous geographic aggregations.
+All of my code to process and explore the data is available on my GitHub. There’s lots of interesting things to look at in this data, so I will leave most of the boring stuff out of this post."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-08-07T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-08-07T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Women in Parliament Worldwide | Samantha Robertson</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Samantha Robertson</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#experience">
+            
+            <span>Experience</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Women in Parliament Worldwide</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-07 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 7, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Women%20in%20Parliament%20Worldwide&amp;url=%2fpost%2f2019-08-07-womeninparliament%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2019-08-07-womeninparliament%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-08-07-womeninparliament%2f&amp;title=Women%20in%20Parliament%20Worldwide"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-08-07-womeninparliament%2f&amp;title=Women%20in%20Parliament%20Worldwide"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Women%20in%20Parliament%20Worldwide&amp;body=%2fpost%2f2019-08-07-womeninparliament%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<p>This week’s RWeekly digest included an <a href="https://data.worldbank.org/indicator/SG.GEN.PARL.ZS">awesome dataset from the World Bank</a> that documents the percentage of women in lower house parliament across the globe from 1997 to 2018. The dataset is nearly complete and also includes summary statistics for numerous geographic aggregations.</p>
+<p>All of my code to process and explore the data is available <a href="https://github.com/srobert4/data-projects/tree/master/women-in-parliament">on my GitHub</a>. There’s lots of interesting things to look at in this data, so I will leave most of the boring stuff out of this post.</p>
+<p>To get a sense of the World Bank data, here are the top 10 and bottom 10 countries in 2018 in terms of percentage of parliament made up of women.</p>
+<pre class="r"><code>wip %&gt;% 
+  filter(year == 2018) %&gt;% 
+  top_n(n = 10, wt = prop_women_seats) %&gt;% 
+  arrange(desc(prop_women_seats)) %&gt;% 
+  knitr::kable(caption = &quot;Top 10 Countries with the largest proportion of women in their parliament in 2018&quot;)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-1">Table 1: </span>Top 10 Countries with the largest proportion of women in their parliament in 2018</caption>
+<thead>
+<tr class="header">
+<th align="left">country_name</th>
+<th align="left">country_code</th>
+<th align="right">year</th>
+<th align="right">prop_women_seats</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Rwanda</td>
+<td align="left">RWA</td>
+<td align="right">2018</td>
+<td align="right">61.3</td>
+</tr>
+<tr class="even">
+<td align="left">Cuba</td>
+<td align="left">CUB</td>
+<td align="right">2018</td>
+<td align="right">53.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Bolivia</td>
+<td align="left">BOL</td>
+<td align="right">2018</td>
+<td align="right">53.1</td>
+</tr>
+<tr class="even">
+<td align="left">Mexico</td>
+<td align="left">MEX</td>
+<td align="right">2018</td>
+<td align="right">48.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Grenada</td>
+<td align="left">GRD</td>
+<td align="right">2018</td>
+<td align="right">46.7</td>
+</tr>
+<tr class="even">
+<td align="left">Namibia</td>
+<td align="left">NAM</td>
+<td align="right">2018</td>
+<td align="right">46.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Sweden</td>
+<td align="left">SWE</td>
+<td align="right">2018</td>
+<td align="right">46.1</td>
+</tr>
+<tr class="even">
+<td align="left">Nicaragua</td>
+<td align="left">NIC</td>
+<td align="right">2018</td>
+<td align="right">45.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Costa Rica</td>
+<td align="left">CRI</td>
+<td align="right">2018</td>
+<td align="right">45.6</td>
+</tr>
+<tr class="even">
+<td align="left">South Africa</td>
+<td align="left">ZAF</td>
+<td align="right">2018</td>
+<td align="right">42.3</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>wip %&gt;% 
+  filter(year == 2018) %&gt;% 
+  top_n(n = 10, wt = -prop_women_seats) %&gt;% 
+  arrange(prop_women_seats) %&gt;% 
+  knitr::kable(caption = &quot;Bottom 10 Countries with the smallest proportion of women in their parliament in 2018&quot;)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 2: </span>Bottom 10 Countries with the smallest proportion of women in their parliament in 2018</caption>
+<thead>
+<tr class="header">
+<th align="left">country_name</th>
+<th align="left">country_code</th>
+<th align="right">year</th>
+<th align="right">prop_women_seats</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Micronesia, Fed. Sts.</td>
+<td align="left">FSM</td>
+<td align="right">2018</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td align="left">Papua New Guinea</td>
+<td align="left">PNG</td>
+<td align="right">2018</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Vanuatu</td>
+<td align="left">VUT</td>
+<td align="right">2018</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td align="left">Yemen, Rep.</td>
+<td align="left">YEM</td>
+<td align="right">2018</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Oman</td>
+<td align="left">OMN</td>
+<td align="right">2018</td>
+<td align="right">1.2</td>
+</tr>
+<tr class="even">
+<td align="left">Haiti</td>
+<td align="left">HTI</td>
+<td align="right">2018</td>
+<td align="right">2.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Kuwait</td>
+<td align="left">KWT</td>
+<td align="right">2018</td>
+<td align="right">3.1</td>
+</tr>
+<tr class="even">
+<td align="left">Solomon Islands</td>
+<td align="left">SLB</td>
+<td align="right">2018</td>
+<td align="right">4.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Lebanon</td>
+<td align="left">LBN</td>
+<td align="right">2018</td>
+<td align="right">4.7</td>
+</tr>
+<tr class="even">
+<td align="left">Thailand</td>
+<td align="left">THA</td>
+<td align="right">2018</td>
+<td align="right">5.3</td>
+</tr>
+</tbody>
+</table>
+<p>Only 3 countries had over half women in their parliament in 2018! The top 10 are still all over 40%, which seems encouraging! Less encouragingly, four nations still had 0 women in the lower house of parliament in 2018.</p>
+<div id="global-trends-in-female-representation" class="section level1">
+<h1>Global Trends in Female Representation</h1>
+<p>Conveniently, the dataset has a precalculated global aggregate statistic.</p>
+<pre class="r"><code>wip %&gt;% 
+  filter(country_name == &quot;World&quot;) %&gt;% 
+  ggplot(aes(year, prop_women_seats)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, by = 2),
+    minor_breaks = FALSE
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  theme_minimal() +
+  labs(
+    title = &quot;There has been a constant upward trend globally since 1997&quot;,
+    x = NULL,
+    y = &quot;Percentage of parliament seats held by women&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>It is encouraging to see that female representation has increased every year when we look at the whole world aggregated.</p>
+<div id="by-region" class="section level2">
+<h2>By region</h2>
+<pre class="r"><code>regions &lt;- c(
+  &quot;East Asia &amp; Pacific&quot;,                
+  &quot;Europe &amp; Central Asia&quot;,              
+  &quot;Latin America &amp; Caribbean&quot;,          
+  &quot;Middle East &amp; North Africa&quot;,             
+  &quot;Sub-Saharan Africa&quot;,
+  &quot;North America&quot;,
+  &quot;South Asia&quot;
+)
+
+wip %&gt;% 
+  filter(country_name %in% regions) %&gt;% 
+  drop_na(prop_women_seats) %&gt;% 
+  ggplot(aes(year, prop_women_seats, color = country_name)) +
+  geom_line(size = 1) +
+  geom_point(size = 1) +
+  ggrepel::geom_text_repel(
+    aes(label = country_name),
+    data = . %&gt;% group_by(country_name) %&gt;% top_n(1, wt = year),
+    nudge_x = 0.25,
+    direction = &quot;y&quot;,
+    hjust = 0
+  ) +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL,
+    limits = c(1997, 2028)
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  guides(color = &quot;none&quot;) +
+  theme_minimal() +
+  labs(
+    x = NULL,
+    y = &quot;Percentage of parliament seats held by women&quot;,
+    title = &quot;All regions but South Asia have had increasing representation since 1997&quot;,
+    subtitle = &quot;Latin America &amp; Caribbean and Middle East &amp; North Africa have seen large incerases&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Notably, Latin America &amp; the Caribbean went from the fourth leading region in terms of female representation in the late 1990s to the leading region by a relatively significant margin by 2014. The Middle East &amp; North Africa, though still lagging behind the rest of the world, also has experienced a marked increase since 1997. Interestingly, South Asia is the only region that has shown a decrease, with representation plateauing in 2009, and then beginning to decrease.</p>
+</div>
+<div id="by-income-level" class="section level2">
+<h2>By income level</h2>
+<p>Another interesting aggregation is by income level of the countries.</p>
+<pre class="r"><code>order &lt;-
+  c(
+    &quot;High income&quot;,
+    &quot;Upper middle income&quot;,
+    &quot;Middle income&quot;,
+    &quot;Lower middle income&quot;,
+    &quot;Low income&quot;
+  )
+
+wip %&gt;% 
+  filter(country_name %in% order) %&gt;% 
+  mutate(country_name = factor(country_name, levels = order, ordered = TRUE)) %&gt;% 
+  drop_na(prop_women_seats) %&gt;% 
+  ggplot(aes(year, prop_women_seats, color = country_name)) +
+  geom_line(aes(group = country_name), color = &quot;white&quot;, size = 2) +
+  geom_point(aes(group = country_name), color = &quot;white&quot;, size = 1) +
+  geom_point(size = 1) +
+  geom_line(size = 1) +
+  ggrepel::geom_text_repel(
+    aes(label = country_name),
+    data = . %&gt;% group_by(country_name) %&gt;% top_n(1, wt = year),
+    nudge_x = 0.25,
+    direction = &quot;y&quot;,
+    hjust = 0,
+    color = &quot;grey30&quot;
+  ) +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL,
+    limits = c(1997, 2025)
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  guides(color = &quot;none&quot;) +
+  theme_minimal() +
+  labs(
+    title = &quot;Low income countries outperform lower middle income countries&quot;,
+    x = NULL,
+    y = &quot;Percentage of parliament seats held by women&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Unsurprisingly, based on the previous two plots, representation is increasing over time at all income levels. There is something very striking about this plot, though. Representation has been higher with higher income, with the obvious exception of low income regions. Representation in low income regions has been higher than in lower middle income regions every year recorded, and in three different years has been second only to high income regions.</p>
+</div>
+<div id="by-country" class="section level2">
+<h2>By country</h2>
+<p>It is really difficult to look at the trend of all nations at once, given how many there are. We can visualize the most recent data across the globe by looking at a map of the world with data from 2018.</p>
+<pre class="r"><code>midpoint &lt;-
+  wip %&gt;% 
+  filter(year == 2018) %&gt;% 
+  semi_join(world %&gt;% select(country_code = iso_a3)) %&gt;% 
+  summarize(median_prop_women = median(prop_women_seats, na.rm = TRUE)) %&gt;% 
+  pull(median_prop_women)</code></pre>
+<pre><code>## Joining, by = &quot;country_code&quot;</code></pre>
+<pre class="r"><code>world %&gt;% 
+  left_join(
+    wip %&gt;% filter(year == 2018), 
+    by = c(&quot;iso_a3&quot; = &quot;country_code&quot;)
+  ) %&gt;% 
+  ggplot() +
+  geom_sf(
+    aes(fill = prop_women_seats), 
+    color = &quot;grey20&quot;, 
+    size = 0.1
+  ) +
+  scale_fill_gradient(
+    low = &quot;white&quot;,
+    high = &quot;#01665e&quot;,
+    labels = scales::percent_format(accuracy = 1, scale = 1)
+  ) +
+  coord_sf(datum = NA) +
+  guides(
+    fill = 
+      guide_colorbar(
+        barwidth = 8, 
+        barheight = 0.5
+      ) 
+  ) +
+  theme_void() +
+  theme(
+    legend.position = &quot;top&quot;,
+    legend.title.align = 1
+  ) +
+  labs(fill = &quot;Proportion of seats\nheld by women&quot;)</code></pre>
+<p><img src="/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>
+<div id="case-study-rwanda" class="section level1">
+<h1>Case study: Rwanda</h1>
+<p>Though it’s hard to see from the map, at the very beginning we noticed that Rwanda had the highest female representation in its parliament in 2018, at over 60%! Looking into the politics there a bit more, I found that they introduced a quota system in 2003 that required 30% of the parliament to be made up of women. Looking at the data, there is a clear increase at the time this policy began.</p>
+<pre class="r"><code>wip %&gt;% 
+  drop_na(prop_women_seats) %&gt;% 
+  filter(country_name == &quot;Rwanda&quot;) %&gt;% 
+  ggplot(aes(year, prop_women_seats)) +
+  geom_hline(yintercept = 50, size = 2, color = &quot;grey80&quot;) +
+  geom_vline(xintercept = 2003, size = 1, color = &quot;#b2182b&quot;) +
+  geom_line() +
+  geom_point() +
+  annotate(
+    geom = &quot;text&quot;,
+    x = 2003.25,
+    y = 40,
+    label = &quot;30% quota\nintroduced\nin 2003&quot;,
+    hjust = 0,
+    color = &quot;grey40&quot;
+  ) + 
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  theme_minimal() +
+  labs(
+    title = &quot;Rwanda reached almost 50/50 representation after the introduction of a quota&quot;,
+    subtitle = &quot;Representation continued to increase even 10 years later&quot;,
+    x = NULL,
+    y = &quot;Percentage of parliament seats held by women&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="quota-systems" class="section level1">
+<h1>Quota Systems</h1>
+<p>The case study of Rwanda made me think more about quotas: how effective are they? where have they been implemented? Conveniently, the Institute for Democracy and Electoral Assistance (IDEA) has a <a href="https://www.idea.int/data-tools/data/gender-quotas/database">public dataset</a> of the types of quotas implemented all over the world! The only downside is that the database doesn’t include the year the quota was introduced. This is something that could be collated manually but we can work without for now.</p>
+<p>There are three types of “quotas” in the dataset, explicit quotas about the number or fraction of seats to be held by women, a reserved seats system where certain seats must be held by women, and voluntary systems where some parties elect to hold themselves to a quota but none exists in law. We can visualize how these systems are implemented around the world with a map.</p>
+<pre class="r"><code>type_order &lt;-
+  quotas %&gt;% 
+  count(quota_type, sort = TRUE) %&gt;% 
+  pull(quota_type)
+
+world %&gt;% 
+  left_join(
+    quotas %&gt;% 
+      mutate(
+        quota_type = factor(
+          quota_type, 
+          levels = type_order,
+          ordered = TRUE
+        )
+      ), 
+    by = c(&quot;iso_a3&quot; = &quot;country_code&quot;)
+  ) %&gt;% 
+  ggplot() +
+  geom_sf(aes(fill = quota_type), color = &quot;white&quot;, size = 0.1) +
+  scale_fill_brewer(
+    type = &quot;qual&quot;, 
+    palette = &quot;Dark2&quot;,
+    na.value = &quot;grey80&quot;
+  ) +
+  theme_minimal() +
+  theme(legend.position = &quot;top&quot;) +
+  coord_sf(datum = NA) +
+  labs(x = NULL, y = NULL, fill = &quot;Quota Type&quot;)</code></pre>
+<p><img src="/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>We can see that South &amp; Central America have almost completely adopted quotas. As we noticed above, this region has had particularly notable improvement in female representation since 1997.</p>
+<p>Now to make any causal claims about quotas and representation trends would need much more careful analysis, so I should emphasize I am not trying to do that. There are a couple of simple questions we could answer with this data, though.</p>
+<ol style="list-style-type: decimal">
+<li>Do the countries with the biggest increase in representation from 1997 to 2018 also have quota systems in place?</li>
+</ol>
+<pre class="r"><code>differences &lt;- 
+  wip_quotas %&gt;% 
+  filter(year %in% c(1997, 2018)) %&gt;% 
+  spread(key = year, value = prop_women_seats) %&gt;% 
+  mutate(
+    difference = `2018` - `1997`,
+    quota_type = if_else(is.na(quota_type), &quot;None&quot;, quota_type)
+  ) %&gt;% 
+  drop_na(difference)
+
+differences %&gt;% 
+  top_n(n = 10, wt = difference) %&gt;% 
+  arrange(desc(difference)) %&gt;% 
+  select(country_name, quota_type, difference) %&gt;% 
+  knitr::kable(caption = &quot;The countries with the biggest increase in percentage of parliament seats held by women from 1997 to 2018&quot;)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-9">Table 3: </span>The countries with the biggest increase in percentage of parliament seats held by women from 1997 to 2018</caption>
+<thead>
+<tr class="header">
+<th align="left">country_name</th>
+<th align="left">quota_type</th>
+<th align="right">difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Rwanda</td>
+<td align="left">Reserved seats</td>
+<td align="right">44.2</td>
+</tr>
+<tr class="even">
+<td align="left">Ethiopia</td>
+<td align="left">Voluntary</td>
+<td align="right">36.8</td>
+</tr>
+<tr class="odd">
+<td align="left">North Macedonia</td>
+<td align="left">Quota</td>
+<td align="right">35.0</td>
+</tr>
+<tr class="even">
+<td align="left">Nicaragua</td>
+<td align="left">Quota</td>
+<td align="right">34.9</td>
+</tr>
+<tr class="odd">
+<td align="left">Ecuador</td>
+<td align="left">Quota</td>
+<td align="right">34.3</td>
+</tr>
+<tr class="even">
+<td align="left">Mexico</td>
+<td align="left">Quota</td>
+<td align="right">34.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Cuba</td>
+<td align="left">None</td>
+<td align="right">30.4</td>
+</tr>
+<tr class="even">
+<td align="left">Senegal</td>
+<td align="left">Quota</td>
+<td align="right">30.1</td>
+</tr>
+<tr class="odd">
+<td align="left">Costa Rica</td>
+<td align="left">Quota</td>
+<td align="right">29.8</td>
+</tr>
+<tr class="even">
+<td align="left">Nepal</td>
+<td align="left">Reserved seats</td>
+<td align="right">29.3</td>
+</tr>
+</tbody>
+</table>
+<p>In fact only two of the top 10 countries by increase 1997-2018 did not have some form of legally binding quota system in place.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Did countries with quota systems in place see larger year-to-year jumps than those without?</li>
+</ol>
+<pre class="r"><code>largest_jumps &lt;-
+  wip_quotas %&gt;% 
+  group_by(country_code) %&gt;% 
+  arrange(year) %&gt;% 
+  mutate(
+    jump = lag(prop_women_seats) - prop_women_seats,
+    quota_type = if_else(is.na(quota_type), &quot;None&quot;, quota_type)
+  ) %&gt;% 
+  drop_na(jump) %&gt;% 
+  summarize(
+    largest_jump = max(jump), 
+    quota_type = first(quota_type)
+  ) %&gt;% 
+  filter(
+    quota_type != &quot;Funding incentives&quot; # only one country
+  )
+
+median_largest_jump &lt;- 
+  largest_jumps %&gt;% 
+  summarize(med = median(largest_jump)) %&gt;% 
+  pull(med)
+
+largest_jumps %&gt;% 
+  ggplot(aes(quota_type, largest_jump)) +
+  geom_hline(yintercept = median_largest_jump, size = 2, color = &quot;white&quot;) +
+  geom_violin(draw_quantiles = 0.5) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  labs(
+    x = &quot;Quota type&quot;,
+    y = &quot;Largest one-year jump in female representation from 1997 to 2018&quot;,
+    title = &quot;More countries with quota systems saw large year-to-year jumps\nin female  representation&quot;,
+    subtitle = &quot;Though some very large jumps occurred in countries without quotas&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>To make this plot, I calculated the largest jump in percentage of seats held by women from one year to the next for each country. The distribution of these jumps by quota system is then plotted as a violin plot. The white reference line shows the median largest jump size across all countries. Each line within a violin plot shows the median largest jump size for countries with that type of quota system in place.</p>
+<p>Two things are clear:</p>
+<ul>
+<li>More than 50% of countries with some kind of quota system experienced a larger jump than the median largest jump in countries with no quota system at all.</li>
+<li>Some countries with no quota system experienced extremely large jumps from one year to the next. Clearly quotas are not <em>necessary</em> to achieve this.
+<ul>
+<li>Side note: since I was curious, I looked up that enormous outlier. It’s Andorra and they had an election in 2011 where 15 women were elected making them the first country in Europe to have a majority female parliament.</li>
+</ul></li>
+</ul>
+<p>Like I said before, I am being careful not to make any causal claims here. Clearly, representation can be increased with or without quotas. Exploring these datasets has been lots of fun, and there are definitely some very positive examples that give hope for a more equal future!</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/data-visualization/">data-visualization</a>
+  
+  <a class="badge badge-light" href="/tags/tidyverse/">tidyverse</a>
+  
+</div>
+
+
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_hua162f16de09a3951536942805fb74cf7_189781_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Samantha Robertson</a></h5>
+    <h6 class="card-subtitle">First Year Ph.D. Student</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:samantha_robertson@berkeley.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/SamRobe04746844" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/srobert4" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/samantha-robertson-8a17a2166/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/2019-04-29-auselectionpoll/">How Much Do Australians Know About Their Parliament?</a></li>
+          
+          <li><a href="/post/2019-03-07-swdchallenge/">#SWDChallenge March 2019</a></li>
+          
+          <li><a href="/post/2019-02-28-visualizing-course-descriptions/">Visualizing Course Descriptions</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.c1b0baf12cd491effaeeb294faf1e83e.js"></script>
+
+  </body>
+</html>
+

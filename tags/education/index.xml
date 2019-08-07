@@ -6,7 +6,7 @@
     <description>Recent content in education on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Feb 2019 00:00:00 -0800</lastBuildDate>
+    <lastBuildDate>Fri, 15 Feb 2019 00:00:00 +1100</lastBuildDate>
     
 	<atom:link href="/tags/education/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Race, Wealth and Education in America</title>
       <link>/project/race-educ/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
       
       <guid>/project/race-educ/</guid>
       <description>Students in Data Challenge Lab, the data science intensive course taught by Bill Behrman and Hadley Wickham, pursue a quarter-long data exploration and analysis project of their choice using the Tidyverse R skills they learn in the course. My project explored the dataset released by the Stanford Education Data Archive along with the publication The Geography of Racial/Ethic Test Score Gaps, (Reardon, Kalogrides and Shores, 2017). Using a number of creative data visualization techniques, including some inspired by the New York Times interactive based on the paper, I was able to explore the education achievement gap between students of different races and with parents of different income and education levels geographically, by subject and by student age.</description>

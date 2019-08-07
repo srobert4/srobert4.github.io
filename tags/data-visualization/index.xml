@@ -6,10 +6,20 @@
     <description>Recent content in data-visualization on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Women in Parliament Worldwide</title>
+      <link>/post/2019-08-07-womeninparliament/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-08-07-womeninparliament/</guid>
+      <description>This week’s RWeekly digest included an awesome dataset from the World Bank that documents the percentage of women in lower house parliament across the globe from 1997 to 2018. The dataset is nearly complete and also includes summary statistics for numerous geographic aggregations.
+All of my code to process and explore the data is available on my GitHub. There’s lots of interesting things to look at in this data, so I will leave most of the boring stuff out of this post.</description>
+    </item>
     
     <item>
       <title>How Much Do Australians Know About Their Parliament?</title>

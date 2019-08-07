@@ -6,8 +6,528 @@
     <description>Recent content in Samantha Robertson on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Women in Parliament Worldwide</title>
+      <link>/post/2019-08-07-womeninparliament/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-08-07-womeninparliament/</guid>
+      <description>
+
+
+&lt;p&gt;This week’s RWeekly digest included an &lt;a href=&#34;https://data.worldbank.org/indicator/SG.GEN.PARL.ZS&#34;&gt;awesome dataset from the World Bank&lt;/a&gt; that documents the percentage of women in lower house parliament across the globe from 1997 to 2018. The dataset is nearly complete and also includes summary statistics for numerous geographic aggregations.&lt;/p&gt;
+&lt;p&gt;All of my code to process and explore the data is available &lt;a href=&#34;https://github.com/srobert4/data-projects/tree/master/women-in-parliament&#34;&gt;on my GitHub&lt;/a&gt;. There’s lots of interesting things to look at in this data, so I will leave most of the boring stuff out of this post.&lt;/p&gt;
+&lt;p&gt;To get a sense of the World Bank data, here are the top 10 and bottom 10 countries in 2018 in terms of percentage of parliament made up of women.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  filter(year == 2018) %&amp;gt;% 
+  top_n(n = 10, wt = prop_women_seats) %&amp;gt;% 
+  arrange(desc(prop_women_seats)) %&amp;gt;% 
+  knitr::kable(caption = &amp;quot;Top 10 Countries with the largest proportion of women in their parliament in 2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-1&#34;&gt;Table 1: &lt;/span&gt;Top 10 Countries with the largest proportion of women in their parliament in 2018&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;country_code&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;year&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;prop_women_seats&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Rwanda&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;RWA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;61.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cuba&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CUB&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Bolivia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;BOL&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MEX&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Grenada&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GRD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Namibia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NAM&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Sweden&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;SWE&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Nicaragua&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NIC&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Costa Rica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CRI&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;South Africa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ZAF&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  filter(year == 2018) %&amp;gt;% 
+  top_n(n = 10, wt = -prop_women_seats) %&amp;gt;% 
+  arrange(prop_women_seats) %&amp;gt;% 
+  knitr::kable(caption = &amp;quot;Bottom 10 Countries with the smallest proportion of women in their parliament in 2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-2&#34;&gt;Table 2: &lt;/span&gt;Bottom 10 Countries with the smallest proportion of women in their parliament in 2018&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;country_code&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;year&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;prop_women_seats&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Micronesia, Fed. Sts.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;FSM&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Papua New Guinea&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PNG&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Vanuatu&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;VUT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Yemen, Rep.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;YEM&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Oman&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;OMN&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Haiti&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;HTI&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Kuwait&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;KWT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Solomon Islands&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;SLB&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Lebanon&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;LBN&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Thailand&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;THA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Only 3 countries had over half women in their parliament in 2018! The top 10 are still all over 40%, which seems encouraging! Less encouragingly, four nations still had 0 women in the lower house of parliament in 2018.&lt;/p&gt;
+&lt;div id=&#34;global-trends-in-female-representation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Global Trends in Female Representation&lt;/h1&gt;
+&lt;p&gt;Conveniently, the dataset has a precalculated global aggregate statistic.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  filter(country_name == &amp;quot;World&amp;quot;) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, by = 2),
+    minor_breaks = FALSE
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  theme_minimal() +
+  labs(
+    title = &amp;quot;There has been a constant upward trend globally since 1997&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It is encouraging to see that female representation has increased every year when we look at the whole world aggregated.&lt;/p&gt;
+&lt;div id=&#34;by-region&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;By region&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;regions &amp;lt;- c(
+  &amp;quot;East Asia &amp;amp; Pacific&amp;quot;,                
+  &amp;quot;Europe &amp;amp; Central Asia&amp;quot;,              
+  &amp;quot;Latin America &amp;amp; Caribbean&amp;quot;,          
+  &amp;quot;Middle East &amp;amp; North Africa&amp;quot;,             
+  &amp;quot;Sub-Saharan Africa&amp;quot;,
+  &amp;quot;North America&amp;quot;,
+  &amp;quot;South Asia&amp;quot;
+)
+
+wip %&amp;gt;% 
+  filter(country_name %in% regions) %&amp;gt;% 
+  drop_na(prop_women_seats) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats, color = country_name)) +
+  geom_line(size = 1) +
+  geom_point(size = 1) +
+  ggrepel::geom_text_repel(
+    aes(label = country_name),
+    data = . %&amp;gt;% group_by(country_name) %&amp;gt;% top_n(1, wt = year),
+    nudge_x = 0.25,
+    direction = &amp;quot;y&amp;quot;,
+    hjust = 0
+  ) +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL,
+    limits = c(1997, 2028)
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  guides(color = &amp;quot;none&amp;quot;) +
+  theme_minimal() +
+  labs(
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;,
+    title = &amp;quot;All regions but South Asia have had increasing representation since 1997&amp;quot;,
+    subtitle = &amp;quot;Latin America &amp;amp; Caribbean and Middle East &amp;amp; North Africa have seen large incerases&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Notably, Latin America &amp;amp; the Caribbean went from the fourth leading region in terms of female representation in the late 1990s to the leading region by a relatively significant margin by 2014. The Middle East &amp;amp; North Africa, though still lagging behind the rest of the world, also has experienced a marked increase since 1997. Interestingly, South Asia is the only region that has shown a decrease, with representation plateauing in 2009, and then beginning to decrease.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;by-income-level&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;By income level&lt;/h2&gt;
+&lt;p&gt;Another interesting aggregation is by income level of the countries.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;order &amp;lt;-
+  c(
+    &amp;quot;High income&amp;quot;,
+    &amp;quot;Upper middle income&amp;quot;,
+    &amp;quot;Middle income&amp;quot;,
+    &amp;quot;Lower middle income&amp;quot;,
+    &amp;quot;Low income&amp;quot;
+  )
+
+wip %&amp;gt;% 
+  filter(country_name %in% order) %&amp;gt;% 
+  mutate(country_name = factor(country_name, levels = order, ordered = TRUE)) %&amp;gt;% 
+  drop_na(prop_women_seats) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats, color = country_name)) +
+  geom_line(aes(group = country_name), color = &amp;quot;white&amp;quot;, size = 2) +
+  geom_point(aes(group = country_name), color = &amp;quot;white&amp;quot;, size = 1) +
+  geom_point(size = 1) +
+  geom_line(size = 1) +
+  ggrepel::geom_text_repel(
+    aes(label = country_name),
+    data = . %&amp;gt;% group_by(country_name) %&amp;gt;% top_n(1, wt = year),
+    nudge_x = 0.25,
+    direction = &amp;quot;y&amp;quot;,
+    hjust = 0,
+    color = &amp;quot;grey30&amp;quot;
+  ) +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL,
+    limits = c(1997, 2025)
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  guides(color = &amp;quot;none&amp;quot;) +
+  theme_minimal() +
+  labs(
+    title = &amp;quot;Low income countries outperform lower middle income countries&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Unsurprisingly, based on the previous two plots, representation is increasing over time at all income levels. There is something very striking about this plot, though. Representation has been higher with higher income, with the obvious exception of low income regions. Representation in low income regions has been higher than in lower middle income regions every year recorded, and in three different years has been second only to high income regions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;by-country&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;By country&lt;/h2&gt;
+&lt;p&gt;It is really difficult to look at the trend of all nations at once, given how many there are. We can visualize the most recent data across the globe by looking at a map of the world with data from 2018.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;midpoint &amp;lt;-
+  wip %&amp;gt;% 
+  filter(year == 2018) %&amp;gt;% 
+  semi_join(world %&amp;gt;% select(country_code = iso_a3)) %&amp;gt;% 
+  summarize(median_prop_women = median(prop_women_seats, na.rm = TRUE)) %&amp;gt;% 
+  pull(median_prop_women)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;country_code&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world %&amp;gt;% 
+  left_join(
+    wip %&amp;gt;% filter(year == 2018), 
+    by = c(&amp;quot;iso_a3&amp;quot; = &amp;quot;country_code&amp;quot;)
+  ) %&amp;gt;% 
+  ggplot() +
+  geom_sf(
+    aes(fill = prop_women_seats), 
+    color = &amp;quot;grey20&amp;quot;, 
+    size = 0.1
+  ) +
+  scale_fill_gradient(
+    low = &amp;quot;white&amp;quot;,
+    high = &amp;quot;#01665e&amp;quot;,
+    labels = scales::percent_format(accuracy = 1, scale = 1)
+  ) +
+  coord_sf(datum = NA) +
+  guides(
+    fill = 
+      guide_colorbar(
+        barwidth = 8, 
+        barheight = 0.5
+      ) 
+  ) +
+  theme_void() +
+  theme(
+    legend.position = &amp;quot;top&amp;quot;,
+    legend.title.align = 1
+  ) +
+  labs(fill = &amp;quot;Proportion of seats\nheld by women&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case-study-rwanda&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Case study: Rwanda&lt;/h1&gt;
+&lt;p&gt;Though it’s hard to see from the map, at the very beginning we noticed that Rwanda had the highest female representation in its parliament in 2018, at over 60%! Looking into the politics there a bit more, I found that they introduced a quota system in 2003 that required 30% of the parliament to be made up of women. Looking at the data, there is a clear increase at the time this policy began.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  drop_na(prop_women_seats) %&amp;gt;% 
+  filter(country_name == &amp;quot;Rwanda&amp;quot;) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats)) +
+  geom_hline(yintercept = 50, size = 2, color = &amp;quot;grey80&amp;quot;) +
+  geom_vline(xintercept = 2003, size = 1, color = &amp;quot;#b2182b&amp;quot;) +
+  geom_line() +
+  geom_point() +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 2003.25,
+    y = 40,
+    label = &amp;quot;30% quota\nintroduced\nin 2003&amp;quot;,
+    hjust = 0,
+    color = &amp;quot;grey40&amp;quot;
+  ) + 
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  theme_minimal() +
+  labs(
+    title = &amp;quot;Rwanda reached almost 50/50 representation after the introduction of a quota&amp;quot;,
+    subtitle = &amp;quot;Representation continued to increase even 10 years later&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;quota-systems&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Quota Systems&lt;/h1&gt;
+&lt;p&gt;The case study of Rwanda made me think more about quotas: how effective are they? where have they been implemented? Conveniently, the Institute for Democracy and Electoral Assistance (IDEA) has a &lt;a href=&#34;https://www.idea.int/data-tools/data/gender-quotas/database&#34;&gt;public dataset&lt;/a&gt; of the types of quotas implemented all over the world! The only downside is that the database doesn’t include the year the quota was introduced. This is something that could be collated manually but we can work without for now.&lt;/p&gt;
+&lt;p&gt;There are three types of “quotas” in the dataset, explicit quotas about the number or fraction of seats to be held by women, a reserved seats system where certain seats must be held by women, and voluntary systems where some parties elect to hold themselves to a quota but none exists in law. We can visualize how these systems are implemented around the world with a map.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;type_order &amp;lt;-
+  quotas %&amp;gt;% 
+  count(quota_type, sort = TRUE) %&amp;gt;% 
+  pull(quota_type)
+
+world %&amp;gt;% 
+  left_join(
+    quotas %&amp;gt;% 
+      mutate(
+        quota_type = factor(
+          quota_type, 
+          levels = type_order,
+          ordered = TRUE
+        )
+      ), 
+    by = c(&amp;quot;iso_a3&amp;quot; = &amp;quot;country_code&amp;quot;)
+  ) %&amp;gt;% 
+  ggplot() +
+  geom_sf(aes(fill = quota_type), color = &amp;quot;white&amp;quot;, size = 0.1) +
+  scale_fill_brewer(
+    type = &amp;quot;qual&amp;quot;, 
+    palette = &amp;quot;Dark2&amp;quot;,
+    na.value = &amp;quot;grey80&amp;quot;
+  ) +
+  theme_minimal() +
+  theme(legend.position = &amp;quot;top&amp;quot;) +
+  coord_sf(datum = NA) +
+  labs(x = NULL, y = NULL, fill = &amp;quot;Quota Type&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can see that South &amp;amp; Central America have almost completely adopted quotas. As we noticed above, this region has had particularly notable improvement in female representation since 1997.&lt;/p&gt;
+&lt;p&gt;Now to make any causal claims about quotas and representation trends would need much more careful analysis, so I should emphasize I am not trying to do that. There are a couple of simple questions we could answer with this data, though.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Do the countries with the biggest increase in representation from 1997 to 2018 also have quota systems in place?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;differences &amp;lt;- 
+  wip_quotas %&amp;gt;% 
+  filter(year %in% c(1997, 2018)) %&amp;gt;% 
+  spread(key = year, value = prop_women_seats) %&amp;gt;% 
+  mutate(
+    difference = `2018` - `1997`,
+    quota_type = if_else(is.na(quota_type), &amp;quot;None&amp;quot;, quota_type)
+  ) %&amp;gt;% 
+  drop_na(difference)
+
+differences %&amp;gt;% 
+  top_n(n = 10, wt = difference) %&amp;gt;% 
+  arrange(desc(difference)) %&amp;gt;% 
+  select(country_name, quota_type, difference) %&amp;gt;% 
+  knitr::kable(caption = &amp;quot;The countries with the biggest increase in percentage of parliament seats held by women from 1997 to 2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-9&#34;&gt;Table 3: &lt;/span&gt;The countries with the biggest increase in percentage of parliament seats held by women from 1997 to 2018&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;quota_type&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;difference&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Rwanda&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Reserved seats&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Ethiopia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Voluntary&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;North Macedonia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;35.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Nicaragua&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Ecuador&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cuba&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;None&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Senegal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Costa Rica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Nepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Reserved seats&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;In fact only two of the top 10 countries by increase 1997-2018 did not have some form of legally binding quota system in place.&lt;/p&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Did countries with quota systems in place see larger year-to-year jumps than those without?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;largest_jumps &amp;lt;-
+  wip_quotas %&amp;gt;% 
+  group_by(country_code) %&amp;gt;% 
+  arrange(year) %&amp;gt;% 
+  mutate(
+    jump = lag(prop_women_seats) - prop_women_seats,
+    quota_type = if_else(is.na(quota_type), &amp;quot;None&amp;quot;, quota_type)
+  ) %&amp;gt;% 
+  drop_na(jump) %&amp;gt;% 
+  summarize(
+    largest_jump = max(jump), 
+    quota_type = first(quota_type)
+  ) %&amp;gt;% 
+  filter(
+    quota_type != &amp;quot;Funding incentives&amp;quot; # only one country
+  )
+
+median_largest_jump &amp;lt;- 
+  largest_jumps %&amp;gt;% 
+  summarize(med = median(largest_jump)) %&amp;gt;% 
+  pull(med)
+
+largest_jumps %&amp;gt;% 
+  ggplot(aes(quota_type, largest_jump)) +
+  geom_hline(yintercept = median_largest_jump, size = 2, color = &amp;quot;white&amp;quot;) +
+  geom_violin(draw_quantiles = 0.5) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  labs(
+    x = &amp;quot;Quota type&amp;quot;,
+    y = &amp;quot;Largest one-year jump in female representation from 1997 to 2018&amp;quot;,
+    title = &amp;quot;More countries with quota systems saw large year-to-year jumps\nin female  representation&amp;quot;,
+    subtitle = &amp;quot;Though some very large jumps occurred in countries without quotas&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;To make this plot, I calculated the largest jump in percentage of seats held by women from one year to the next for each country. The distribution of these jumps by quota system is then plotted as a violin plot. The white reference line shows the median largest jump size across all countries. Each line within a violin plot shows the median largest jump size for countries with that type of quota system in place.&lt;/p&gt;
+&lt;p&gt;Two things are clear:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;More than 50% of countries with some kind of quota system experienced a larger jump than the median largest jump in countries with no quota system at all.&lt;/li&gt;
+&lt;li&gt;Some countries with no quota system experienced extremely large jumps from one year to the next. Clearly quotas are not &lt;em&gt;necessary&lt;/em&gt; to achieve this.
+&lt;ul&gt;
+&lt;li&gt;Side note: since I was curious, I looked up that enormous outlier. It’s Andorra and they had an election in 2011 where 15 women were elected making them the first country in Europe to have a majority female parliament.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Like I said before, I am being careful not to make any causal claims here. Clearly, representation can be increased with or without quotas. Exploring these datasets has been lots of fun, and there are definitely some very positive examples that give hope for a more equal future!&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>How Much Do Australians Know About Their Parliament?</title>
@@ -1072,7 +1592,7 @@ forceNetwork(
     <item>
       <title>A SimVascular Plug-in</title>
       <link>/project/simvascular/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
       
       <guid>/project/simvascular/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
@@ -1096,7 +1616,7 @@ forceNetwork(
     <item>
       <title>LiCoRICE</title>
       <link>/project/licorice/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
       
       <guid>/project/licorice/</guid>
       <description>&lt;p&gt;LiCoRICE is an &lt;strong&gt;open-source, realtime computation platform specialized for systems neuroscience experimentation&lt;/strong&gt;. It has been developed in the Brain Interfacing Lab is now the system used to run the group&amp;rsquo;s closed-loop brain interface experiments. The platform is written in &lt;strong&gt;C and Python&lt;/strong&gt;, and is specifically designed with a modular architecture to allow easy prototyping of models by experimenters using only Python.&lt;/p&gt;
@@ -1116,7 +1636,7 @@ forceNetwork(
     <item>
       <title>Race, Wealth and Education in America</title>
       <link>/project/race-educ/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
       
       <guid>/project/race-educ/</guid>
       <description>&lt;p&gt;Students in &lt;a href=&#34;https://datalab.stanford.edu&#34; target=&#34;_blank&#34;&gt;Data Challenge Lab&lt;/a&gt;, the data science intensive course taught by Bill Behrman and Hadley Wickham, pursue a quarter-long data exploration and analysis project of their choice using the Tidyverse R skills they learn in the course. My project explored the dataset released by the &lt;a href=&#34;https://cepa.stanford.edu/seda/overview&#34; target=&#34;_blank&#34;&gt;Stanford Education Data Archive&lt;/a&gt; along with the publication &lt;a href=&#34;https://cepa.stanford.edu/sites/default/files/wp16-10-v201712.pdf&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;The Geography of Racial/Ethic Test Score Gaps&lt;/em&gt;&lt;/a&gt;, (Reardon, Kalogrides and Shores, 2017). Using a number of creative data visualization techniques, including some inspired by the &lt;a href=&#34;https://www.nytimes.com/interactive/2016/04/29/upshot/money-race-and-success-how-your-school-district-compares.html&#34; target=&#34;_blank&#34;&gt;New York Times interactive&lt;/a&gt; based on the paper, I was able to explore the education achievement gap between students of different races and with parents of different income and education levels geographically, by subject and by student age.&lt;/p&gt;
@@ -1128,7 +1648,7 @@ forceNetwork(
     <item>
       <title>The Stanford Open Policing Project</title>
       <link>/project/opp/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
       
       <guid>/project/opp/</guid>
       <description>&lt;p&gt;In the Fall of 2018, I worked with the researchers at the &lt;a href=&#34;https://openpolicing.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Open Policing Project&lt;/a&gt; (OPP) in the &lt;a href=&#34;https://policylab.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Computational Policy Lab&lt;/a&gt;, to implement and run the Veil of Darkness Test, as proposed by &lt;a href=&#34;https://www.rand.org/pubs/reprints/RP1253.html&#34; target=&#34;_blank&#34;&gt;Grogger &amp;amp; Ridgeway in 2006&lt;/a&gt; using the large OPP dataset.  The premise of the test is that the race of a driver is less visible to the police when it is dark outside than when it is light. Therefore, in the presence of racial bias, there should be a greater disparity in the racial breakdown of drivers stopped during daylight hours than at night. There are a number of factors to control for, most critically time of day, location of the stop.&lt;/p&gt;
@@ -1147,7 +1667,7 @@ forceNetwork(
     <item>
       <title>Example Page</title>
       <link>/tutorial/example/</link>
-      <pubDate>Sun, 09 Sep 2018 00:00:00 -0700</pubDate>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +1000</pubDate>
       
       <guid>/tutorial/example/</guid>
       <description>
@@ -1167,7 +1687,7 @@ forceNetwork(
     <item>
       <title>Privacy Policy</title>
       <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 -0700</pubDate>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +1000</pubDate>
       
       <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
@@ -1177,7 +1697,7 @@ forceNetwork(
     <item>
       <title>An Open-Source Realtime Computation Platform</title>
       <link>/publication/licorice-one/</link>
-      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 +1000</pubDate>
       
       <guid>/publication/licorice-one/</guid>
       <description></description>
@@ -1186,7 +1706,7 @@ forceNetwork(
     <item>
       <title>Example Talk</title>
       <link>/talk/example/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 -0800</pubDate>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +1100</pubDate>
       
       <guid>/talk/example/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
