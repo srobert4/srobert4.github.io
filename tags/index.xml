@@ -23,7 +23,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -111,6 +111,15 @@
     </item>
     
     <item>
+      <title>jupyter</title>
+      <link>/tags/jupyter/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/jupyter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>licorice</title>
       <link>/tags/licorice/</link>
       <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
@@ -134,6 +143,15 @@
       <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
       
       <guid>/tags/opp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>/tags/python/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
@@ -194,7 +212,7 @@
     <item>
       <title>tidyverse</title>
       <link>/tags/tidyverse/</link>
-      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/tidyverse/</guid>
       <description></description>

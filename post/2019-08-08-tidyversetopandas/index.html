@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.0.0">
+  <meta name="generator" content="Hugo 0.54.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Samantha Robertson">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="I started this jupyter notebook to help me learn to (1) use both Python and R in one Jupyter notebook and (2) translate tidyverse syntax into Python (specifically pandas &amp; seaborn) syntax. I figured I would post it in the hopes it might be helpful to someone else. Also, I wanted to learn how to post a jupyter notebook on this website.
+Helpful links:
+ Rmagic Seaborn Tidyverse -&gt; Pandas (Most of this is actually taken straight from this post) R &#43; Jupyter This link helped me set up my environment so that I could use R and Python in one notebook.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2019-08-08-tidyversetopandas/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2019-08-08-tidyversetopandas/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@SamRobe04746844">
+  <meta property="twitter:creator" content="@SamRobe04746844">
+  
+  <meta property="og:site_name" content="Samantha Robertson">
+  <meta property="og:url" content="/post/2019-08-08-tidyversetopandas/">
+  <meta property="og:title" content="Translating Tidyverse to Python | Samantha Robertson">
+  <meta property="og:description" content="I started this jupyter notebook to help me learn to (1) use both Python and R in one Jupyter notebook and (2) translate tidyverse syntax into Python (specifically pandas &amp; seaborn) syntax. I figured I would post it in the hopes it might be helpful to someone else. Also, I wanted to learn how to post a jupyter notebook on this website.
+Helpful links:
+ Rmagic Seaborn Tidyverse -&gt; Pandas (Most of this is actually taken straight from this post) R &#43; Jupyter This link helped me set up my environment so that I could use R and Python in one notebook."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-08-08T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-08-08T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Translating Tidyverse to Python | Samantha Robertson</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Samantha Robertson</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#experience">
+            
+            <span>Experience</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Translating Tidyverse to Python</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-08 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-08 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 8, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Translating%20Tidyverse%20to%20Python&amp;url=%2fpost%2f2019-08-08-tidyversetopandas%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2019-08-08-tidyversetopandas%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-08-08-tidyversetopandas%2f&amp;title=Translating%20Tidyverse%20to%20Python"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-08-08-tidyversetopandas%2f&amp;title=Translating%20Tidyverse%20to%20Python"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Translating%20Tidyverse%20to%20Python&amp;body=%2fpost%2f2019-08-08-tidyversetopandas%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>I started this jupyter notebook to help me learn to (1) use both Python and R in one Jupyter notebook and (2) translate tidyverse syntax into Python (specifically pandas &amp; seaborn) syntax. I figured I would post it in the hopes it might be helpful to someone else. Also, I wanted to learn how to post a jupyter notebook on this website.</p>
+
+<p>Helpful links:</p>
+
+<ul>
+<li><a href="https://ipython.org/ipython-doc/2/config/extensions/rmagic.html" target="_blank">Rmagic</a></li>
+<li><a href="https://seaborn.pydata.org/introduction.html#introduction" target="_blank">Seaborn</a></li>
+<li><a href="https://towardsdatascience.com/tidying-up-pandas-4572bfa38776" target="_blank">Tidyverse -&gt; Pandas</a> (Most of this is actually taken straight from this post)</li>
+<li><a href="https://www.datacamp.com/community/blog/jupyter-notebook-r?utm_source=adwords_ppc&amp;utm_campaignid=898687156&amp;utm_adgroupid=48947256715&amp;utm_device=c&amp;utm_keyword=&amp;utm_matchtype=b&amp;utm_network=g&amp;utm_adpostion=1t1&amp;utm_creative=229765585186&amp;utm_targetid=aud-299261629574:dsa-473406574235&amp;utm_loc_interest_ms=&amp;utm_loc_physical_ms=1000286&amp;gclid=CjwKCAjw7anqBRALEiwAgvGgm8sI-Ddl4V7GaVRcbznYgpeQBSk1-izJk7yKZOD2uuy0oWUSOJe5SxoChl8QAvD_BwE" target="_blank">R + Jupyter</a> This link helped me set up my environment so that I could use R and Python in one notebook.</li>
+</ul>
+
+<h3 id="setup">Setup</h3>
+
+<pre><code class="language-python">import warnings
+warnings.filterwarnings('ignore')
+%reload_ext rpy2.ipython
+%R library(tidyverse)
+</code></pre>
+
+<pre><code>array(['bindrcpp', 'dplyr', 'purrr', 'readr', 'tidyr', 'tibble', 'ggplot2',
+       'tidyverse', 'tools', 'stats', 'graphics', 'grDevices', 'utils',
+       'datasets', 'methods', 'base'],
+      dtype='|S9')
+</code></pre>
+
+<pre><code class="language-python"># Load in the pandas library
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+</code></pre>
+
+<h3 id="make-some-fake-data">Make some fake data</h3>
+
+<pre><code class="language-python">df = pd.DataFrame({'Alphabet': ['a', 'b', 'c', 'd','e', 'f', 'g', 'h','i'],
+                   'A': [4, 3, 5, 2, 1, 7, 7, 5, 9],
+                   'B': [0, 4, 3, 6, 7, 10,11, 9, 13],
+                   'C': [1, 2, 3, 1, 2, 3, 1, 2, 3]})
+</code></pre>
+
+<h3 id="glimpse-summarize">Glimpse &amp; Summarize</h3>
+
+<pre><code class="language-python">%R glimpse(df)
+</code></pre>
+
+<pre><code>function (x, df1, df2, ncp, log = FALSE)  
+</code></pre>
+
+<pre><code class="language-python">df.head()
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-r">%%R -i df 
+summary(df)
+</code></pre>
+
+<pre><code>       A            Alphabet       B            C    
+ Min.   :1.000   a      :1   Min.   : 0   Min.   :1  
+ 1st Qu.:3.000   b      :1   1st Qu.: 4   1st Qu.:1  
+ Median :5.000   c      :1   Median : 7   Median :2  
+ Mean   :4.778   d      :1   Mean   : 7   Mean   :2  
+ 3rd Qu.:7.000   e      :1   3rd Qu.:10   3rd Qu.:3  
+ Max.   :9.000   f      :1   Max.   :13   Max.   :3  
+                 (Other):3                           
+</code></pre>
+
+<pre><code class="language-python">df.info(null_counts = True)
+</code></pre>
+
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 9 entries, 0 to 8
+Data columns (total 4 columns):
+A           9 non-null int64
+Alphabet    9 non-null object
+B           9 non-null int64
+C           9 non-null int64
+dtypes: int64(3), object(1)
+memory usage: 360.0+ bytes
+</code></pre>
+
+<h3 id="filtering">Filtering</h3>
+
+<pre><code class="language-python">%R df %&gt;% filter(A &gt; 2)
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df[df.A &gt; 2]
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="slice-select">Slice &amp; Select</h3>
+
+<pre><code class="language-python">%R df %&gt;% slice(4:5)
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df.loc[3:4,:] # Note: if slicing only one row, use df.loc[[3],:]
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">%R df %&gt;% select(A:B)
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df.loc[:, &quot;A&quot;:&quot;B&quot;] # Select non-adjacent columns with df.loc[:, [&quot;A&quot;,&quot;B&quot;]]
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">%R df %&gt;% select(-A)
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df.drop(labels = [&quot;A&quot;], axis = 1) # Can use columns = [&quot;A&quot;] in Python 3 / Pandas 0.21.0.
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="arrange-sort">Arrange / Sort</h3>
+
+<pre><code class="language-python">%R df %&gt;% arrange(desc(A))
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df.sort_values(by=&quot;A&quot;, ascending=False) 
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="mutate">Mutate</h3>
+
+<pre><code class="language-python">%R df %&gt;% mutate(AoverC = A / C, Bplus1 = B + 1)
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+      <th>AoverC</th>
+      <th>Bplus1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4.000000</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+      <td>1.500000</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1.666667</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+      <td>2.000000</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+      <td>2.333333</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+      <td>7.000000</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+      <td>2.500000</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+      <td>3.000000</td>
+      <td>14.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python">df.assign(AoverC = df.A / df.C, Bplus1 = lambda df: df[&quot;B&quot;] + 1 )
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+      <th>AoverC</th>
+      <th>Bplus1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4.000000</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+      <td>1.500000</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1.666667</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+      <td>2.000000</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+      <td>2.333333</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+      <td>7.000000</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+      <td>2.500000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+      <td>3.000000</td>
+      <td>14</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>To use functions that are NOT vectorized</p>
+
+<pre><code class="language-r">%%R -i df
+is_b &lt;- function(letter) { letter == &quot;b&quot; } # Pretend this function doesn't work on vectors
+df %&gt;% 
+    rowwise %&gt;% 
+    mutate(is_Alphabet_b = is_b(Alphabet))
+</code></pre>
+
+<pre><code>Source: local data frame [9 x 5]
+Groups: &lt;by row&gt;
+
+# A tibble: 9 x 5
+      A Alphabet     B     C is_Alphabet_b
+  &lt;int&gt;   &lt;fctr&gt; &lt;int&gt; &lt;int&gt;         &lt;lgl&gt;
+1     4        a     0     1         FALSE
+2     3        b     4     2          TRUE
+3     5        c     3     3         FALSE
+4     2        d     6     1         FALSE
+5     1        e     7     2         FALSE
+6     7        f    10     3         FALSE
+7     7        g    11     1         FALSE
+8     5        h     9     2         FALSE
+9     9        i    13     3         FALSE
+</code></pre>
+
+<pre><code class="language-python">def is_b(letter):
+    return letter == &quot;b&quot; # Again, pretend not vectorized
+
+df.assign( 
+    is_Alphabet_b = lambda df: df.Alphabet.apply(is_b) 
+)
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+      <th>is_Alphabet_b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="grouping-summarizing">Grouping &amp; Summarizing</h3>
+
+<pre><code class="language-r">%%R -i df
+df %&gt;% 
+    group_by(C) %&gt;%
+    summarize(avg_A = mean(A), mean_B = mean(B))
+</code></pre>
+
+<pre><code># A tibble: 3 x 3
+      C    avg_A   mean_B
+  &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1     1 4.333333 5.666667
+2     2 3.000000 6.666667
+3     3 7.000000 8.666667
+</code></pre>
+
+<pre><code class="language-python">df.groupby(&quot;C&quot;)\
+  .agg({'A' : ['mean'], 'B' : ['mean']})
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>mean</th>
+      <th>mean</th>
+    </tr>
+    <tr>
+      <th>C</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>4.333333</td>
+      <td>5.666667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.000000</td>
+      <td>6.666667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.000000</td>
+      <td>8.666667</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>This is super nasty. I hope I can find something better or will need to practice with this a lot.</p>
+
+<h3 id="joins">Joins</h3>
+
+<p>First I&rsquo;ll create a second fake dataset to join</p>
+
+<pre><code class="language-python">df2 = pd.DataFrame({'Group': [&quot;First&quot;, &quot;Second&quot;, &quot;Third&quot;],
+                   'C': [1, 2, 3]})
+</code></pre>
+
+<pre><code class="language-r">%%R -i df,df2
+df %&gt;% left_join(df2, by = &quot;C&quot;)
+</code></pre>
+
+<pre><code>  A Alphabet  B C  Group
+1 4        a  0 1  First
+2 3        b  4 2 Second
+3 5        c  3 3  Third
+4 2        d  6 1  First
+5 1        e  7 2 Second
+6 7        f 10 3  Third
+7 7        g 11 1  First
+8 5        h  9 2 Second
+9 9        i 13 3  Third
+</code></pre>
+
+<pre><code class="language-python">df.merge(df2, how = &quot;left&quot;, on = &quot;C&quot;)
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>Alphabet</th>
+      <th>B</th>
+      <th>C</th>
+      <th>Group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>a</td>
+      <td>0</td>
+      <td>1</td>
+      <td>First</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>b</td>
+      <td>4</td>
+      <td>2</td>
+      <td>Second</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>c</td>
+      <td>3</td>
+      <td>3</td>
+      <td>Third</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>d</td>
+      <td>6</td>
+      <td>1</td>
+      <td>First</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>e</td>
+      <td>7</td>
+      <td>2</td>
+      <td>Second</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>f</td>
+      <td>10</td>
+      <td>3</td>
+      <td>Third</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>g</td>
+      <td>11</td>
+      <td>1</td>
+      <td>First</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5</td>
+      <td>h</td>
+      <td>9</td>
+      <td>2</td>
+      <td>Second</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>i</td>
+      <td>13</td>
+      <td>3</td>
+      <td>Third</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="plotting">Plotting</h3>
+
+<pre><code class="language-r">%%R -i df
+df %&gt;%
+    ggplot() + 
+    geom_point(aes(x=A, y=B, color=factor(C)), size = 2)
+</code></pre>
+
+<p><img src="/post/2019-08-08-tidyversetopandas_files/Tidyverse%20to%20Pandas_38_0.png" alt="png" /></p>
+
+<pre><code class="language-python">sns.set(style=&quot;darkgrid&quot;)
+sns.relplot(x=&quot;A&quot;, y=&quot;B&quot;, hue=&quot;C&quot;, data=df,
+           palette = sns.color_palette(n_colors = 3))
+</code></pre>
+
+<pre><code>&lt;seaborn.axisgrid.FacetGrid at 0x11cd56e10&gt;
+</code></pre>
+
+<p><img src="/post/2019-08-08-tidyversetopandas_files/Tidyverse%20to%20Pandas_39_1.png" alt="png" /></p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/tidyverse/">tidyverse</a>
+  
+  <a class="badge badge-light" href="/tags/python/">python</a>
+  
+  <a class="badge badge-light" href="/tags/jupyter/">jupyter</a>
+  
+</div>
+
+
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_hua162f16de09a3951536942805fb74cf7_189781_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Samantha Robertson</a></h5>
+    <h6 class="card-subtitle">First Year Ph.D. Student</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:samantha_robertson@berkeley.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/SamRobe04746844" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/srobert4" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/samantha-robertson-8a17a2166/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/2019-08-07-womeninparliament/">Women in Parliament Worldwide</a></li>
+          
+          <li><a href="/post/2019-04-29-auselectionpoll/">How Much Do Australians Know About Their Parliament?</a></li>
+          
+          <li><a href="/post/2019-03-07-swdchallenge/">#SWDChallenge March 2019</a></li>
+          
+          <li><a href="/post/2019-02-28-visualizing-course-descriptions/">Visualizing Course Descriptions</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.c1b0baf12cd491effaeeb294faf1e83e.js"></script>
+
+  </body>
+</html>
+

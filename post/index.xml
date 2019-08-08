@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Translating Tidyverse to Python</title>
+      <link>/post/2019-08-08-tidyversetopandas/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-08-08-tidyversetopandas/</guid>
+      <description>I started this jupyter notebook to help me learn to (1) use both Python and R in one Jupyter notebook and (2) translate tidyverse syntax into Python (specifically pandas &amp;amp; seaborn) syntax. I figured I would post it in the hopes it might be helpful to someone else. Also, I wanted to learn how to post a jupyter notebook on this website.
+Helpful links:
+ Rmagic Seaborn Tidyverse -&amp;gt; Pandas (Most of this is actually taken straight from this post) R + Jupyter This link helped me set up my environment so that I could use R and Python in one notebook.</description>
+    </item>
     
     <item>
       <title>Women in Parliament Worldwide</title>
