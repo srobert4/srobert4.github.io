@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.0.0">
+  <meta name="generator" content="Hugo 0.54.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Samantha Robertson">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the Stanford Data Lab which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2019-08-09-who-immunizations/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2019-08-09-who-immunizations/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@SamRobe04746844">
+  <meta property="twitter:creator" content="@SamRobe04746844">
+  
+  <meta property="og:site_name" content="Samantha Robertson">
+  <meta property="og:url" content="/post/2019-08-09-who-immunizations/">
+  <meta property="og:title" content="Replicating WHO Visualizations of Global Immunization Coverage | Samantha Robertson">
+  <meta property="og:description" content="Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the Stanford Data Lab which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-08-09T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-08-09T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Replicating WHO Visualizations of Global Immunization Coverage | Samantha Robertson</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Samantha Robertson</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#experience">
+            
+            <span>Experience</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Replicating WHO Visualizations of Global Immunization Coverage</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-08-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-09 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Aug 9, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    8 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage&amp;url=%2fpost%2f2019-08-09-who-immunizations%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2019-08-09-who-immunizations%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-08-09-who-immunizations%2f&amp;title=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-08-09-who-immunizations%2f&amp;title=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage&amp;body=%2fpost%2f2019-08-09-who-immunizations%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<p>Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the <a href="datalab.stanford.edu">Stanford Data Lab</a> which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.</p>
+<p>I replicated three visualizations. Below are the comparisons of WHO’s vis against mine. All the code to create my plots is at the bottom of this post! I’m not fully convinced that the WHO visualizations are the most effective, for example two of them use redundant color, but for the challenge I tried to replicate them as faithfully as possible.</p>
+<p><img src="/post/2019-08-09-who-immunizations_files/comparison.jpg" /></p>
+<p>Below is the code for the three plots my way!</p>
+<p>First, I load the data and libraries and define some functions and constants for all three plots.</p>
+<pre class="r"><code># Libraries
+library(tidyverse)
+
+# Files
+data_dir &lt;- &quot;~/GitHub/data-projects/who-immunizations/data/&quot;
+file_global_mcv &lt;- str_c(data_dir, &quot;global_regional_coverage.csv&quot;)
+file_weunic &lt;- str_c(data_dir, &quot;wuenic_master_07_06_2017.csv&quot;)
+file_subnational &lt;- str_c(data_dir, &quot;subnational_06_29_2017.csv&quot;)
+
+# Constants
+national_dtp3_countries &lt;- c(
+  &quot;Pakistan&quot;,
+  &quot;Syrian Arab Republic&quot;,
+  &quot;Yemen&quot;,
+  &quot;Iraq&quot;,
+  &quot;Mali&quot;,
+  &quot;Afghanistan&quot;,
+  &quot;Haiti&quot;,
+  &quot;Ethiopia&quot;,
+  &quot;Democratic Republic of the Congo&quot;,
+  &quot;Nigeria&quot;,
+  &quot;Somalia&quot;
+)
+
+subnat_coverage_order &lt;- c(
+  &quot;0 to 60%&quot;,
+  &quot;60% to 70%&quot;,
+  &quot;70% to 80%&quot;,
+  &quot;90% to 95%&quot;,
+  &quot;80% to 90%&quot;,
+  &quot;95% to 100%&quot;,
+  &quot;&gt;100%&quot;
+)
+
+subnat_x_breaks &lt;- c(seq(0, 100, by = 10), 400, 700, 1000)
+subnat_y_breaks &lt;- c(
+  10, 500, 2000, 5000, 10000, 15000, 
+  seq(20000, 60000, by = 10000), 
+  80000, 100000, 150000, 
+  seq(200000, 500000, by = 100000)
+)
+subnat_size_breaks &lt;- c(1, 10, 100, 1000, 10000, 100000, 300000)
+
+subnational_dtp3_labels &lt;- c(&quot;Dhaka&quot;, &quot;Lahore&quot;, &quot;Karachi&quot;, &quot;São Paulo&quot;)
+
+# I picked the colors from the original plots using an online color picker
+color_mcv1 &lt;- &quot;#69bcd1&quot;
+color_mcv2 &lt;- &quot;#d13f3e&quot;
+color_mcv_refline &lt;- &quot;#367cc1&quot;
+colors_dtp3_subnational &lt;- c(
+  &quot;0 to 60%&quot; = &quot;#d5322f&quot;,
+  &quot;60% to 70%&quot; = &quot;#f36d4a&quot;,
+  &quot;70% to 80%&quot; = &quot;#fbad68&quot;,
+  &quot;80% to 90%&quot; = &quot;#92cc64&quot;,
+  &quot;90% to 95%&quot; = &quot;#6abc68&quot;,
+  &quot;95% to 100%&quot; = &quot;#249752&quot;,
+  &quot;&gt;100%&quot; = &quot;#876086&quot;
+)
+
+# Helper functions
+global_mcv_y_labels &lt;- function(vals) {
+  # Add the percent sign only to the very top (100%) label
+  if_else(vals == 100, str_c(vals, &quot;%&quot;), str_c(vals))
+}
+
+subnat_x_labels &lt;- function(vals) {
+  # Add the percent sign to all but make the last element &gt;X%
+  vals &lt;- scales::percent(vals, accuracy = 1, scale = 1)
+  vals[length(vals)] &lt;- str_c(&quot;&gt;&quot;, vals[length(vals)])
+  vals
+}
+
+subnat_size_labels &lt;- function(vals) { 
+  if_else(vals &gt; 100, str_c(vals / 1000, &quot;k&quot;), str_c(vals))
+}
+
+x_trans_trans &lt;- function(x) {
+  # Custom axis transformation for subnational dtp3 plot
+  scales::trans_new(
+    &quot;x_trans&quot;, 
+    function(x) if_else(x &lt;= 100, x, 93.5 + (x/15)), 
+    function(x) if_else(x &lt;= 100, x, (x - 93.5) * 15)
+  )
+}
+
+# ==============================================================================
+
+global_mcv &lt;- read_csv(file_global_mcv)
+weunic &lt;- read_csv(file_weunic)
+subnational &lt;- read_csv(file_subnational)</code></pre>
+<div id="global-mcv-coverage" class="section level3">
+<h3>Global MCV Coverage</h3>
+<p>This visualization shows the percentage of children worldwide receiving the MCV1 and MCV2 vaccines between 2000 and 2016. Vaccination coverage has been steadily increasing for both vaccines, though neither has reached the 90% target. MCV2 coverage is lower overall than MCV1 coverage, but is increasing at a faster rate.</p>
+<pre class="r"><code>global_mcv %&gt;% 
+  rename_all(str_to_lower) %&gt;% 
+  filter(
+    group == &quot;Global&quot;,
+    vaccine %in% c(&quot;mcv1&quot;, &quot;mcv2&quot;),
+    year &gt;= 2000
+  ) %&gt;% 
+  ggplot() +
+  geom_line(aes(year, coverage, color = vaccine), size = 0.8) +
+  geom_hline(yintercept = 90, color = color_mcv_refline, size = 0.8) +
+  annotate(
+    geom = &quot;text&quot;,
+    x = 2008, 
+    y = 93, 
+    hjust = 0.5, 
+    label = &quot;90% Vaccination Target&quot;, 
+    color = color_mcv_refline,
+    size = 3,
+    fontface = &quot;bold&quot;
+  ) +
+  scale_x_continuous(
+    breaks = seq(2000, 2016, by = 2)
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 100, by = 20),
+    limits = c(0, 100),
+    labels = global_mcv_y_labels
+  ) +
+  scale_color_manual(
+    values = c(&quot;mcv1&quot; = color_mcv1, &quot;mcv2&quot; = color_mcv2),
+    labels = str_to_upper
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = &quot;bold&quot;),
+    legend.justification = c(&quot;right&quot;, &quot;top&quot;),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.background = element_rect(color = &quot;grey60&quot;),
+    panel.grid.minor.y = element_line(color = &quot;grey60&quot;, size = 0.2),
+    panel.grid.major.y = element_line(color = &quot;grey60&quot;, size = 0.2)
+  ) +
+  coord_cartesian(
+    xlim = c(1999.5, 2016.5), 
+    ylim = c(0, 100), 
+    expand = FALSE,
+  ) +
+  labs(
+    x = NULL,
+    y = &quot;Coverage&quot;,
+    color = NULL,
+    title = &quot;Global MCV1 and MCV2 Coverage&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+</div>
+<div id="national-dtp3-coverage" class="section level3">
+<h3>National DTP3 Coverage</h3>
+<p>This visualization shows the change between 2010 and 2016 in DTP3 coverage in select countries. Like in the next visualization (subnational DTP3 coverage), color is encoding coverage in 2016, which is a redundant encoding. I did find that the graph is much more pleasing to the eye with the encoding, but is much simpler to understand without it, in my opinion.</p>
+<p>There was a little bit of data manipulation to be done for this plot. The first step is filtering to the vaccine, countries and years we want. Then there is a <code>mutate</code> to create some helpful plotting variables. I created the tibble <code>weunic_country_colors</code> to keep track of which country should be which color.</p>
+<pre class="r"><code>weunic &lt;- 
+  weunic %&gt;% 
+  rename_all(str_to_lower) %&gt;% 
+  filter(
+    year %in% c(2010, 2016), 
+    vaccine == &quot;dtp3&quot;, 
+    country %in% national_dtp3_countries
+  ) %&gt;% 
+  select(wuenic, year, country) %&gt;% 
+  arrange(year, wuenic) %&gt;% 
+  mutate(
+    diff_to_next = lead(wuenic) - wuenic,
+    ynudge = case_when(
+      diff_to_next == 1 ~ -1,
+      diff_to_next == 0 ~ -2,
+      TRUE ~ 0
+    ),
+    ypos = wuenic + ynudge
+  )
+
+weunic_country_colors &lt;- 
+  weunic %&gt;% 
+  filter(year == 2016) %&gt;% 
+  mutate(
+    color = case_when(
+      wuenic &lt; 60 ~ &quot;red&quot;,
+      wuenic &lt; 70 ~ &quot;orange&quot;,
+      TRUE ~ &quot;yellow&quot;
+    )
+  ) %&gt;% 
+  select(country, color)
+
+weunic &lt;- 
+  weunic %&gt;% 
+  left_join(weunic_country_colors, by = &quot;country&quot;)</code></pre>
+<p>Now the data is ready to plot! The code is long mostly because there are four labels for each country, and each needs to be a different type face and justification! The rest of the plot is quite basic.</p>
+<pre class="r"><code>weunic %&gt;% 
+  ggplot() +
+  geom_point(aes(year, wuenic, color = color)) +
+  geom_segment(
+    aes(
+      y = `2010`,
+      yend = `2016`,
+      color = color
+    ), 
+    x = 2010, 
+    xend = 2016, 
+    data = select(weunic, country, year, wuenic) %&gt;% 
+      spread(year, wuenic) %&gt;% 
+      left_join(weunic_country_colors, by = &quot;country&quot;)
+  ) +
+  geom_text( # Label points with the numeric value
+    aes(
+      y = ypos,
+      label = wuenic
+    ),
+    x = 2009.5,
+    fontface = &quot;bold&quot;,
+    data = filter(weunic, year == 2010)
+  ) +
+  geom_text( # Label points with country name
+    aes(
+      y = ypos,
+      label = country
+    ),
+    x = 2009,
+    hjust = 1,
+    data = filter(weunic, year == 2010)
+  ) +
+  geom_text(
+    aes(
+      y = ypos,
+      label = wuenic
+    ),
+    x = 2016.5,
+    data = filter(weunic, year == 2016),
+    fontface = &quot;bold&quot;
+  ) +
+  geom_text(
+    aes(
+      y = ypos,
+      label = country
+    ),
+    x = 2017,
+    hjust = 0,
+    data = filter(weunic, year == 2016)
+  ) +
+  scale_x_continuous(
+    breaks = c(2010, 2016), 
+    limits = c(2000, 2026),
+    position = &quot;top&quot;
+  ) +
+  scale_color_manual(
+    values = c(
+      &quot;red&quot; = &quot;#d5322f&quot;,
+      &quot;orange&quot; = &quot;#f36d4a&quot;,
+      &quot;yellow&quot; = &quot;#fbad68&quot;
+    )
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text.y = element_blank(),
+    axis.text.x = element_text(
+      color = &quot;black&quot;,
+      size = 16,
+      face = &quot;bold&quot;
+    ),
+    plot.title = element_text(
+      size = 16,
+      face = &quot;bold&quot;,
+      hjust = 0.5
+    ),
+    legend.position = &quot;none&quot;
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    title = &quot;Trends in DTPcv3 Coverage since\n2010 for Selected Countries&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="subnational-dtp3-coverage" class="section level3">
+<h3>Subnational DTP3 Coverage</h3>
+<p>This visualization shows the 2016 Coverage rate and number of surviving infants at the subnational level across the world. I was struck by the aesthetics of the plot, however I am torn as to whether the redundant encoding of size and color is distracting or not. I have been taught that all redundant information should be excluded, and quite clearly each variable is encoded in two different aesthetics, however I do think the colors, at least, help to differentiate and draw the eye. Regardless, the plot was quite a challenge to replicate so I kept the redundancy just for fun.</p>
+<pre class="r"><code>subnational %&gt;% 
+  filter(
+    annum == 2016, 
+    Vaccode == &quot;DTP3&quot;,
+    !is.na(Admin2)
+  ) %&gt;% 
+  mutate(
+    color = case_when(
+      Coverage &lt;= 60 ~ &quot;0 to 60%&quot;,
+      Coverage &lt;= 70 ~ &quot;60% to 70%&quot;,
+      Coverage &lt;= 80 ~ &quot;70% to 80%&quot;,
+      Coverage &lt;= 90 ~ &quot;80% to 90%&quot;,
+      Coverage &lt;= 95 ~ &quot;90% to 95%&quot;,
+      Coverage &lt;= 100 ~ &quot;95% to 100%&quot;,
+      TRUE ~ &quot;&gt;100%&quot;
+    ),
+    color = factor(color, levels = subnat_coverage_order, ordered = TRUE),
+    Coverage = if_else(Coverage &lt; 1000, Coverage, 1000),
+    label = if_else(Admin2 %in% subnational_dtp3_labels, Admin2, &quot;&quot;)
+  ) %&gt;% 
+  sample_frac() %&gt;% 
+  ggplot() +
+  geom_point(
+    aes(
+      Coverage, 
+      Denominator, 
+      size = Denominator, 
+      fill = color
+    ), 
+    shape = 21, 
+    color = &quot;white&quot;, 
+    stroke = 0.25
+  ) +
+  ggrepel::geom_text_repel(
+    aes(
+      Coverage, 
+      Denominator, 
+      label = label
+    ), 
+    point.padding = 0.5, 
+    min.segment.length = 1
+  ) +
+  scale_x_continuous(
+    trans = &quot;x_trans&quot;,
+    breaks = subnat_x_breaks,
+    labels = subnat_x_labels,
+    position = &quot;top&quot;
+  ) +
+  scale_y_continuous(
+    trans = &quot;sqrt&quot;,
+    breaks = subnat_y_breaks,
+    labels = scales::unit_format(unit = &quot;&quot;, scale = 1, sep = &quot;&quot;),
+    position = &quot;right&quot;,
+    limits = c(10, 500000)
+  ) +
+  scale_size(
+    range = c(1, 10),
+    breaks = subnat_size_breaks,
+    labels = subnat_size_labels,
+    guide = guide_legend(
+      title.position = &quot;top&quot;, 
+      nrow = 1, 
+      override.aes = list(fill = &quot;black&quot;, color = &quot;black&quot;),
+      label.position = &quot;bottom&quot;,
+      label.hjust = 0.5
+    )
+  ) +
+  scale_fill_manual(
+    values = colors_dtp3_subnational, 
+    guide = guide_legend(
+      title.position = &quot;top&quot;, 
+      ncol = 1,
+      override.aes = list(shape = 22, size = 5),
+      reverse = TRUE
+    )
+  ) +
+  labs(
+    x = &quot;DTP3 Coverage&quot;,
+    y = &quot;Surviving Infants&quot;,
+    title = &quot;DTPcv3 Reported Coverage by District&quot;,
+    fill = &quot;Coverage&quot;,
+    size = &quot;Surviving Infants&quot;
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_text(face = &quot;bold&quot;, hjust = 0),
+    axis.title.y = element_text(face = &quot;bold&quot;, hjust = 0),
+    legend.position = &quot;bottom&quot;,
+    legend.title = element_text(face = &quot;bold&quot;),
+    legend.justification = &quot;left&quot;,
+    plot.title = element_text(face = &quot;bold&quot;),
+    panel.grid.minor = element_blank()
+  ) +
+  coord_cartesian(
+    xlim = c(10, 1000), 
+    ylim = c(0, 500000), 
+    expand = FALSE, 
+    clip = &quot;off&quot;
+  )</code></pre>
+<p><img src="/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/data-visualization/">data-visualization</a>
+  
+  <a class="badge badge-light" href="/tags/tidyverse/">tidyverse</a>
+  
+</div>
+
+
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_hua162f16de09a3951536942805fb74cf7_189781_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Samantha Robertson</a></h5>
+    <h6 class="card-subtitle">First Year Ph.D. Student</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:samantha_robertson@berkeley.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/SamRobe04746844" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/srobert4" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/samantha-robertson-8a17a2166/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/2019-08-07-womeninparliament/">Women in Parliament Worldwide</a></li>
+          
+          <li><a href="/post/2019-04-29-auselectionpoll/">How Much Do Australians Know About Their Parliament?</a></li>
+          
+          <li><a href="/post/2019-03-07-swdchallenge/">#SWDChallenge March 2019</a></li>
+          
+          <li><a href="/post/2019-02-28-visualizing-course-descriptions/">Visualizing Course Descriptions</a></li>
+          
+          <li><a href="/post/2019-08-08-tidyversetopandas/">Translating Tidyverse to Python</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.c1b0baf12cd491effaeeb294faf1e83e.js"></script>
+
+  </body>
+</html>
+

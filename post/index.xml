@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Replicating WHO Visualizations of Global Immunization Coverage</title>
+      <link>/post/2019-08-09-who-immunizations/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-08-09-who-immunizations/</guid>
+      <description>Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the Stanford Data Lab which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.</description>
+    </item>
     
     <item>
       <title>Translating Tidyverse to Python</title>

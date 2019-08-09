@@ -6,8 +6,403 @@
     <description>Recent content in Samantha Robertson on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Replicating WHO Visualizations of Global Immunization Coverage</title>
+      <link>/post/2019-08-09-who-immunizations/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-08-09-who-immunizations/</guid>
+      <description>
+
+
+&lt;p&gt;Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the &lt;a href=&#34;datalab.stanford.edu&#34;&gt;Stanford Data Lab&lt;/a&gt; which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.&lt;/p&gt;
+&lt;p&gt;I replicated three visualizations. Below are the comparisons of WHO’s vis against mine. All the code to create my plots is at the bottom of this post! I’m not fully convinced that the WHO visualizations are the most effective, for example two of them use redundant color, but for the challenge I tried to replicate them as faithfully as possible.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/comparison.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Below is the code for the three plots my way!&lt;/p&gt;
+&lt;p&gt;First, I load the data and libraries and define some functions and constants for all three plots.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Libraries
+library(tidyverse)
+
+# Files
+data_dir &amp;lt;- &amp;quot;~/GitHub/data-projects/who-immunizations/data/&amp;quot;
+file_global_mcv &amp;lt;- str_c(data_dir, &amp;quot;global_regional_coverage.csv&amp;quot;)
+file_weunic &amp;lt;- str_c(data_dir, &amp;quot;wuenic_master_07_06_2017.csv&amp;quot;)
+file_subnational &amp;lt;- str_c(data_dir, &amp;quot;subnational_06_29_2017.csv&amp;quot;)
+
+# Constants
+national_dtp3_countries &amp;lt;- c(
+  &amp;quot;Pakistan&amp;quot;,
+  &amp;quot;Syrian Arab Republic&amp;quot;,
+  &amp;quot;Yemen&amp;quot;,
+  &amp;quot;Iraq&amp;quot;,
+  &amp;quot;Mali&amp;quot;,
+  &amp;quot;Afghanistan&amp;quot;,
+  &amp;quot;Haiti&amp;quot;,
+  &amp;quot;Ethiopia&amp;quot;,
+  &amp;quot;Democratic Republic of the Congo&amp;quot;,
+  &amp;quot;Nigeria&amp;quot;,
+  &amp;quot;Somalia&amp;quot;
+)
+
+subnat_coverage_order &amp;lt;- c(
+  &amp;quot;0 to 60%&amp;quot;,
+  &amp;quot;60% to 70%&amp;quot;,
+  &amp;quot;70% to 80%&amp;quot;,
+  &amp;quot;90% to 95%&amp;quot;,
+  &amp;quot;80% to 90%&amp;quot;,
+  &amp;quot;95% to 100%&amp;quot;,
+  &amp;quot;&amp;gt;100%&amp;quot;
+)
+
+subnat_x_breaks &amp;lt;- c(seq(0, 100, by = 10), 400, 700, 1000)
+subnat_y_breaks &amp;lt;- c(
+  10, 500, 2000, 5000, 10000, 15000, 
+  seq(20000, 60000, by = 10000), 
+  80000, 100000, 150000, 
+  seq(200000, 500000, by = 100000)
+)
+subnat_size_breaks &amp;lt;- c(1, 10, 100, 1000, 10000, 100000, 300000)
+
+subnational_dtp3_labels &amp;lt;- c(&amp;quot;Dhaka&amp;quot;, &amp;quot;Lahore&amp;quot;, &amp;quot;Karachi&amp;quot;, &amp;quot;São Paulo&amp;quot;)
+
+# I picked the colors from the original plots using an online color picker
+color_mcv1 &amp;lt;- &amp;quot;#69bcd1&amp;quot;
+color_mcv2 &amp;lt;- &amp;quot;#d13f3e&amp;quot;
+color_mcv_refline &amp;lt;- &amp;quot;#367cc1&amp;quot;
+colors_dtp3_subnational &amp;lt;- c(
+  &amp;quot;0 to 60%&amp;quot; = &amp;quot;#d5322f&amp;quot;,
+  &amp;quot;60% to 70%&amp;quot; = &amp;quot;#f36d4a&amp;quot;,
+  &amp;quot;70% to 80%&amp;quot; = &amp;quot;#fbad68&amp;quot;,
+  &amp;quot;80% to 90%&amp;quot; = &amp;quot;#92cc64&amp;quot;,
+  &amp;quot;90% to 95%&amp;quot; = &amp;quot;#6abc68&amp;quot;,
+  &amp;quot;95% to 100%&amp;quot; = &amp;quot;#249752&amp;quot;,
+  &amp;quot;&amp;gt;100%&amp;quot; = &amp;quot;#876086&amp;quot;
+)
+
+# Helper functions
+global_mcv_y_labels &amp;lt;- function(vals) {
+  # Add the percent sign only to the very top (100%) label
+  if_else(vals == 100, str_c(vals, &amp;quot;%&amp;quot;), str_c(vals))
+}
+
+subnat_x_labels &amp;lt;- function(vals) {
+  # Add the percent sign to all but make the last element &amp;gt;X%
+  vals &amp;lt;- scales::percent(vals, accuracy = 1, scale = 1)
+  vals[length(vals)] &amp;lt;- str_c(&amp;quot;&amp;gt;&amp;quot;, vals[length(vals)])
+  vals
+}
+
+subnat_size_labels &amp;lt;- function(vals) { 
+  if_else(vals &amp;gt; 100, str_c(vals / 1000, &amp;quot;k&amp;quot;), str_c(vals))
+}
+
+x_trans_trans &amp;lt;- function(x) {
+  # Custom axis transformation for subnational dtp3 plot
+  scales::trans_new(
+    &amp;quot;x_trans&amp;quot;, 
+    function(x) if_else(x &amp;lt;= 100, x, 93.5 + (x/15)), 
+    function(x) if_else(x &amp;lt;= 100, x, (x - 93.5) * 15)
+  )
+}
+
+# ==============================================================================
+
+global_mcv &amp;lt;- read_csv(file_global_mcv)
+weunic &amp;lt;- read_csv(file_weunic)
+subnational &amp;lt;- read_csv(file_subnational)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;global-mcv-coverage&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Global MCV Coverage&lt;/h3&gt;
+&lt;p&gt;This visualization shows the percentage of children worldwide receiving the MCV1 and MCV2 vaccines between 2000 and 2016. Vaccination coverage has been steadily increasing for both vaccines, though neither has reached the 90% target. MCV2 coverage is lower overall than MCV1 coverage, but is increasing at a faster rate.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;global_mcv %&amp;gt;% 
+  rename_all(str_to_lower) %&amp;gt;% 
+  filter(
+    group == &amp;quot;Global&amp;quot;,
+    vaccine %in% c(&amp;quot;mcv1&amp;quot;, &amp;quot;mcv2&amp;quot;),
+    year &amp;gt;= 2000
+  ) %&amp;gt;% 
+  ggplot() +
+  geom_line(aes(year, coverage, color = vaccine), size = 0.8) +
+  geom_hline(yintercept = 90, color = color_mcv_refline, size = 0.8) +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 2008, 
+    y = 93, 
+    hjust = 0.5, 
+    label = &amp;quot;90% Vaccination Target&amp;quot;, 
+    color = color_mcv_refline,
+    size = 3,
+    fontface = &amp;quot;bold&amp;quot;
+  ) +
+  scale_x_continuous(
+    breaks = seq(2000, 2016, by = 2)
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 100, by = 20),
+    limits = c(0, 100),
+    labels = global_mcv_y_labels
+  ) +
+  scale_color_manual(
+    values = c(&amp;quot;mcv1&amp;quot; = color_mcv1, &amp;quot;mcv2&amp;quot; = color_mcv2),
+    labels = str_to_upper
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = &amp;quot;bold&amp;quot;),
+    legend.justification = c(&amp;quot;right&amp;quot;, &amp;quot;top&amp;quot;),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.background = element_rect(color = &amp;quot;grey60&amp;quot;),
+    panel.grid.minor.y = element_line(color = &amp;quot;grey60&amp;quot;, size = 0.2),
+    panel.grid.major.y = element_line(color = &amp;quot;grey60&amp;quot;, size = 0.2)
+  ) +
+  coord_cartesian(
+    xlim = c(1999.5, 2016.5), 
+    ylim = c(0, 100), 
+    expand = FALSE,
+  ) +
+  labs(
+    x = NULL,
+    y = &amp;quot;Coverage&amp;quot;,
+    color = NULL,
+    title = &amp;quot;Global MCV1 and MCV2 Coverage&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;national-dtp3-coverage&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;National DTP3 Coverage&lt;/h3&gt;
+&lt;p&gt;This visualization shows the change between 2010 and 2016 in DTP3 coverage in select countries. Like in the next visualization (subnational DTP3 coverage), color is encoding coverage in 2016, which is a redundant encoding. I did find that the graph is much more pleasing to the eye with the encoding, but is much simpler to understand without it, in my opinion.&lt;/p&gt;
+&lt;p&gt;There was a little bit of data manipulation to be done for this plot. The first step is filtering to the vaccine, countries and years we want. Then there is a &lt;code&gt;mutate&lt;/code&gt; to create some helpful plotting variables. I created the tibble &lt;code&gt;weunic_country_colors&lt;/code&gt; to keep track of which country should be which color.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;weunic &amp;lt;- 
+  weunic %&amp;gt;% 
+  rename_all(str_to_lower) %&amp;gt;% 
+  filter(
+    year %in% c(2010, 2016), 
+    vaccine == &amp;quot;dtp3&amp;quot;, 
+    country %in% national_dtp3_countries
+  ) %&amp;gt;% 
+  select(wuenic, year, country) %&amp;gt;% 
+  arrange(year, wuenic) %&amp;gt;% 
+  mutate(
+    diff_to_next = lead(wuenic) - wuenic,
+    ynudge = case_when(
+      diff_to_next == 1 ~ -1,
+      diff_to_next == 0 ~ -2,
+      TRUE ~ 0
+    ),
+    ypos = wuenic + ynudge
+  )
+
+weunic_country_colors &amp;lt;- 
+  weunic %&amp;gt;% 
+  filter(year == 2016) %&amp;gt;% 
+  mutate(
+    color = case_when(
+      wuenic &amp;lt; 60 ~ &amp;quot;red&amp;quot;,
+      wuenic &amp;lt; 70 ~ &amp;quot;orange&amp;quot;,
+      TRUE ~ &amp;quot;yellow&amp;quot;
+    )
+  ) %&amp;gt;% 
+  select(country, color)
+
+weunic &amp;lt;- 
+  weunic %&amp;gt;% 
+  left_join(weunic_country_colors, by = &amp;quot;country&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the data is ready to plot! The code is long mostly because there are four labels for each country, and each needs to be a different type face and justification! The rest of the plot is quite basic.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;weunic %&amp;gt;% 
+  ggplot() +
+  geom_point(aes(year, wuenic, color = color)) +
+  geom_segment(
+    aes(
+      y = `2010`,
+      yend = `2016`,
+      color = color
+    ), 
+    x = 2010, 
+    xend = 2016, 
+    data = select(weunic, country, year, wuenic) %&amp;gt;% 
+      spread(year, wuenic) %&amp;gt;% 
+      left_join(weunic_country_colors, by = &amp;quot;country&amp;quot;)
+  ) +
+  geom_text( # Label points with the numeric value
+    aes(
+      y = ypos,
+      label = wuenic
+    ),
+    x = 2009.5,
+    fontface = &amp;quot;bold&amp;quot;,
+    data = filter(weunic, year == 2010)
+  ) +
+  geom_text( # Label points with country name
+    aes(
+      y = ypos,
+      label = country
+    ),
+    x = 2009,
+    hjust = 1,
+    data = filter(weunic, year == 2010)
+  ) +
+  geom_text(
+    aes(
+      y = ypos,
+      label = wuenic
+    ),
+    x = 2016.5,
+    data = filter(weunic, year == 2016),
+    fontface = &amp;quot;bold&amp;quot;
+  ) +
+  geom_text(
+    aes(
+      y = ypos,
+      label = country
+    ),
+    x = 2017,
+    hjust = 0,
+    data = filter(weunic, year == 2016)
+  ) +
+  scale_x_continuous(
+    breaks = c(2010, 2016), 
+    limits = c(2000, 2026),
+    position = &amp;quot;top&amp;quot;
+  ) +
+  scale_color_manual(
+    values = c(
+      &amp;quot;red&amp;quot; = &amp;quot;#d5322f&amp;quot;,
+      &amp;quot;orange&amp;quot; = &amp;quot;#f36d4a&amp;quot;,
+      &amp;quot;yellow&amp;quot; = &amp;quot;#fbad68&amp;quot;
+    )
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text.y = element_blank(),
+    axis.text.x = element_text(
+      color = &amp;quot;black&amp;quot;,
+      size = 16,
+      face = &amp;quot;bold&amp;quot;
+    ),
+    plot.title = element_text(
+      size = 16,
+      face = &amp;quot;bold&amp;quot;,
+      hjust = 0.5
+    ),
+    legend.position = &amp;quot;none&amp;quot;
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    title = &amp;quot;Trends in DTPcv3 Coverage since\n2010 for Selected Countries&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;subnational-dtp3-coverage&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Subnational DTP3 Coverage&lt;/h3&gt;
+&lt;p&gt;This visualization shows the 2016 Coverage rate and number of surviving infants at the subnational level across the world. I was struck by the aesthetics of the plot, however I am torn as to whether the redundant encoding of size and color is distracting or not. I have been taught that all redundant information should be excluded, and quite clearly each variable is encoded in two different aesthetics, however I do think the colors, at least, help to differentiate and draw the eye. Regardless, the plot was quite a challenge to replicate so I kept the redundancy just for fun.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;subnational %&amp;gt;% 
+  filter(
+    annum == 2016, 
+    Vaccode == &amp;quot;DTP3&amp;quot;,
+    !is.na(Admin2)
+  ) %&amp;gt;% 
+  mutate(
+    color = case_when(
+      Coverage &amp;lt;= 60 ~ &amp;quot;0 to 60%&amp;quot;,
+      Coverage &amp;lt;= 70 ~ &amp;quot;60% to 70%&amp;quot;,
+      Coverage &amp;lt;= 80 ~ &amp;quot;70% to 80%&amp;quot;,
+      Coverage &amp;lt;= 90 ~ &amp;quot;80% to 90%&amp;quot;,
+      Coverage &amp;lt;= 95 ~ &amp;quot;90% to 95%&amp;quot;,
+      Coverage &amp;lt;= 100 ~ &amp;quot;95% to 100%&amp;quot;,
+      TRUE ~ &amp;quot;&amp;gt;100%&amp;quot;
+    ),
+    color = factor(color, levels = subnat_coverage_order, ordered = TRUE),
+    Coverage = if_else(Coverage &amp;lt; 1000, Coverage, 1000),
+    label = if_else(Admin2 %in% subnational_dtp3_labels, Admin2, &amp;quot;&amp;quot;)
+  ) %&amp;gt;% 
+  sample_frac() %&amp;gt;% 
+  ggplot() +
+  geom_point(
+    aes(
+      Coverage, 
+      Denominator, 
+      size = Denominator, 
+      fill = color
+    ), 
+    shape = 21, 
+    color = &amp;quot;white&amp;quot;, 
+    stroke = 0.25
+  ) +
+  ggrepel::geom_text_repel(
+    aes(
+      Coverage, 
+      Denominator, 
+      label = label
+    ), 
+    point.padding = 0.5, 
+    min.segment.length = 1
+  ) +
+  scale_x_continuous(
+    trans = &amp;quot;x_trans&amp;quot;,
+    breaks = subnat_x_breaks,
+    labels = subnat_x_labels,
+    position = &amp;quot;top&amp;quot;
+  ) +
+  scale_y_continuous(
+    trans = &amp;quot;sqrt&amp;quot;,
+    breaks = subnat_y_breaks,
+    labels = scales::unit_format(unit = &amp;quot;&amp;quot;, scale = 1, sep = &amp;quot;&amp;quot;),
+    position = &amp;quot;right&amp;quot;,
+    limits = c(10, 500000)
+  ) +
+  scale_size(
+    range = c(1, 10),
+    breaks = subnat_size_breaks,
+    labels = subnat_size_labels,
+    guide = guide_legend(
+      title.position = &amp;quot;top&amp;quot;, 
+      nrow = 1, 
+      override.aes = list(fill = &amp;quot;black&amp;quot;, color = &amp;quot;black&amp;quot;),
+      label.position = &amp;quot;bottom&amp;quot;,
+      label.hjust = 0.5
+    )
+  ) +
+  scale_fill_manual(
+    values = colors_dtp3_subnational, 
+    guide = guide_legend(
+      title.position = &amp;quot;top&amp;quot;, 
+      ncol = 1,
+      override.aes = list(shape = 22, size = 5),
+      reverse = TRUE
+    )
+  ) +
+  labs(
+    x = &amp;quot;DTP3 Coverage&amp;quot;,
+    y = &amp;quot;Surviving Infants&amp;quot;,
+    title = &amp;quot;DTPcv3 Reported Coverage by District&amp;quot;,
+    fill = &amp;quot;Coverage&amp;quot;,
+    size = &amp;quot;Surviving Infants&amp;quot;
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_text(face = &amp;quot;bold&amp;quot;, hjust = 0),
+    axis.title.y = element_text(face = &amp;quot;bold&amp;quot;, hjust = 0),
+    legend.position = &amp;quot;bottom&amp;quot;,
+    legend.title = element_text(face = &amp;quot;bold&amp;quot;),
+    legend.justification = &amp;quot;left&amp;quot;,
+    plot.title = element_text(face = &amp;quot;bold&amp;quot;),
+    panel.grid.minor = element_blank()
+  ) +
+  coord_cartesian(
+    xlim = c(10, 1000), 
+    ylim = c(0, 500000), 
+    expand = FALSE, 
+    clip = &amp;quot;off&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Translating Tidyverse to Python</title>
