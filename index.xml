@@ -3521,7 +3521,7 @@ forceNetwork(
     <item>
       <title>A SimVascular Plug-in</title>
       <link>/project/simvascular/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
       
       <guid>/project/simvascular/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
@@ -3545,7 +3545,7 @@ forceNetwork(
     <item>
       <title>LiCoRICE</title>
       <link>/project/licorice/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
       
       <guid>/project/licorice/</guid>
       <description>&lt;p&gt;LiCoRICE is an &lt;strong&gt;open-source, realtime computation platform specialized for systems neuroscience experimentation&lt;/strong&gt;. It has been developed in the Brain Interfacing Lab is now the system used to run the group&amp;rsquo;s closed-loop brain interface experiments. The platform is written in &lt;strong&gt;C and Python&lt;/strong&gt;, and is specifically designed with a modular architecture to allow easy prototyping of models by experimenters using only Python.&lt;/p&gt;
@@ -3565,7 +3565,7 @@ forceNetwork(
     <item>
       <title>Race, Wealth and Education in America</title>
       <link>/project/race-educ/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
       
       <guid>/project/race-educ/</guid>
       <description>&lt;p&gt;Students in &lt;a href=&#34;https://datalab.stanford.edu&#34; target=&#34;_blank&#34;&gt;Data Challenge Lab&lt;/a&gt;, the data science intensive course taught by Bill Behrman and Hadley Wickham, pursue a quarter-long data exploration and analysis project of their choice using the Tidyverse R skills they learn in the course. My project explored the dataset released by the &lt;a href=&#34;https://cepa.stanford.edu/seda/overview&#34; target=&#34;_blank&#34;&gt;Stanford Education Data Archive&lt;/a&gt; along with the publication &lt;a href=&#34;https://cepa.stanford.edu/sites/default/files/wp16-10-v201712.pdf&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;The Geography of Racial/Ethic Test Score Gaps&lt;/em&gt;&lt;/a&gt;, (Reardon, Kalogrides and Shores, 2017). Using a number of creative data visualization techniques, including some inspired by the &lt;a href=&#34;https://www.nytimes.com/interactive/2016/04/29/upshot/money-race-and-success-how-your-school-district-compares.html&#34; target=&#34;_blank&#34;&gt;New York Times interactive&lt;/a&gt; based on the paper, I was able to explore the education achievement gap between students of different races and with parents of different income and education levels geographically, by subject and by student age.&lt;/p&gt;
@@ -3577,7 +3577,7 @@ forceNetwork(
     <item>
       <title>The Stanford Open Policing Project</title>
       <link>/project/opp/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
       
       <guid>/project/opp/</guid>
       <description>&lt;p&gt;In the Fall of 2018, I worked with the researchers at the &lt;a href=&#34;https://openpolicing.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Open Policing Project&lt;/a&gt; (OPP) in the &lt;a href=&#34;https://policylab.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Computational Policy Lab&lt;/a&gt;, to implement and run the Veil of Darkness Test, as proposed by &lt;a href=&#34;https://www.rand.org/pubs/reprints/RP1253.html&#34; target=&#34;_blank&#34;&gt;Grogger &amp;amp; Ridgeway in 2006&lt;/a&gt; using the large OPP dataset.  The premise of the test is that the race of a driver is less visible to the police when it is dark outside than when it is light. Therefore, in the presence of racial bias, there should be a greater disparity in the racial breakdown of drivers stopped during daylight hours than at night. There are a number of factors to control for, most critically time of day, location of the stop.&lt;/p&gt;
@@ -3596,7 +3596,7 @@ forceNetwork(
     <item>
       <title>Example Page</title>
       <link>/tutorial/example/</link>
-      <pubDate>Sun, 09 Sep 2018 00:00:00 +1000</pubDate>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 -0700</pubDate>
       
       <guid>/tutorial/example/</guid>
       <description>
@@ -3616,7 +3616,7 @@ forceNetwork(
     <item>
       <title>Privacy Policy</title>
       <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +1000</pubDate>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 -0700</pubDate>
       
       <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
@@ -3626,7 +3626,7 @@ forceNetwork(
     <item>
       <title>An Open-Source Realtime Computation Platform</title>
       <link>/publication/licorice-one/</link>
-      <pubDate>Sun, 15 Apr 2018 00:00:00 +1000</pubDate>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
       
       <guid>/publication/licorice-one/</guid>
       <description></description>
@@ -3635,7 +3635,7 @@ forceNetwork(
     <item>
       <title>Example Talk</title>
       <link>/talk/example/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +1100</pubDate>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 -0800</pubDate>
       
       <guid>/talk/example/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;

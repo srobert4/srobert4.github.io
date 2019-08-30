@@ -6,7 +6,7 @@
     <description>Recent content in licorice on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Feb 2019 00:00:00 +1100</lastBuildDate>
+    <lastBuildDate>Fri, 15 Feb 2019 00:00:00 -0800</lastBuildDate>
     
 	<atom:link href="/tags/licorice/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>LiCoRICE</title>
       <link>/project/licorice/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +1100</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
       
       <guid>/project/licorice/</guid>
       <description>LiCoRICE is an open-source, realtime computation platform specialized for systems neuroscience experimentation. It has been developed in the Brain Interfacing Lab is now the system used to run the group&amp;rsquo;s closed-loop brain interface experiments. The platform is written in C and Python, and is specifically designed with a modular architecture to allow easy prototyping of models by experimenters using only Python.
@@ -24,7 +24,7 @@ I joined the LiCoRICE project in the Summer of 2017.</description>
     <item>
       <title>An Open-Source Realtime Computation Platform</title>
       <link>/publication/licorice-one/</link>
-      <pubDate>Sun, 15 Apr 2018 00:00:00 +1000</pubDate>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
       
       <guid>/publication/licorice-one/</guid>
       <description></description>
