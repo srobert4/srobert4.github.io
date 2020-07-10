@@ -6,10 +6,19 @@
     <description>Recent content on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Apr 2018 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 -0700</lastBuildDate>
     
 	<atom:link href="/authors/samantha-robertson/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>What If I Don&#39;t Like Any Of The Choices? The Limits of Preference Elicitation for Participatory Algorithm Design</title>
+      <link>/publication/paml2020/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 -0700</pubDate>
+      
+      <guid>/publication/paml2020/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>An Open-Source Realtime Computation Platform</title>
