@@ -367,7 +367,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    4 min read
+    5 min read
   </span>
   
 
@@ -454,6 +454,15 @@
 <h3>The Data</h3>
 <p>The data provided is nice and clean, so all we are left to do is read it in using <code>read_csv()</code>. I changed some variable names to make it nicer to work with, and noticed that there are a few negative quantities of money in the data, which I drop since they are impossible. Here’s a glimpse of what the data looks like:</p>
 <table>
+<colgroup>
+<col width="6%" />
+<col width="4%" />
+<col width="11%" />
+<col width="8%" />
+<col width="8%" />
+<col width="11%" />
+<col width="49%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">id</th>
@@ -531,16 +540,16 @@
   group_by(donor) %&gt;% 
   summarise(donated = sum(amount)) %&gt;% 
   mutate(prop_donated = donated / sum(donated)) %&gt;% 
-  select(country = donor, prop_donated)
-
-received &lt;-
+  select(country = donor, prop_donated)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>received &lt;-
   data %&gt;% 
   group_by(recipient) %&gt;% 
   summarise(received = sum(amount)) %&gt;% 
   mutate(prop_received = received / sum(received)) %&gt;% 
-  select(country = recipient, prop_received)
-
-aid &lt;-
+  select(country = recipient, prop_received)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>aid &lt;-
   donated %&gt;% 
   full_join(received, by = c(&quot;country&quot;)) %&gt;% 
   mutate_at(vars(-country), ~if_else(is.na(.), 0, .)) %&gt;% 
@@ -588,6 +597,9 @@ aid %&gt;%
     title = &quot;The United States and Japan are the world&#39;s major donors&quot;,
     subtitle = &quot;India has received almost 40% of all global aid&quot;
   )</code></pre>
+<pre><code>## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
+
+## Warning: `expand_scale()` is deprecated; use `expansion()` instead.</code></pre>
 <p><img src="/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Excuse the squished y-axis. I played around with it for a while and eventually gave up. Any hints are very welcome!</p>
 </div>
@@ -600,17 +612,17 @@ aid %&gt;%
   summarise(donated = sum(amount)) %&gt;% 
   ungroup() %&gt;% 
   mutate(prop_donated = donated / sum(donated)) %&gt;% 
-  select(country = donor, year, prop_donated)
-
-received &lt;-
+  select(country = donor, year, prop_donated)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;donor&#39; (override with `.groups` argument)</code></pre>
+<pre class="r"><code>received &lt;-
   data %&gt;% 
   group_by(recipient, year) %&gt;% 
   summarise(received = sum(amount)) %&gt;% 
   ungroup() %&gt;% 
   mutate(prop_received = received / sum(received)) %&gt;% 
-  select(country = recipient, year, prop_received)
-
-timeseries &lt;-
+  select(country = recipient, year, prop_received)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;recipient&#39; (override with `.groups` argument)</code></pre>
+<pre class="r"><code>timeseries &lt;-
   donated %&gt;% 
   full_join(received, by = c(&quot;country&quot;, &quot;year&quot;)) %&gt;% 
   mutate_at(vars(prop_donated, prop_received), ~if_else(is.na(.), 0, .)) %&gt;% 

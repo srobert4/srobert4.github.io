@@ -929,9 +929,9 @@ differences %&gt;%
   ) %&gt;% 
   filter(
     quota_type != &quot;Funding incentives&quot; # only one country
-  )
-
-median_largest_jump &lt;- 
+  )</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>median_largest_jump &lt;- 
   largest_jumps %&gt;% 
   summarize(med = median(largest_jump)) %&gt;% 
   pull(med)

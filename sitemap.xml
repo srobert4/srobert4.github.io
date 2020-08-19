@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>/publication/modeling_assumptions_clash/</loc>
+      <lastmod>2020-06-10T00:00:00-07:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/publication/limits_of_prefs/</loc>
       <lastmod>2020-06-10T00:00:00-07:00</lastmod>
     </url>
@@ -148,6 +156,15 @@
     
     <url>
     
+      <loc>/publication_types/3/</loc>
+      <lastmod>2020-06-10T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/author/</loc>
       <priority>0</priority>
     </url>
@@ -174,6 +191,15 @@
     
       <loc>/tags/d3/</loc>
       <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/mechanism-design/</loc>
+      <lastmod>2020-06-10T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -301,8 +327,35 @@
     
     <url>
     
+      <loc>/tags/student-assignment/</loc>
+      <lastmod>2020-06-10T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/tags/</loc>
       <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/tonya-nguyen/</loc>
+      <lastmod>2020-06-10T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/value-sensitive-design/</loc>
+      <lastmod>2020-06-10T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     

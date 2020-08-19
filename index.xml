@@ -10,6 +10,15 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Modeling Assumptions Clash with the Real World: Configuring Student Assignment Algorithms to Meet Community Needs</title>
+      <link>/publication/modeling_assumptions_clash/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 -0700</pubDate>
+      
+      <guid>/publication/modeling_assumptions_clash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>What If I Don&#39;t Like Any Of The Choices? The Limits of Preference Elicitation for Participatory Algorithm Design</title>
       <link>/publication/limits_of_prefs/</link>
       <pubDate>Wed, 10 Jun 2020 00:00:00 -0700</pubDate>
@@ -36,7 +45,7 @@
 library(tidyverse)
 
 # Files
-data_dir &amp;lt;- &amp;quot;~/GitHub/data-projects/who-immunizations/data/&amp;quot;
+data_dir &amp;lt;- &amp;quot;~/Data/who-immunizations/&amp;quot;
 file_global_mcv &amp;lt;- str_c(data_dir, &amp;quot;global_regional_coverage.csv&amp;quot;)
 file_weunic &amp;lt;- str_c(data_dir, &amp;quot;wuenic_master_07_06_2017.csv&amp;quot;)
 file_subnational &amp;lt;- str_c(data_dir, &amp;quot;subnational_06_29_2017.csv&amp;quot;)
@@ -2434,9 +2443,9 @@ differences %&amp;gt;%
   ) %&amp;gt;% 
   filter(
     quota_type != &amp;quot;Funding incentives&amp;quot; # only one country
-  )
-
-median_largest_jump &amp;lt;- 
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` ungrouping output (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;median_largest_jump &amp;lt;- 
   largest_jumps %&amp;gt;% 
   summarize(med = median(largest_jump)) %&amp;gt;% 
   pull(med)
@@ -2479,7 +2488,7 @@ largest_jumps %&amp;gt;%
 &lt;p&gt;It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see &lt;a href=&#34;http://freerangestats.info/blog/2019/04/22/AES-intro&#34;&gt;freerangestats’&lt;/a&gt; exploration of the &lt;a href=&#34;https://australianelectionstudy.org/&#34;&gt;2016 Australian Election Study&lt;/a&gt; featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-04-29-auselectionpoll_files/auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare? I quickly realized that I have many qualms with this plot.&lt;/p&gt;
-&lt;p&gt;First, it takes some hunting to find the correct answers to each question (they’re listed in the subtitle), and once you’ve found them you have to go through six facets and match responses to answers. The plot shows the proportion of respondents who answered True, False or Don’t Know to each question. In my opinion, it would be far more intutitive to show only what we really care about: who was right!&lt;/p&gt;
+&lt;p&gt;First, it takes some hunting to find the correct answers to each question (they’re listed in the subtitle), and once you’ve found them you have to go through six facets and match responses to answers. The plot shows the proportion of respondents who answered True, False or Don’t Know to each question. In my opinion, it would be far more intuitive to show only what we really care about: who was right!&lt;/p&gt;
 &lt;p&gt;Then there’s the choice of the stacked bar chart. Firstly, placing the “Don’t Know” responses at the middle, centered at 0, makes it almost impossible to see the percentages of “True” and “False” respondents, about whom we likely care far more. Secondly, the choice to make “False” go in the “negative” (labelled positive) direction on the axis, as well as the color choice, makes me intuitively assume that the orange indicates incorrect answers and green indicates correct.&lt;/p&gt;
 &lt;p&gt;Finally, what set me off in the first place: we can’t compare between parties! The orientation of the facets makes it very difficult to compare in the horizontal direction, even if the bars did all start at zero.&lt;/p&gt;
 &lt;p&gt;Here’s my proposed improvement on the visualization from freerangestats:&lt;/p&gt;
@@ -2494,7 +2503,7 @@ library(haven)
 
 # Constants
 # =========
-FILE_DATA &amp;lt;- &amp;quot;~/Downloads/aes2016.sas7bdat&amp;quot;
+FILE_DATA &amp;lt;- &amp;quot;~/Data/aus-election-poll/aes2016.sas7bdat&amp;quot;
 QUESTION_ABBRS &amp;lt;- c(
   &amp;quot;federation_1901&amp;quot;, 
   &amp;quot;prop_rep&amp;quot;, 
@@ -2821,6 +2830,15 @@ ed_props_by_party &amp;lt;-
 &lt;h3&gt;The Data&lt;/h3&gt;
 &lt;p&gt;The data provided is nice and clean, so all we are left to do is read it in using &lt;code&gt;read_csv()&lt;/code&gt;. I changed some variable names to make it nicer to work with, and noticed that there are a few negative quantities of money in the data, which I drop since they are impossible. Here’s a glimpse of what the data looks like:&lt;/p&gt;
 &lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;6%&#34; /&gt;
+&lt;col width=&#34;4%&#34; /&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;8%&#34; /&gt;
+&lt;col width=&#34;8%&#34; /&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;49%&#34; /&gt;
+&lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
 &lt;th align=&#34;left&#34;&gt;id&lt;/th&gt;
@@ -2898,16 +2916,16 @@ ed_props_by_party &amp;lt;-
   group_by(donor) %&amp;gt;% 
   summarise(donated = sum(amount)) %&amp;gt;% 
   mutate(prop_donated = donated / sum(donated)) %&amp;gt;% 
-  select(country = donor, prop_donated)
-
-received &amp;lt;-
+  select(country = donor, prop_donated)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` ungrouping output (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;received &amp;lt;-
   data %&amp;gt;% 
   group_by(recipient) %&amp;gt;% 
   summarise(received = sum(amount)) %&amp;gt;% 
   mutate(prop_received = received / sum(received)) %&amp;gt;% 
-  select(country = recipient, prop_received)
-
-aid &amp;lt;-
+  select(country = recipient, prop_received)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` ungrouping output (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;aid &amp;lt;-
   donated %&amp;gt;% 
   full_join(received, by = c(&amp;quot;country&amp;quot;)) %&amp;gt;% 
   mutate_at(vars(-country), ~if_else(is.na(.), 0, .)) %&amp;gt;% 
@@ -2955,6 +2973,9 @@ aid %&amp;gt;%
     title = &amp;quot;The United States and Japan are the world&amp;#39;s major donors&amp;quot;,
     subtitle = &amp;quot;India has received almost 40% of all global aid&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
+
+## Warning: `expand_scale()` is deprecated; use `expansion()` instead.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Excuse the squished y-axis. I played around with it for a while and eventually gave up. Any hints are very welcome!&lt;/p&gt;
 &lt;/div&gt;
@@ -2967,17 +2988,17 @@ aid %&amp;gt;%
   summarise(donated = sum(amount)) %&amp;gt;% 
   ungroup() %&amp;gt;% 
   mutate(prop_donated = donated / sum(donated)) %&amp;gt;% 
-  select(country = donor, year, prop_donated)
-
-received &amp;lt;-
+  select(country = donor, year, prop_donated)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` regrouping output by &amp;#39;donor&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;received &amp;lt;-
   data %&amp;gt;% 
   group_by(recipient, year) %&amp;gt;% 
   summarise(received = sum(amount)) %&amp;gt;% 
   ungroup() %&amp;gt;% 
   mutate(prop_received = received / sum(received)) %&amp;gt;% 
-  select(country = recipient, year, prop_received)
-
-timeseries &amp;lt;-
+  select(country = recipient, year, prop_received)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` regrouping output by &amp;#39;recipient&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;timeseries &amp;lt;-
   donated %&amp;gt;% 
   full_join(received, by = c(&amp;quot;country&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
   mutate_at(vars(prop_donated, prop_received), ~if_else(is.na(.), 0, .)) %&amp;gt;% 
@@ -3075,8 +3096,8 @@ library(wordcloud)
 library(tm)
 library(igraph)
 library(networkD3)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FILE.googlesheets &amp;lt;- &amp;quot;~/Desktop/myclasses.Rds&amp;quot;
-FILE.explorecourses &amp;lt;- &amp;quot;~/Desktop/courses1819raw.Rds&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FILE.googlesheets &amp;lt;- &amp;quot;~/Data/course-descriptions/myclasses.Rds&amp;quot;
+FILE.explorecourses &amp;lt;- &amp;quot;~/Data/course-descriptions/courses1819raw.Rds&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;collating-the-data&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Collating the data&lt;/h1&gt;
 &lt;p&gt;First, we need some data! Although I played around with trying to scrape my transcript, it proved not worth the effort with all the Stanford security, so I created a Google Sheets document and manually recorded each class I have taken, including the department code e.g. “CS”, the course code e.g. “106A”, the school e.g. “School of Engineering”, the number of units I took the class for, and the quarter I took the class (recorded as an integer from 1-12).&lt;/p&gt;
@@ -3229,6 +3250,7 @@ head(classes) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
   classes %&amp;gt;% 
   group_by(quarter) %&amp;gt;% 
   summarise(total_units = sum(units))
+## `summarise()` ungrouping output (override with `.groups` argument)
 
 fall_quarters &amp;lt;-
   tribble(
@@ -3266,7 +3288,8 @@ classes %&amp;gt;%
     y = &amp;quot;Units&amp;quot;,
     color = NULL,
     title = &amp;quot;Over Time I&amp;#39;ve started to take more classes in Engineering\nand fewer in Humanities and Sciences&amp;quot;
-  )&lt;/code&gt;&lt;/pre&gt;
+  )
+## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;…what about by Department?&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes %&amp;gt;% 
@@ -3288,7 +3311,8 @@ classes %&amp;gt;%
     color = NULL,
     title = &amp;quot;Computer Science Dominates My Unit Count&amp;quot;,
     subtitle = &amp;quot;Math, MS&amp;amp;E and Statistics classes are also required of my major&amp;quot;
-  )&lt;/code&gt;&lt;/pre&gt;
+  )
+## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;scraping-course-descriptions&#34; class=&#34;section level1&#34;&gt;
@@ -3298,14 +3322,14 @@ classes %&amp;gt;%
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;explore_courses &amp;lt;- read_rds(FILE.explorecourses)
 head(explore_courses)
 ## # A tibble: 6 x 4
-##   num    title            desc                     attrs                   
-##   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;                    &amp;lt;chr&amp;gt;                   
-## 1 AA 47… Why Go To Space? Why do we spend billion… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 2 AA 93: Building Trust … Preparatory course for … &amp;quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 3 AA 10… Introduction to… This class introduces t… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 4 AA 10… Introduction to… &amp;quot;This course explores t… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 5 AA 10… Air and Space P… &amp;quot;This course is designe… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 6 AA 10… Surviving Space  Space is dangerous. Any… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t…&lt;/code&gt;&lt;/pre&gt;
+##   num    title             desc                       attrs                     
+##   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;             &amp;lt;chr&amp;gt;                      &amp;lt;chr&amp;gt;                     
+## 1 AA 47… Why Go To Space?  &amp;quot;Why do we spend billions… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 2 AA 93: Building Trust i… &amp;quot;Preparatory course for B… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 3 AA 10… Introduction to … &amp;quot;This class introduces th… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 4 AA 10… Introduction to … &amp;quot;This course explores the… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 5 AA 10… Air and Space Pr… &amp;quot;This course is designed … &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 6 AA 10… Surviving Space   &amp;quot;Space is dangerous. Anyt… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Clearly, the results are a little messy! For now, though all we want is the description to join to the datafram of my classes, and maybe the title of the classes might be fun too. To join to our dataset we need to split the &lt;code&gt;num&lt;/code&gt; variable into department and code. While we’re at it, let’s drop any prerequisites from the &lt;code&gt;desc&lt;/code&gt; variable. We don’t care about them for analysing the descriptions.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;explore_courses &amp;lt;- 
   explore_courses %&amp;gt;% 
@@ -3322,6 +3346,12 @@ head(explore_courses)
 
 head(explore_courses, 2) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;0%&#34; /&gt;
+&lt;col width=&#34;0%&#34; /&gt;
+&lt;col width=&#34;2%&#34; /&gt;
+&lt;col width=&#34;95%&#34; /&gt;
+&lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
 &lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
@@ -3639,32 +3669,6 @@ forceNetwork(
       
       <guid>/publication/licorice-one/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Example Talk</title>
-      <link>/talk/example/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 -0800</pubDate>
-      
-      <guid>/talk/example/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    &lt;p&gt;Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.&lt;/p&gt;
-
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Academic&amp;rsquo;s &lt;em&gt;Slides&lt;/em&gt; feature and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
     </item>
     
   </channel>

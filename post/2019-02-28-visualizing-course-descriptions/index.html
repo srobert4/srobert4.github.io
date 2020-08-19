@@ -461,8 +461,8 @@ library(wordcloud)
 library(tm)
 library(igraph)
 library(networkD3)</code></pre>
-<pre class="r"><code>FILE.googlesheets &lt;- &quot;~/Desktop/myclasses.Rds&quot;
-FILE.explorecourses &lt;- &quot;~/Desktop/courses1819raw.Rds&quot;</code></pre>
+<pre class="r"><code>FILE.googlesheets &lt;- &quot;~/Data/course-descriptions/myclasses.Rds&quot;
+FILE.explorecourses &lt;- &quot;~/Data/course-descriptions/courses1819raw.Rds&quot;</code></pre>
 <div id="collating-the-data" class="section level1">
 <h1>Collating the data</h1>
 <p>First, we need some data! Although I played around with trying to scrape my transcript, it proved not worth the effort with all the Stanford security, so I created a Google Sheets document and manually recorded each class I have taken, including the department code e.g. “CS”, the course code e.g. “106A”, the school e.g. “School of Engineering”, the number of units I took the class for, and the quarter I took the class (recorded as an integer from 1-12).</p>
@@ -615,6 +615,7 @@ head(classes) %&gt;% knitr::kable()</code></pre>
   classes %&gt;% 
   group_by(quarter) %&gt;% 
   summarise(total_units = sum(units))
+## `summarise()` ungrouping output (override with `.groups` argument)
 
 fall_quarters &lt;-
   tribble(
@@ -652,7 +653,8 @@ classes %&gt;%
     y = &quot;Units&quot;,
     color = NULL,
     title = &quot;Over Time I&#39;ve started to take more classes in Engineering\nand fewer in Humanities and Sciences&quot;
-  )</code></pre>
+  )
+## `summarise()` regrouping output by &#39;school&#39; (override with `.groups` argument)</code></pre>
 <p><img src="/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>…what about by Department?</p>
 <pre class="r"><code>classes %&gt;% 
@@ -674,7 +676,8 @@ classes %&gt;%
     color = NULL,
     title = &quot;Computer Science Dominates My Unit Count&quot;,
     subtitle = &quot;Math, MS&amp;E and Statistics classes are also required of my major&quot;
-  )</code></pre>
+  )
+## `summarise()` regrouping output by &#39;school&#39; (override with `.groups` argument)</code></pre>
 <p><img src="/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="scraping-course-descriptions" class="section level1">
@@ -684,14 +687,14 @@ classes %&gt;%
 <pre class="r"><code>explore_courses &lt;- read_rds(FILE.explorecourses)
 head(explore_courses)
 ## # A tibble: 6 x 4
-##   num    title            desc                     attrs                   
-##   &lt;chr&gt;  &lt;chr&gt;            &lt;chr&gt;                    &lt;chr&gt;                   
-## 1 AA 47… Why Go To Space? Why do we spend billion… &quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 2 AA 93: Building Trust … Preparatory course for … &quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 3 AA 10… Introduction to… This class introduces t… &quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 4 AA 10… Introduction to… &quot;This course explores t… &quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 5 AA 10… Air and Space P… &quot;This course is designe… &quot;\r\n\t\t\t\t\t\r\n\t\t…
-## 6 AA 10… Surviving Space  Space is dangerous. Any… &quot;\r\n\t\t\t\t\t\r\n\t\t…</code></pre>
+##   num    title             desc                       attrs                     
+##   &lt;chr&gt;  &lt;chr&gt;             &lt;chr&gt;                      &lt;chr&gt;                     
+## 1 AA 47… Why Go To Space?  &quot;Why do we spend billions… &quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 2 AA 93: Building Trust i… &quot;Preparatory course for B… &quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 3 AA 10… Introduction to … &quot;This class introduces th… &quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 4 AA 10… Introduction to … &quot;This course explores the… &quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 5 AA 10… Air and Space Pr… &quot;This course is designed … &quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 6 AA 10… Surviving Space   &quot;Space is dangerous. Anyt… &quot;\r\n\t\t\t\t\t\r\n\t\t\t…</code></pre>
 <p>Clearly, the results are a little messy! For now, though all we want is the description to join to the datafram of my classes, and maybe the title of the classes might be fun too. To join to our dataset we need to split the <code>num</code> variable into department and code. While we’re at it, let’s drop any prerequisites from the <code>desc</code> variable. We don’t care about them for analysing the descriptions.</p>
 <pre class="r"><code>explore_courses &lt;- 
   explore_courses %&gt;% 
@@ -708,6 +711,12 @@ head(explore_courses)
 
 head(explore_courses, 2) %&gt;% knitr::kable()</code></pre>
 <table>
+<colgroup>
+<col width="0%" />
+<col width="0%" />
+<col width="2%" />
+<col width="95%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">dept</th>
