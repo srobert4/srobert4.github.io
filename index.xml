@@ -6,8 +6,17 @@
     <description>Recent content in Samantha Robertson on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Jan 2021 00:00:00 -0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Apr 2021 00:00:00 -0700</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Three Directions for the Design of Human-Centered Machine Translation</title>
+      <link>/publication/hcmt/</link>
+      <pubDate>Tue, 20 Apr 2021 00:00:00 -0700</pubDate>
+      
+      <guid>/publication/hcmt/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Modeling Assumptions Clash with the Real World: Transparency, Equity, and Community Challenges for Student Assignment Algorithms</title>
@@ -3660,15 +3669,6 @@ forceNetwork(
       <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>An Open-Source Realtime Computation Platform</title>
-      <link>/publication/licorice-one/</link>
-      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
-      
-      <guid>/publication/licorice-one/</guid>
-      <description></description>
     </item>
     
   </channel>

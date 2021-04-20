@@ -6,10 +6,19 @@
     <description>Recent content in Publications on Samantha Robertson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Jan 2021 00:00:00 -0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Apr 2021 00:00:00 -0700</lastBuildDate>
     
 	<atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Three Directions for the Design of Human-Centered Machine Translation</title>
+      <link>/publication/hcmt/</link>
+      <pubDate>Tue, 20 Apr 2021 00:00:00 -0700</pubDate>
+      
+      <guid>/publication/hcmt/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Modeling Assumptions Clash with the Real World: Transparency, Equity, and Community Challenges for Student Assignment Algorithms</title>

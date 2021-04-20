@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>/publication/hcmt/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/publication/modeling_assumptions_clash/</loc>
       <lastmod>2021-01-28T00:00:00-08:00</lastmod>
     </url>
@@ -148,7 +156,7 @@
     <url>
     
       <loc>/publication_types/1/</loc>
-      <lastmod>2021-01-28T00:00:00-08:00</lastmod>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -189,6 +197,60 @@
     
     <url>
     
+      <loc>/authors/daniel-j.-liebling/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/human-centered-design/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/katherine-heller/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/machine-translation/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/margaret-mitchell/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/mark-d%C3%ADaz/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/tags/mechanism-design/</loc>
       <lastmod>2021-01-28T00:00:00-08:00</lastmod>
       <priority>0</priority>
@@ -198,8 +260,17 @@
     
     <url>
     
+      <loc>/authors/michal-lahav/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/authors/niloufar-salehi/</loc>
-      <lastmod>2021-01-28T00:00:00-08:00</lastmod>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -243,7 +314,7 @@
     <url>
     
       <loc>/publication_types/</loc>
-      <lastmod>2021-01-28T00:00:00-08:00</lastmod>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -252,7 +323,7 @@
     <url>
     
       <loc>/publication/</loc>
-      <lastmod>2021-01-28T00:00:00-08:00</lastmod>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
     </url>
     
   
@@ -286,7 +357,7 @@
     <url>
     
       <loc>/</loc>
-      <lastmod>2021-01-28T00:00:00-08:00</lastmod>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -295,7 +366,16 @@
     <url>
     
       <loc>/authors/samantha-robertson/</loc>
-      <lastmod>2021-01-28T00:00:00-08:00</lastmod>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/samy-bengio/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -336,6 +416,15 @@
     
     <url>
     
+      <loc>/authors/timnit-gebru/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/authors/tonya-nguyen/</loc>
       <lastmod>2021-01-28T00:00:00-08:00</lastmod>
       <priority>0</priority>
@@ -347,6 +436,15 @@
     
       <loc>/tags/value-sensitive-design/</loc>
       <lastmod>2021-01-28T00:00:00-08:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/wesley-hanwen-deng/</loc>
+      <lastmod>2021-04-20T00:00:00-07:00</lastmod>
       <priority>0</priority>
     </url>
     

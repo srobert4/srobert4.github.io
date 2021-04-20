@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Katherine Heller on Samantha Robertson</title>
+    <link>/authors/katherine-heller/</link>
+    <description>Recent content in Katherine Heller on Samantha Robertson</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Apr 2021 00:00:00 -0700</lastBuildDate>
+    
+	<atom:link href="/authors/katherine-heller/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Three Directions for the Design of Human-Centered Machine Translation</title>
+      <link>/publication/hcmt/</link>
+      <pubDate>Tue, 20 Apr 2021 00:00:00 -0700</pubDate>
+      
+      <guid>/publication/hcmt/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
