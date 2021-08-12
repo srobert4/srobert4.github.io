@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 4.0.0">
-  <meta name="generator" content="Hugo 0.84.0" />
+  <meta name="generator" content="Hugo 0.54.0" />
 
   
 
@@ -126,9 +126,9 @@
   <meta property="og:description" content="A plug-in widget for fast and easy lumped parameter modelling of the cardiovascular system in SimVascular."><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2019-02-15T00:00:00-05:00">
+  <meta property="article:published_time" content="2019-02-15T00:00:00-08:00">
   
-  <meta property="article:modified_time" content="2019-02-15T00:00:00-05:00">
+  <meta property="article:modified_time" content="2019-02-15T00:00:00-08:00">
   
 
   
@@ -177,6 +177,11 @@
     
       <a class="navbar-brand" href="/">Samantha Robertson</a>
       
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
 
     
     <div class="collapse navbar-collapse" id="navbar">
@@ -184,6 +189,101 @@
       
       
       <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
         
 
       
@@ -244,8 +344,8 @@
 
 
 
-<meta content="2019-02-15 00:00:00 -0500 EST" itemprop="datePublished">
-<meta content="2019-02-15 00:00:00 -0500 EST" itemprop="dateModified">
+<meta content="2019-02-15 00:00:00 -0800 PST" itemprop="datePublished">
+<meta content="2019-02-15 00:00:00 -0800 PST" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -407,13 +507,20 @@
 
     <div class="article-style" itemprop="articleBody">
       <p><strong>Background</strong></p>
+
 <p>SimVascular is an open-source software project partly based in the Stanford Cardiovascular Biomechanics Computation Lab, where I spent the Summer of 2018 with support from the Stanford Bioengineering REU program. SimVascular enables segmentation of medical image data to develop 3-dimensional cardiovascular models, which can then be used for patient-specific simulation and analysis of bloodflow.</p>
+
 <p><strong>Overview</strong></p>
+
 <p>My summer project involved developing a GUI plug-in for the software that would allow researchers to rapidly prototype and run simulations on lumped parameter models of the cardiovascular system. Lumped parameter modelling uses electrical circuit diagrams as an analogy to the cardiovascular system, allowing analysis of fundamental quantities such as pressure and flow. These models are often used in early stages of model development, as the simulations are relatively computationally inexpensive. They are also often used to provide boundary conditions to more complex, 3-D models.</p>
+
 <p><strong>Motivation</strong></p>
+
 <p>Under the current architecture, researchers had to manually derive the ODEs that governed their LPN models, and write custom simulation code. This was extremely tedious for large models. In order to use lumped parameter models as boundary conditions, researchers needed to edit FORTRAN code. My goal was to streamline this process by designing a simple drag-and-drop graphical user interface within SimVascular. This interface allows researchers to quickly and easily design models, run simulations, and visualize the results all within the easy-to-use plug-in.</p>
+
 <p><strong>Execution</strong></p>
-<p>The simulator plug-in is written in C++ with Qt for easy integration into the existing SimVascular architecture. Promising future directions involve specialization of the simulator for cardiovascular modelling by including large components such as a <a href="https://en.wikipedia.org/wiki/Windkessel_effect">Windkessel model</a> or even a &ldquo;heart model&rdquo;, which are composed of multiple traditional electrical components.</p>
+
+<p>The simulator plug-in is written in C++ with Qt for easy integration into the existing SimVascular architecture. Promising future directions involve specialization of the simulator for cardiovascular modelling by including large components such as a <a href="https://en.wikipedia.org/wiki/Windkessel_effect" target="_blank">Windkessel model</a> or even a &ldquo;heart model&rdquo;, which are composed of multiple traditional electrical components.</p>
 
     </div>
 
@@ -558,10 +665,6 @@
 
 <div class="container">
   <footer class="site-footer">
-  
-  <p class="powered-by">
-    <a href="/privacy/">Privacy Policy</a>
-  </p>
   
 
   <p class="powered-by">
@@ -709,7 +812,7 @@
     
     
     
-    <script src="/js/academic.min.8371f5be049074d5a4e0e23f9aa74528.js"></script>
+    <script src="/js/academic.min.c1b0baf12cd491effaeeb294faf1e83e.js"></script>
 
   </body>
 </html>

@@ -3662,13 +3662,12 @@ forceNetwork(
     </item>
     
     <item>
-      <title>Privacy Policy</title>
-      <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 -0700</pubDate>
+      <title>An Open-Source Realtime Computation Platform</title>
+      <link>/publication/licorice-one/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
       
-      <guid>/privacy/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
+      <guid>/publication/licorice-one/</guid>
+      <description></description>
     </item>
     
   </channel>
