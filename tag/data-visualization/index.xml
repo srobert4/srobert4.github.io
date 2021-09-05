@@ -1,0 +1,2012 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data-visualization | Samantha Robertson</title>
+    <link>https://samrobertson.netlify.com/tag/data-visualization/</link>
+      <atom:link href="https://samrobertson.netlify.com/tag/data-visualization/index.xml" rel="self" type="application/rss+xml" />
+    <description>data-visualization</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
+      <title>data-visualization</title>
+      <link>https://samrobertson.netlify.com/tag/data-visualization/</link>
+    </image>
+    
+    <item>
+      <title>Replicating WHO Visualizations of Global Immunization Coverage</title>
+      <link>https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/</guid>
+      <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the &lt;a href=&#34;datalab.stanford.edu&#34;&gt;Stanford Data Lab&lt;/a&gt; which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.&lt;/p&gt;
+&lt;p&gt;I replicated three visualizations. Below are the comparisons of WHO’s vis against mine. All the code to create my plots is at the bottom of this post! I’m not fully convinced that the WHO visualizations are the most effective, for example two of them use redundant color, but for the challenge I tried to replicate them as faithfully as possible.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/comparison.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Below is the code for the three plots my way!&lt;/p&gt;
+&lt;p&gt;First, I load the data and libraries and define some functions and constants for all three plots.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Libraries
+library(tidyverse)
+
+# Files
+data_dir &amp;lt;- &amp;quot;~/Data/who-immunizations/&amp;quot;
+file_global_mcv &amp;lt;- str_c(data_dir, &amp;quot;global_regional_coverage.csv&amp;quot;)
+file_weunic &amp;lt;- str_c(data_dir, &amp;quot;wuenic_master_07_06_2017.csv&amp;quot;)
+file_subnational &amp;lt;- str_c(data_dir, &amp;quot;subnational_06_29_2017.csv&amp;quot;)
+
+# Constants
+national_dtp3_countries &amp;lt;- c(
+  &amp;quot;Pakistan&amp;quot;,
+  &amp;quot;Syrian Arab Republic&amp;quot;,
+  &amp;quot;Yemen&amp;quot;,
+  &amp;quot;Iraq&amp;quot;,
+  &amp;quot;Mali&amp;quot;,
+  &amp;quot;Afghanistan&amp;quot;,
+  &amp;quot;Haiti&amp;quot;,
+  &amp;quot;Ethiopia&amp;quot;,
+  &amp;quot;Democratic Republic of the Congo&amp;quot;,
+  &amp;quot;Nigeria&amp;quot;,
+  &amp;quot;Somalia&amp;quot;
+)
+
+subnat_coverage_order &amp;lt;- c(
+  &amp;quot;0 to 60%&amp;quot;,
+  &amp;quot;60% to 70%&amp;quot;,
+  &amp;quot;70% to 80%&amp;quot;,
+  &amp;quot;90% to 95%&amp;quot;,
+  &amp;quot;80% to 90%&amp;quot;,
+  &amp;quot;95% to 100%&amp;quot;,
+  &amp;quot;&amp;gt;100%&amp;quot;
+)
+
+subnat_x_breaks &amp;lt;- c(seq(0, 100, by = 10), 400, 700, 1000)
+subnat_y_breaks &amp;lt;- c(
+  10, 500, 2000, 5000, 10000, 15000, 
+  seq(20000, 60000, by = 10000), 
+  80000, 100000, 150000, 
+  seq(200000, 500000, by = 100000)
+)
+subnat_size_breaks &amp;lt;- c(1, 10, 100, 1000, 10000, 100000, 300000)
+
+subnational_dtp3_labels &amp;lt;- c(&amp;quot;Dhaka&amp;quot;, &amp;quot;Lahore&amp;quot;, &amp;quot;Karachi&amp;quot;, &amp;quot;São Paulo&amp;quot;)
+
+# I picked the colors from the original plots using an online color picker
+color_mcv1 &amp;lt;- &amp;quot;#69bcd1&amp;quot;
+color_mcv2 &amp;lt;- &amp;quot;#d13f3e&amp;quot;
+color_mcv_refline &amp;lt;- &amp;quot;#367cc1&amp;quot;
+colors_dtp3_subnational &amp;lt;- c(
+  &amp;quot;0 to 60%&amp;quot; = &amp;quot;#d5322f&amp;quot;,
+  &amp;quot;60% to 70%&amp;quot; = &amp;quot;#f36d4a&amp;quot;,
+  &amp;quot;70% to 80%&amp;quot; = &amp;quot;#fbad68&amp;quot;,
+  &amp;quot;80% to 90%&amp;quot; = &amp;quot;#92cc64&amp;quot;,
+  &amp;quot;90% to 95%&amp;quot; = &amp;quot;#6abc68&amp;quot;,
+  &amp;quot;95% to 100%&amp;quot; = &amp;quot;#249752&amp;quot;,
+  &amp;quot;&amp;gt;100%&amp;quot; = &amp;quot;#876086&amp;quot;
+)
+
+# Helper functions
+global_mcv_y_labels &amp;lt;- function(vals) {
+  # Add the percent sign only to the very top (100%) label
+  if_else(vals == 100, str_c(vals, &amp;quot;%&amp;quot;), str_c(vals))
+}
+
+subnat_x_labels &amp;lt;- function(vals) {
+  # Add the percent sign to all but make the last element &amp;gt;X%
+  vals &amp;lt;- scales::percent(vals, accuracy = 1, scale = 1)
+  vals[length(vals)] &amp;lt;- str_c(&amp;quot;&amp;gt;&amp;quot;, vals[length(vals)])
+  vals
+}
+
+subnat_size_labels &amp;lt;- function(vals) { 
+  if_else(vals &amp;gt; 100, str_c(vals / 1000, &amp;quot;k&amp;quot;), str_c(vals))
+}
+
+x_trans_trans &amp;lt;- function(x) {
+  # Custom axis transformation for subnational dtp3 plot
+  scales::trans_new(
+    &amp;quot;x_trans&amp;quot;, 
+    function(x) if_else(x &amp;lt;= 100, x, 93.5 + (x/15)), 
+    function(x) if_else(x &amp;lt;= 100, x, (x - 93.5) * 15)
+  )
+}
+
+# ==============================================================================
+
+global_mcv &amp;lt;- read_csv(file_global_mcv)
+weunic &amp;lt;- read_csv(file_weunic)
+subnational &amp;lt;- read_csv(file_subnational)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;global-mcv-coverage&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Global MCV Coverage&lt;/h3&gt;
+&lt;p&gt;This visualization shows the percentage of children worldwide receiving the MCV1 and MCV2 vaccines between 2000 and 2016. Vaccination coverage has been steadily increasing for both vaccines, though neither has reached the 90% target. MCV2 coverage is lower overall than MCV1 coverage, but is increasing at a faster rate.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;global_mcv %&amp;gt;% 
+  rename_all(str_to_lower) %&amp;gt;% 
+  filter(
+    group == &amp;quot;Global&amp;quot;,
+    vaccine %in% c(&amp;quot;mcv1&amp;quot;, &amp;quot;mcv2&amp;quot;),
+    year &amp;gt;= 2000
+  ) %&amp;gt;% 
+  ggplot() +
+  geom_line(aes(year, coverage, color = vaccine), size = 0.8) +
+  geom_hline(yintercept = 90, color = color_mcv_refline, size = 0.8) +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 2008, 
+    y = 93, 
+    hjust = 0.5, 
+    label = &amp;quot;90% Vaccination Target&amp;quot;, 
+    color = color_mcv_refline,
+    size = 3,
+    fontface = &amp;quot;bold&amp;quot;
+  ) +
+  scale_x_continuous(
+    breaks = seq(2000, 2016, by = 2)
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 100, by = 20),
+    limits = c(0, 100),
+    labels = global_mcv_y_labels
+  ) +
+  scale_color_manual(
+    values = c(&amp;quot;mcv1&amp;quot; = color_mcv1, &amp;quot;mcv2&amp;quot; = color_mcv2),
+    labels = str_to_upper
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = &amp;quot;bold&amp;quot;),
+    legend.justification = c(&amp;quot;right&amp;quot;, &amp;quot;top&amp;quot;),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.background = element_rect(color = &amp;quot;grey60&amp;quot;),
+    panel.grid.minor.y = element_line(color = &amp;quot;grey60&amp;quot;, size = 0.2),
+    panel.grid.major.y = element_line(color = &amp;quot;grey60&amp;quot;, size = 0.2)
+  ) +
+  coord_cartesian(
+    xlim = c(1999.5, 2016.5), 
+    ylim = c(0, 100), 
+    expand = FALSE,
+  ) +
+  labs(
+    x = NULL,
+    y = &amp;quot;Coverage&amp;quot;,
+    color = NULL,
+    title = &amp;quot;Global MCV1 and MCV2 Coverage&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;national-dtp3-coverage&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;National DTP3 Coverage&lt;/h3&gt;
+&lt;p&gt;This visualization shows the change between 2010 and 2016 in DTP3 coverage in select countries. Like in the next visualization (subnational DTP3 coverage), color is encoding coverage in 2016, which is a redundant encoding. I did find that the graph is much more pleasing to the eye with the encoding, but is much simpler to understand without it, in my opinion.&lt;/p&gt;
+&lt;p&gt;There was a little bit of data manipulation to be done for this plot. The first step is filtering to the vaccine, countries and years we want. Then there is a &lt;code&gt;mutate&lt;/code&gt; to create some helpful plotting variables. I created the tibble &lt;code&gt;weunic_country_colors&lt;/code&gt; to keep track of which country should be which color.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;weunic &amp;lt;- 
+  weunic %&amp;gt;% 
+  rename_all(str_to_lower) %&amp;gt;% 
+  filter(
+    year %in% c(2010, 2016), 
+    vaccine == &amp;quot;dtp3&amp;quot;, 
+    country %in% national_dtp3_countries
+  ) %&amp;gt;% 
+  select(wuenic, year, country) %&amp;gt;% 
+  arrange(year, wuenic) %&amp;gt;% 
+  mutate(
+    diff_to_next = lead(wuenic) - wuenic,
+    ynudge = case_when(
+      diff_to_next == 1 ~ -1,
+      diff_to_next == 0 ~ -2,
+      TRUE ~ 0
+    ),
+    ypos = wuenic + ynudge
+  )
+
+weunic_country_colors &amp;lt;- 
+  weunic %&amp;gt;% 
+  filter(year == 2016) %&amp;gt;% 
+  mutate(
+    color = case_when(
+      wuenic &amp;lt; 60 ~ &amp;quot;red&amp;quot;,
+      wuenic &amp;lt; 70 ~ &amp;quot;orange&amp;quot;,
+      TRUE ~ &amp;quot;yellow&amp;quot;
+    )
+  ) %&amp;gt;% 
+  select(country, color)
+
+weunic &amp;lt;- 
+  weunic %&amp;gt;% 
+  left_join(weunic_country_colors, by = &amp;quot;country&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the data is ready to plot! The code is long mostly because there are four labels for each country, and each needs to be a different type face and justification! The rest of the plot is quite basic.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;weunic %&amp;gt;% 
+  ggplot() +
+  geom_point(aes(year, wuenic, color = color)) +
+  geom_segment(
+    aes(
+      y = `2010`,
+      yend = `2016`,
+      color = color
+    ), 
+    x = 2010, 
+    xend = 2016, 
+    data = select(weunic, country, year, wuenic) %&amp;gt;% 
+      spread(year, wuenic) %&amp;gt;% 
+      left_join(weunic_country_colors, by = &amp;quot;country&amp;quot;)
+  ) +
+  geom_text( # Label points with the numeric value
+    aes(
+      y = ypos,
+      label = wuenic
+    ),
+    x = 2009.5,
+    fontface = &amp;quot;bold&amp;quot;,
+    data = filter(weunic, year == 2010)
+  ) +
+  geom_text( # Label points with country name
+    aes(
+      y = ypos,
+      label = country
+    ),
+    x = 2009,
+    hjust = 1,
+    data = filter(weunic, year == 2010)
+  ) +
+  geom_text(
+    aes(
+      y = ypos,
+      label = wuenic
+    ),
+    x = 2016.5,
+    data = filter(weunic, year == 2016),
+    fontface = &amp;quot;bold&amp;quot;
+  ) +
+  geom_text(
+    aes(
+      y = ypos,
+      label = country
+    ),
+    x = 2017,
+    hjust = 0,
+    data = filter(weunic, year == 2016)
+  ) +
+  scale_x_continuous(
+    breaks = c(2010, 2016), 
+    limits = c(2000, 2026),
+    position = &amp;quot;top&amp;quot;
+  ) +
+  scale_color_manual(
+    values = c(
+      &amp;quot;red&amp;quot; = &amp;quot;#d5322f&amp;quot;,
+      &amp;quot;orange&amp;quot; = &amp;quot;#f36d4a&amp;quot;,
+      &amp;quot;yellow&amp;quot; = &amp;quot;#fbad68&amp;quot;
+    )
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text.y = element_blank(),
+    axis.text.x = element_text(
+      color = &amp;quot;black&amp;quot;,
+      size = 16,
+      face = &amp;quot;bold&amp;quot;
+    ),
+    plot.title = element_text(
+      size = 16,
+      face = &amp;quot;bold&amp;quot;,
+      hjust = 0.5
+    ),
+    legend.position = &amp;quot;none&amp;quot;
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    title = &amp;quot;Trends in DTPcv3 Coverage since\n2010 for Selected Countries&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;subnational-dtp3-coverage&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Subnational DTP3 Coverage&lt;/h3&gt;
+&lt;p&gt;This visualization shows the 2016 Coverage rate and number of surviving infants at the subnational level across the world. I was struck by the aesthetics of the plot, however I am torn as to whether the redundant encoding of size and color is distracting or not. I have been taught that all redundant information should be excluded, and quite clearly each variable is encoded in two different aesthetics, however I do think the colors, at least, help to differentiate and draw the eye. Regardless, the plot was quite a challenge to replicate so I kept the redundancy just for fun.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;subnational %&amp;gt;% 
+  filter(
+    annum == 2016, 
+    Vaccode == &amp;quot;DTP3&amp;quot;,
+    !is.na(Admin2)
+  ) %&amp;gt;% 
+  mutate(
+    color = case_when(
+      Coverage &amp;lt;= 60 ~ &amp;quot;0 to 60%&amp;quot;,
+      Coverage &amp;lt;= 70 ~ &amp;quot;60% to 70%&amp;quot;,
+      Coverage &amp;lt;= 80 ~ &amp;quot;70% to 80%&amp;quot;,
+      Coverage &amp;lt;= 90 ~ &amp;quot;80% to 90%&amp;quot;,
+      Coverage &amp;lt;= 95 ~ &amp;quot;90% to 95%&amp;quot;,
+      Coverage &amp;lt;= 100 ~ &amp;quot;95% to 100%&amp;quot;,
+      TRUE ~ &amp;quot;&amp;gt;100%&amp;quot;
+    ),
+    color = factor(color, levels = subnat_coverage_order, ordered = TRUE),
+    Coverage = if_else(Coverage &amp;lt; 1000, Coverage, 1000),
+    label = if_else(Admin2 %in% subnational_dtp3_labels, Admin2, &amp;quot;&amp;quot;)
+  ) %&amp;gt;% 
+  sample_frac() %&amp;gt;% 
+  ggplot() +
+  geom_point(
+    aes(
+      Coverage, 
+      Denominator, 
+      size = Denominator, 
+      fill = color
+    ), 
+    shape = 21, 
+    color = &amp;quot;white&amp;quot;, 
+    stroke = 0.25
+  ) +
+  ggrepel::geom_text_repel(
+    aes(
+      Coverage, 
+      Denominator, 
+      label = label
+    ), 
+    point.padding = 0.5, 
+    min.segment.length = 1
+  ) +
+  scale_x_continuous(
+    trans = &amp;quot;x_trans&amp;quot;,
+    breaks = subnat_x_breaks,
+    labels = subnat_x_labels,
+    position = &amp;quot;top&amp;quot;
+  ) +
+  scale_y_continuous(
+    trans = &amp;quot;sqrt&amp;quot;,
+    breaks = subnat_y_breaks,
+    labels = scales::unit_format(unit = &amp;quot;&amp;quot;, scale = 1, sep = &amp;quot;&amp;quot;),
+    position = &amp;quot;right&amp;quot;,
+    limits = c(10, 500000)
+  ) +
+  scale_size(
+    range = c(1, 10),
+    breaks = subnat_size_breaks,
+    labels = subnat_size_labels,
+    guide = guide_legend(
+      title.position = &amp;quot;top&amp;quot;, 
+      nrow = 1, 
+      override.aes = list(fill = &amp;quot;black&amp;quot;, color = &amp;quot;black&amp;quot;),
+      label.position = &amp;quot;bottom&amp;quot;,
+      label.hjust = 0.5
+    )
+  ) +
+  scale_fill_manual(
+    values = colors_dtp3_subnational, 
+    guide = guide_legend(
+      title.position = &amp;quot;top&amp;quot;, 
+      ncol = 1,
+      override.aes = list(shape = 22, size = 5),
+      reverse = TRUE
+    )
+  ) +
+  labs(
+    x = &amp;quot;DTP3 Coverage&amp;quot;,
+    y = &amp;quot;Surviving Infants&amp;quot;,
+    title = &amp;quot;DTPcv3 Reported Coverage by District&amp;quot;,
+    fill = &amp;quot;Coverage&amp;quot;,
+    size = &amp;quot;Surviving Infants&amp;quot;
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_text(face = &amp;quot;bold&amp;quot;, hjust = 0),
+    axis.title.y = element_text(face = &amp;quot;bold&amp;quot;, hjust = 0),
+    legend.position = &amp;quot;bottom&amp;quot;,
+    legend.title = element_text(face = &amp;quot;bold&amp;quot;),
+    legend.justification = &amp;quot;left&amp;quot;,
+    plot.title = element_text(face = &amp;quot;bold&amp;quot;),
+    panel.grid.minor = element_blank()
+  ) +
+  coord_cartesian(
+    xlim = c(10, 1000), 
+    ylim = c(0, 500000), 
+    expand = FALSE, 
+    clip = &amp;quot;off&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Women in Parliament Worldwide</title>
+      <link>https://samrobertson.netlify.com/post/2019-08-07-womeninparliament/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/post/2019-08-07-womeninparliament/</guid>
+      <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;This week’s RWeekly digest included an &lt;a href=&#34;https://data.worldbank.org/indicator/SG.GEN.PARL.ZS&#34;&gt;awesome dataset from the World Bank&lt;/a&gt; that documents the percentage of women in lower house parliament across the globe from 1997 to 2018. The dataset is nearly complete and also includes summary statistics for numerous geographic aggregations.&lt;/p&gt;
+&lt;p&gt;All of my code to process and explore the data is available &lt;a href=&#34;https://github.com/srobert4/data-projects/tree/master/women-in-parliament&#34;&gt;on my GitHub&lt;/a&gt;. There’s lots of interesting things to look at in this data, so I will leave most of the boring stuff out of this post.&lt;/p&gt;
+&lt;p&gt;To get a sense of the World Bank data, here are the top 10 and bottom 10 countries in 2018 in terms of percentage of parliament made up of women.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  filter(year == 2018) %&amp;gt;% 
+  top_n(n = 10, wt = prop_women_seats) %&amp;gt;% 
+  arrange(desc(prop_women_seats)) %&amp;gt;% 
+  knitr::kable(caption = &amp;quot;Top 10 Countries with the largest proportion of women in their parliament in 2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-1&#34;&gt;Table 1: &lt;/span&gt;Top 10 Countries with the largest proportion of women in their parliament in 2018&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;country_code&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;year&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;prop_women_seats&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Rwanda&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;RWA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;61.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cuba&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CUB&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Bolivia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;BOL&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;53.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MEX&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Grenada&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GRD&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Namibia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NAM&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Sweden&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;SWE&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;46.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Nicaragua&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NIC&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Costa Rica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CRI&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;South Africa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ZAF&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;42.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  filter(year == 2018) %&amp;gt;% 
+  top_n(n = 10, wt = -prop_women_seats) %&amp;gt;% 
+  arrange(prop_women_seats) %&amp;gt;% 
+  knitr::kable(caption = &amp;quot;Bottom 10 Countries with the smallest proportion of women in their parliament in 2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-2&#34;&gt;Table 2: &lt;/span&gt;Bottom 10 Countries with the smallest proportion of women in their parliament in 2018&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;country_code&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;year&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;prop_women_seats&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Micronesia, Fed. Sts.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;FSM&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Papua New Guinea&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PNG&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Vanuatu&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;VUT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Yemen, Rep.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;YEM&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Oman&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;OMN&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Haiti&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;HTI&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Kuwait&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;KWT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Solomon Islands&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;SLB&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Lebanon&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;LBN&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Thailand&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;THA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2018&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Only 3 countries had over half women in their parliament in 2018! The top 10 are still all over 40%, which seems encouraging! Less encouragingly, four nations still had 0 women in the lower house of parliament in 2018.&lt;/p&gt;
+&lt;div id=&#34;global-trends-in-female-representation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Global Trends in Female Representation&lt;/h1&gt;
+&lt;p&gt;Conveniently, the dataset has a precalculated global aggregate statistic.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  filter(country_name == &amp;quot;World&amp;quot;) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, by = 2),
+    minor_breaks = FALSE
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  theme_minimal() +
+  labs(
+    title = &amp;quot;There has been a constant upward trend globally since 1997&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It is encouraging to see that female representation has increased every year when we look at the whole world aggregated.&lt;/p&gt;
+&lt;div id=&#34;by-region&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;By region&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;regions &amp;lt;- c(
+  &amp;quot;East Asia &amp;amp; Pacific&amp;quot;,                
+  &amp;quot;Europe &amp;amp; Central Asia&amp;quot;,              
+  &amp;quot;Latin America &amp;amp; Caribbean&amp;quot;,          
+  &amp;quot;Middle East &amp;amp; North Africa&amp;quot;,             
+  &amp;quot;Sub-Saharan Africa&amp;quot;,
+  &amp;quot;North America&amp;quot;,
+  &amp;quot;South Asia&amp;quot;
+)
+
+wip %&amp;gt;% 
+  filter(country_name %in% regions) %&amp;gt;% 
+  drop_na(prop_women_seats) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats, color = country_name)) +
+  geom_line(size = 1) +
+  geom_point(size = 1) +
+  ggrepel::geom_text_repel(
+    aes(label = country_name),
+    data = . %&amp;gt;% group_by(country_name) %&amp;gt;% top_n(1, wt = year),
+    nudge_x = 0.25,
+    direction = &amp;quot;y&amp;quot;,
+    hjust = 0
+  ) +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL,
+    limits = c(1997, 2028)
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  guides(color = &amp;quot;none&amp;quot;) +
+  theme_minimal() +
+  labs(
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;,
+    title = &amp;quot;All regions but South Asia have had increasing representation since 1997&amp;quot;,
+    subtitle = &amp;quot;Latin America &amp;amp; Caribbean and Middle East &amp;amp; North Africa have seen large incerases&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Notably, Latin America &amp;amp; the Caribbean went from the fourth leading region in terms of female representation in the late 1990s to the leading region by a relatively significant margin by 2014. The Middle East &amp;amp; North Africa, though still lagging behind the rest of the world, also has experienced a marked increase since 1997. Interestingly, South Asia is the only region that has shown a decrease, with representation plateauing in 2009, and then beginning to decrease.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;by-income-level&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;By income level&lt;/h2&gt;
+&lt;p&gt;Another interesting aggregation is by income level of the countries.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;order &amp;lt;-
+  c(
+    &amp;quot;High income&amp;quot;,
+    &amp;quot;Upper middle income&amp;quot;,
+    &amp;quot;Middle income&amp;quot;,
+    &amp;quot;Lower middle income&amp;quot;,
+    &amp;quot;Low income&amp;quot;
+  )
+
+wip %&amp;gt;% 
+  filter(country_name %in% order) %&amp;gt;% 
+  mutate(country_name = factor(country_name, levels = order, ordered = TRUE)) %&amp;gt;% 
+  drop_na(prop_women_seats) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats, color = country_name)) +
+  geom_line(aes(group = country_name), color = &amp;quot;white&amp;quot;, size = 2) +
+  geom_point(aes(group = country_name), color = &amp;quot;white&amp;quot;, size = 1) +
+  geom_point(size = 1) +
+  geom_line(size = 1) +
+  ggrepel::geom_text_repel(
+    aes(label = country_name),
+    data = . %&amp;gt;% group_by(country_name) %&amp;gt;% top_n(1, wt = year),
+    nudge_x = 0.25,
+    direction = &amp;quot;y&amp;quot;,
+    hjust = 0,
+    color = &amp;quot;grey30&amp;quot;
+  ) +
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL,
+    limits = c(1997, 2025)
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  guides(color = &amp;quot;none&amp;quot;) +
+  theme_minimal() +
+  labs(
+    title = &amp;quot;Low income countries outperform lower middle income countries&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Unsurprisingly, based on the previous two plots, representation is increasing over time at all income levels. There is something very striking about this plot, though. Representation has been higher with higher income, with the obvious exception of low income regions. Representation in low income regions has been higher than in lower middle income regions every year recorded, and in three different years has been second only to high income regions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;by-country&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;By country&lt;/h2&gt;
+&lt;p&gt;It is really difficult to look at the trend of all nations at once, given how many there are. We can visualize the most recent data across the globe by looking at a map of the world with data from 2018.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;midpoint &amp;lt;-
+  wip %&amp;gt;% 
+  filter(year == 2018) %&amp;gt;% 
+  semi_join(world %&amp;gt;% select(country_code = iso_a3)) %&amp;gt;% 
+  summarize(median_prop_women = median(prop_women_seats, na.rm = TRUE)) %&amp;gt;% 
+  pull(median_prop_women)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;country_code&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world %&amp;gt;% 
+  left_join(
+    wip %&amp;gt;% filter(year == 2018), 
+    by = c(&amp;quot;iso_a3&amp;quot; = &amp;quot;country_code&amp;quot;)
+  ) %&amp;gt;% 
+  ggplot() +
+  geom_sf(
+    aes(fill = prop_women_seats), 
+    color = &amp;quot;grey20&amp;quot;, 
+    size = 0.1
+  ) +
+  scale_fill_gradient(
+    low = &amp;quot;white&amp;quot;,
+    high = &amp;quot;#01665e&amp;quot;,
+    labels = scales::percent_format(accuracy = 1, scale = 1)
+  ) +
+  coord_sf(datum = NA) +
+  guides(
+    fill = 
+      guide_colorbar(
+        barwidth = 8, 
+        barheight = 0.5
+      ) 
+  ) +
+  theme_void() +
+  theme(
+    legend.position = &amp;quot;top&amp;quot;,
+    legend.title.align = 1
+  ) +
+  labs(fill = &amp;quot;Proportion of seats\nheld by women&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case-study-rwanda&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Case study: Rwanda&lt;/h1&gt;
+&lt;p&gt;Though it’s hard to see from the map, at the very beginning we noticed that Rwanda had the highest female representation in its parliament in 2018, at over 60%! Looking into the politics there a bit more, I found that they introduced a quota system in 2003 that required 30% of the parliament to be made up of women. Looking at the data, there is a clear increase at the time this policy began.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;wip %&amp;gt;% 
+  drop_na(prop_women_seats) %&amp;gt;% 
+  filter(country_name == &amp;quot;Rwanda&amp;quot;) %&amp;gt;% 
+  ggplot(aes(year, prop_women_seats)) +
+  geom_hline(yintercept = 50, size = 2, color = &amp;quot;grey80&amp;quot;) +
+  geom_vline(xintercept = 2003, size = 1, color = &amp;quot;#b2182b&amp;quot;) +
+  geom_line() +
+  geom_point() +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 2003.25,
+    y = 40,
+    label = &amp;quot;30% quota\nintroduced\nin 2003&amp;quot;,
+    hjust = 0,
+    color = &amp;quot;grey40&amp;quot;
+  ) + 
+  scale_x_continuous(
+    breaks = seq(1998, 2018, 2),
+    minor_breaks = NULL
+  ) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  theme_minimal() +
+  labs(
+    title = &amp;quot;Rwanda reached almost 50/50 representation after the introduction of a quota&amp;quot;,
+    subtitle = &amp;quot;Representation continued to increase even 10 years later&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;quota-systems&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Quota Systems&lt;/h1&gt;
+&lt;p&gt;The case study of Rwanda made me think more about quotas: how effective are they? where have they been implemented? Conveniently, the Institute for Democracy and Electoral Assistance (IDEA) has a &lt;a href=&#34;https://www.idea.int/data-tools/data/gender-quotas/database&#34;&gt;public dataset&lt;/a&gt; of the types of quotas implemented all over the world! The only downside is that the database doesn’t include the year the quota was introduced. This is something that could be collated manually but we can work without for now.&lt;/p&gt;
+&lt;p&gt;There are three types of “quotas” in the dataset, explicit quotas about the number or fraction of seats to be held by women, a reserved seats system where certain seats must be held by women, and voluntary systems where some parties elect to hold themselves to a quota but none exists in law. We can visualize how these systems are implemented around the world with a map.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;type_order &amp;lt;-
+  quotas %&amp;gt;% 
+  count(quota_type, sort = TRUE) %&amp;gt;% 
+  pull(quota_type)
+
+world %&amp;gt;% 
+  left_join(
+    quotas %&amp;gt;% 
+      mutate(
+        quota_type = factor(
+          quota_type, 
+          levels = type_order,
+          ordered = TRUE
+        )
+      ), 
+    by = c(&amp;quot;iso_a3&amp;quot; = &amp;quot;country_code&amp;quot;)
+  ) %&amp;gt;% 
+  ggplot() +
+  geom_sf(aes(fill = quota_type), color = &amp;quot;white&amp;quot;, size = 0.1) +
+  scale_fill_brewer(
+    type = &amp;quot;qual&amp;quot;, 
+    palette = &amp;quot;Dark2&amp;quot;,
+    na.value = &amp;quot;grey80&amp;quot;
+  ) +
+  theme_minimal() +
+  theme(legend.position = &amp;quot;top&amp;quot;) +
+  coord_sf(datum = NA) +
+  labs(x = NULL, y = NULL, fill = &amp;quot;Quota Type&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can see that South &amp;amp; Central America have almost completely adopted quotas. As we noticed above, this region has had particularly notable improvement in female representation since 1997.&lt;/p&gt;
+&lt;p&gt;Now to make any causal claims about quotas and representation trends would need much more careful analysis, so I should emphasize I am not trying to do that. There are a couple of simple questions we could answer with this data, though.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Do the countries with the biggest increase in representation from 1997 to 2018 also have quota systems in place?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;differences &amp;lt;- 
+  wip_quotas %&amp;gt;% 
+  filter(year %in% c(1997, 2018)) %&amp;gt;% 
+  spread(key = year, value = prop_women_seats) %&amp;gt;% 
+  mutate(
+    difference = `2018` - `1997`,
+    quota_type = if_else(is.na(quota_type), &amp;quot;None&amp;quot;, quota_type)
+  ) %&amp;gt;% 
+  drop_na(difference)
+
+differences %&amp;gt;% 
+  top_n(n = 10, wt = difference) %&amp;gt;% 
+  arrange(desc(difference)) %&amp;gt;% 
+  select(country_name, quota_type, difference) %&amp;gt;% 
+  knitr::kable(caption = &amp;quot;The countries with the biggest increase in percentage of parliament seats held by women from 1997 to 2018&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-9&#34;&gt;Table 3: &lt;/span&gt;The countries with the biggest increase in percentage of parliament seats held by women from 1997 to 2018&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;country_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;quota_type&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;difference&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Rwanda&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Reserved seats&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Ethiopia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Voluntary&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;North Macedonia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;35.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Nicaragua&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Ecuador&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Mexico&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Cuba&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;None&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Senegal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Costa Rica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Quota&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Nepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Reserved seats&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;In fact only two of the top 10 countries by increase 1997-2018 did not have some form of legally binding quota system in place.&lt;/p&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Did countries with quota systems in place see larger year-to-year jumps than those without?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;largest_jumps &amp;lt;-
+  wip_quotas %&amp;gt;% 
+  group_by(country_code) %&amp;gt;% 
+  arrange(year) %&amp;gt;% 
+  mutate(
+    jump = lag(prop_women_seats) - prop_women_seats,
+    quota_type = if_else(is.na(quota_type), &amp;quot;None&amp;quot;, quota_type)
+  ) %&amp;gt;% 
+  drop_na(jump) %&amp;gt;% 
+  summarize(
+    largest_jump = max(jump), 
+    quota_type = first(quota_type)
+  ) %&amp;gt;% 
+  filter(
+    quota_type != &amp;quot;Funding incentives&amp;quot; # only one country
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` ungrouping output (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;median_largest_jump &amp;lt;- 
+  largest_jumps %&amp;gt;% 
+  summarize(med = median(largest_jump)) %&amp;gt;% 
+  pull(med)
+
+largest_jumps %&amp;gt;% 
+  ggplot(aes(quota_type, largest_jump)) +
+  geom_hline(yintercept = median_largest_jump, size = 2, color = &amp;quot;white&amp;quot;) +
+  geom_violin(draw_quantiles = 0.5) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+  labs(
+    x = &amp;quot;Quota type&amp;quot;,
+    y = &amp;quot;Largest one-year jump in female representation from 1997 to 2018&amp;quot;,
+    title = &amp;quot;More countries with quota systems saw large year-to-year jumps\nin female  representation&amp;quot;,
+    subtitle = &amp;quot;Though some very large jumps occurred in countries without quotas&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;To make this plot, I calculated the largest jump in percentage of seats held by women from one year to the next for each country. The distribution of these jumps by quota system is then plotted as a violin plot. The white reference line shows the median largest jump size across all countries. Each line within a violin plot shows the median largest jump size for countries with that type of quota system in place.&lt;/p&gt;
+&lt;p&gt;Two things are clear:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;More than 50% of countries with some kind of quota system experienced a larger jump than the median largest jump in countries with no quota system at all.&lt;/li&gt;
+&lt;li&gt;Some countries with no quota system experienced extremely large jumps from one year to the next. Clearly quotas are not &lt;em&gt;necessary&lt;/em&gt; to achieve this.
+&lt;ul&gt;
+&lt;li&gt;Side note: since I was curious, I looked up that enormous outlier. It’s Andorra and they had an election in 2011 where 15 women were elected making them the first country in Europe to have a majority female parliament.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Like I said before, I am being careful not to make any causal claims here. Clearly, representation can be increased with or without quotas. Exploring these datasets has been lots of fun, and there are definitely some very positive examples that give hope for a more equal future!&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How Much Do Australians Know About Their Parliament?</title>
+      <link>https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll/</link>
+      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll/</guid>
+      <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see &lt;a href=&#34;http://freerangestats.info/blog/2019/04/22/AES-intro&#34;&gt;freerangestats’&lt;/a&gt; exploration of the &lt;a href=&#34;https://australianelectionstudy.org/&#34;&gt;2016 Australian Election Study&lt;/a&gt; featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare? I quickly realized that I have many qualms with this plot.&lt;/p&gt;
+&lt;p&gt;First, it takes some hunting to find the correct answers to each question (they’re listed in the subtitle), and once you’ve found them you have to go through six facets and match responses to answers. The plot shows the proportion of respondents who answered True, False or Don’t Know to each question. In my opinion, it would be far more intuitive to show only what we really care about: who was right!&lt;/p&gt;
+&lt;p&gt;Then there’s the choice of the stacked bar chart. Firstly, placing the “Don’t Know” responses at the middle, centered at 0, makes it almost impossible to see the percentages of “True” and “False” respondents, about whom we likely care far more. Secondly, the choice to make “False” go in the “negative” (labelled positive) direction on the axis, as well as the color choice, makes me intuitively assume that the orange indicates incorrect answers and green indicates correct.&lt;/p&gt;
+&lt;p&gt;Finally, what set me off in the first place: we can’t compare between parties! The orientation of the facets makes it very difficult to compare in the horizontal direction, even if the bars did all start at zero.&lt;/p&gt;
+&lt;p&gt;Here’s my proposed improvement on the visualization from freerangestats:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/improved_auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It looks from this plot like the Greens voters have outdone everyone across the board, followed by voters for the coalition. We shouldn’t draw any conclusions too quickly though, keep reading to see the code and explore how education levels influence Australian voters’ knowledge of their parliament.&lt;/p&gt;
+&lt;div id=&#34;importing-and-wrangling-the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Importing and Wrangling the Data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Libraries
+# =========
+library(tidyverse)
+library(haven)
+
+# Constants
+# =========
+FILE_DATA &amp;lt;- &amp;quot;~/Data/aus-election-poll/aes2016.sas7bdat&amp;quot;
+QUESTION_ABBRS &amp;lt;- c(
+  &amp;quot;federation_1901&amp;quot;, 
+  &amp;quot;prop_rep&amp;quot;, 
+  &amp;quot;time_between_elections&amp;quot;, 
+  &amp;quot;constitution&amp;quot;, 
+  &amp;quot;deposit&amp;quot;, 
+  &amp;quot;num_members_hrp&amp;quot;
+)
+QUESTION_LABELS &amp;lt;- c(
+  &amp;quot;Australia became a\nfederation in 1901\n(True)&amp;quot;,
+  &amp;quot;The Senate election is\nbased on proportional representation\n(True)&amp;quot;,
+  &amp;quot;The longest time allowed between\nFederal elections for the House\nof Representatives is four years\n(False)&amp;quot;,
+  &amp;quot;The Constitution can only be\nchanged by the High Court\n(False)&amp;quot;,
+  &amp;quot;No-one may stand for Federal\nparliament unless they pay a deposit\n(True)&amp;quot;,
+  &amp;quot;There are 75 members of\nthe House of Representatives\n(False)&amp;quot;
+)
+QUESTION_LABELS_SHORT &amp;lt;- c(
+  &amp;quot;Federation&amp;quot;,
+  &amp;quot;Proportional Representation&amp;quot;,
+  &amp;quot;Years Between Elections&amp;quot;,
+  &amp;quot;Changing the Constitution&amp;quot;,
+  &amp;quot;Deposit to Stand\nfor Federal Election&amp;quot;,
+  &amp;quot;Number of Members\nin the House of Reps&amp;quot;
+)
+
+PARTY_LEVELS &amp;lt;- c(
+  &amp;quot;Coalition&amp;quot;, 
+  &amp;quot;Labor Party (ALP)&amp;quot;, 
+  &amp;quot;Greens&amp;quot;, 
+  &amp;quot;Other (incl. no vote)&amp;quot;
+)
+PARTY_COLORS &amp;lt;- c(&amp;quot;#1b4f9c&amp;quot;, &amp;quot;#e43340&amp;quot;, &amp;quot;#009c3d&amp;quot;, &amp;quot;grey60&amp;quot;)
+
+EDUCATION_LEVELS &amp;lt;- c(
+  &amp;quot;some secondary&amp;quot;,
+  &amp;quot;secondary&amp;quot;,
+  &amp;quot;trade&amp;quot;,
+  &amp;quot;university&amp;quot;
+)
+EDUCATION_LABELS &amp;lt;- c(
+  &amp;quot;Some secondary school\nor less&amp;quot;,
+  &amp;quot;Secondary school only&amp;quot;,
+  &amp;quot;Trade Qualification\nor other Diploma&amp;quot;,
+  &amp;quot;Bachelor&amp;#39;s Degree\nor higher&amp;quot;
+)
+
+# Functions
+# =========
+recode_truefalse &amp;lt;- function(x, answer) {
+  recode(
+    x,
+    `1` = TRUE,
+    `2` = FALSE,
+    .default = NA
+  ) %in% answer
+}
+
+recode_party &amp;lt;- function(x) {
+  recode(
+    x,
+    `1` = &amp;quot;Coalition&amp;quot;,
+    `2` = &amp;quot;Labor Party (ALP)&amp;quot;,
+    `3` = &amp;quot;Coalition&amp;quot;,
+    `4` = &amp;quot;Greens&amp;quot;,
+    `997` = NA_character_,
+    `998` = NA_character_,
+    .default = &amp;quot;Other (incl. no vote)&amp;quot;
+  )
+}
+
+recode_01 &amp;lt;- function(x) {
+  if_else(x %in% 997:999, NA_real_, x)
+}
+
+import_vars &amp;lt;- list(
+  weight = list(var = &amp;quot;wt_enrol&amp;quot;, fun = identity),
+  senate_vote = list(var = &amp;quot;B9_2&amp;quot;, fun = recode_party),
+  schooling = list(var = &amp;quot;G1&amp;quot;, fun = recode_01),
+  tertiary = list(var = &amp;quot;G3&amp;quot;, fun = recode_01),
+  federation_1901 = list(var = &amp;quot;F10_1&amp;quot;, fun = function(.) recode_truefalse(., TRUE)),
+  num_members_hrp = list(var = &amp;quot;F10_2&amp;quot;, fun = function(.) recode_truefalse(., FALSE)),
+  constitution = list(var = &amp;quot;F10_3&amp;quot;, fun = function(.) recode_truefalse(., FALSE)),
+  prop_rep = list(var = &amp;quot;F10_4&amp;quot;, fun = function(.) recode_truefalse(., TRUE)),
+  deposit = list(var = &amp;quot;F10_5&amp;quot;, fun = function(.) recode_truefalse(., TRUE)),
+  time_between_elections = list(var = &amp;quot;F10_6&amp;quot;, fun = function(.) recode_truefalse(., FALSE))
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first step is to read in and wrangle the data. I downloaded the data in SAS format, so I use &lt;code&gt;haven::read_sas&lt;/code&gt; to read the raw data. The list &lt;code&gt;import_vars&lt;/code&gt; specifies the columns we would like to keep, the column names we would like to assign, and the functions we would like to apply to recode the survey response variables to a readable format.&lt;/p&gt;
+&lt;p&gt;There are many encodings in the survey data that should be recoded. For example, AES encodes “Item skipped” and “Does not apply”, responses we would like to encode as &lt;code&gt;NA&lt;/code&gt;, as numbers 997 and 999. I also define functions to redefine the “True”/“False”/“Don’t Know” responses into logical vectors representing whether the respondent answered correctly, and to give names to the political parties. I chose to collapse the Liberal Party and the National (Country) Party into the Coalition, and drop One Nation to make the visualizations easier to digest.&lt;/p&gt;
+&lt;p&gt;I define my own &lt;code&gt;education&lt;/code&gt; variable based on responses to two questions: “How old were you when you left secondary school?” and “Have you obtained a trade qualification, a degree or a diploma, or any other qualification since leaving school?”&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- 
+  read_sas(data_file = FILE_DATA)
+
+true_false &amp;lt;-
+  import_vars %&amp;gt;% 
+  map_dfc(~ .$fun(pull(df, .$var))) %&amp;gt;% 
+  mutate(
+    education = 
+      case_when(
+        schooling &amp;gt; 1 ~ &amp;quot;some secondary&amp;quot;,
+        tertiary == 1 ~ &amp;quot;secondary&amp;quot;,
+        tertiary %in% c(2, 3) ~ &amp;quot;university&amp;quot;,
+        tertiary %in% c(4, 5, 6, 7) ~ &amp;quot;trade&amp;quot;,
+        TRUE ~ NA_character_
+      ),
+    education = 
+      factor(
+        education, 
+        levels = EDUCATION_LEVELS,
+        labels =  EDUCATION_LABELS,
+        ordered = TRUE
+      ),
+    senate_vote = factor(senate_vote, levels = PARTY_LEVELS)
+  ) %&amp;gt;% 
+  select(-schooling, -tertiary)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualizing-responses-by-party&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Visualizing Responses by Party&lt;/h2&gt;
+&lt;p&gt;Now that the data has been cleaned up, I can create my version of the freerangestats visualization.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;responses &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  select(-weight, -education) %&amp;gt;% 
+  group_by(senate_vote) %&amp;gt;%
+  summarise_all(mean, na.rm = TRUE) %&amp;gt;% 
+  gather(
+    key = &amp;quot;question&amp;quot;, 
+    value = &amp;quot;prop_correct&amp;quot;,
+    -senate_vote
+  ) %&amp;gt;% 
+  mutate(
+    question = factor(
+      question, 
+      levels = QUESTION_ABBRS,
+      labels = QUESTION_LABELS
+    )
+  )
+
+responses %&amp;gt;% 
+  ggplot(
+    aes(
+      reorder(question, -prop_correct), 
+      prop_correct, 
+      color = senate_vote
+    )
+  ) +
+  geom_hline(yintercept = 0.5, color = &amp;quot;white&amp;quot;, size = 2) +
+  geom_line(aes(group = senate_vote)) +
+  geom_point() +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  theme(
+    axis.text.x = element_text(size = 7),
+    legend.position = &amp;quot;top&amp;quot;,
+    legend.title = element_blank()
+  ) +
+  labs(
+    title = &amp;quot;Australians&amp;#39; Knowledge of Constitutional Issues&amp;quot;,
+    subtitle = &amp;quot;By Senate Vote in the 2013 Federal Election&amp;quot;,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;,
+    x = &amp;quot;True/False Question (Answer)&amp;quot;,
+    y = &amp;quot;Percentage of respondents who answered correctly&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/plot1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I think this plot is an improvement for a few reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;We can very easily compare between parties, and can very quickly identify parties by their official colors&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We can quickly see the percentage of &lt;strong&gt;correct&lt;/strong&gt; respondents&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We can see which questions were easier and which were more difficult for the respondents&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The answers are listed with the questions&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is some information lost, for example we can no longer see how many people said they didn’t know the answer, and it is much more difficult to figure out the raw responses. However, in my opinion this is far less important information in this context.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;controlling-for-education-level&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Controlling for Education Level&lt;/h2&gt;
+&lt;p&gt;The AES gives us lots of details about the respondents including their education level. Although the plot above appears to indicate that Greens voters know the most about the parliamentary system, I was wary to jump to this conclusion without controlling for the level of education of the voters.&lt;/p&gt;
+&lt;p&gt;To make inferences about the enrolled population, we need to use the provided weights. Then we are able to calculate the proportion of the electorate and the proportion of voters for each of the Coalition, ALP and the Greens at each level of education.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;total_ed_props &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;%
+  count(education, wt = weight) %&amp;gt;% 
+  mutate(prop_educated = n / sum(n), group = &amp;quot;All respondents&amp;quot;)
+
+ed_props_by_party &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  filter(senate_vote != &amp;quot;Other (incl. no vote)&amp;quot;) %&amp;gt;% 
+  count(senate_vote, education, wt = weight) %&amp;gt;% 
+  group_by(senate_vote) %&amp;gt;% 
+  mutate(prop_educated = n / sum(n)) %&amp;gt;% 
+  ungroup()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plotting these proportions shows dramatic disparities:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ed_props_by_party %&amp;gt;% 
+  ggplot(aes(education, prop_educated)) +
+  geom_line(
+    aes(group = group), 
+    color = &amp;quot;grey60&amp;quot;, 
+    data = total_ed_props
+  ) +
+  geom_point(color = &amp;quot;grey60&amp;quot;, data = total_ed_props) +
+  geom_line(aes(group = senate_vote, color = senate_vote)) +
+  geom_point(aes(color = senate_vote)) +
+  scale_y_continuous(
+    breaks = seq(0, 0.5, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  theme(
+    legend.position = &amp;quot;top&amp;quot;,
+    axis.text.x = element_text(size = 8)
+  ) +
+  labs(
+    title = &amp;quot;The highly educated are far overrepresented amongst Greens voters&amp;quot;,
+    subtitle = &amp;quot;Over 55% of Greens voters are university graduates, compared to 37% of the\n enrolled population (shown in grey)&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of voters by party\nweighted to match enrolled population&amp;quot;,
+    color = NULL,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As we see in the plot above, university graduates are far overrepresented amongst Greens voters, while voters for Labor and the Coalition are reflective of national trends in education levels.&lt;/p&gt;
+&lt;p&gt;To understand whether educational differences account for the variation in performance on the True/False questions, we need to do some further exploration. To simplify this, I decided to calculate a score for each respondent. A simple and interpretable score is the proportion of correct answers to the 6 True/False questions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  mutate(
+    frac_correct = (federation_1901 + prop_rep + time_between_elections +
+                        constitution + deposit + num_members_hrp) / 6
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can then visualize the distribution of scores at each education level.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores %&amp;gt;% 
+  ggplot(aes(education, frac_correct)) +
+  geom_hline(yintercept = 0.5, size = 2, color = &amp;quot;white&amp;quot;) +
+  geom_boxplot(varwidth = TRUE) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    x = &amp;quot;Highest Level of Education Attained&amp;quot;,
+    y = &amp;quot;Percentage of questions answered correctly (of 6 total)&amp;quot;,
+    title = &amp;quot;Median Performance Increases with Education Level&amp;quot;,
+    subtitle = &amp;quot;But performance varies widely at all levels&amp;quot;,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Despite the wide variation at every level of education, it does appear that university graduates performed the best on the multiple choice questions, with the top half of respondents with a Bachelor’s degree or higher getting at least half of the questions correct.&lt;/p&gt;
+&lt;p&gt;Finally, we can visualize the joint distribution of performance across the six questions, across the levels of education and across the party preferences. I chose to leave out those with less than a secondary school education, as this was a very small sample.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;responses_with_ed &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  select(-weight) %&amp;gt;% 
+  filter(education != &amp;quot;Some secondary school\nor less&amp;quot;) %&amp;gt;% 
+  group_by(senate_vote, education) %&amp;gt;%
+  summarise_all(mean, na.rm = TRUE) %&amp;gt;% 
+  gather(
+    key = &amp;quot;question&amp;quot;, 
+    value = &amp;quot;prop_correct&amp;quot;, 
+    -senate_vote, 
+    -education
+  ) %&amp;gt;% 
+  mutate(
+    question = factor(
+      question, 
+      levels = QUESTION_ABBRS,
+      labels = QUESTION_LABELS_SHORT
+    )
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;responses_with_ed %&amp;gt;% 
+  ggplot(
+    aes(
+      reorder(question, -prop_correct), 
+      prop_correct, 
+      color = senate_vote
+    )
+  ) +
+  geom_hline(yintercept = 0.5, color = &amp;quot;white&amp;quot;, size = 2) +
+  geom_line(aes(group = senate_vote)) +
+  geom_point() +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  theme(
+    axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+    legend.position = &amp;quot;top&amp;quot;,
+    legend.title = element_blank()
+  ) +
+  labs(
+    title = &amp;quot;Australians&amp;#39; Knowledge of Constitutional Issues by 2013 Senate Vote and Education Level&amp;quot;,
+    subtitle = &amp;quot;University graduates outperform those less educated regardless of party affiliation&amp;quot;,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;,
+    x = &amp;quot;Question Topic&amp;quot;,
+    y = &amp;quot;Percentage of respondents who answered correctly&amp;quot;
+  ) +
+  facet_grid(cols = vars(education))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As we might’ve expected, the gap between voters across party preferences closes entirely with education level. Though it appears that accuracy amongst those with only a secondary school education does vary with party affiliation, this variation is much less pronounced amongst those with trade or other non-degree qualifications and completely indistinguishable amongst those with a university degree.&lt;/p&gt;
+&lt;p&gt;I will certainly be continuing to explore this data. I’m excited to think more about why the variation remains amongst secondary school graduates, or perhaps how socioeconomic status comes into play. It would also be interesting to break down the Coalition into Liberal voters and National Party voters. I’ll also be looking into some longitudinal analysis with the AES data!&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>#SWDChallenge March 2019</title>
+      <link>https://samrobertson.netlify.com/post/2019-03-07-swdchallenge/</link>
+      <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/post/2019-03-07-swdchallenge/</guid>
+      <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;This month I decided to take part in the &lt;a href=&#34;http://www.storytellingwithdata.com/swdchallenge&#34;&gt;Storytelling With Data monthly challenge&lt;/a&gt; for the first time! The dataset we were given to explore contains global aid exchanges between 47 countries across the world across the years 1973-2013. The goal is to create visualizations that answers the broad question: &lt;strong&gt;Who Donates?&lt;/strong&gt;, as well as some bonus questions about distribution of donations geographically, temporally and by purpose of donation. Here’s my initial attempt! Along with some code. (The only package I use here is &lt;code&gt;tidyverse&lt;/code&gt;).&lt;/p&gt;
+&lt;div id=&#34;the-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The Data&lt;/h3&gt;
+&lt;p&gt;The data provided is nice and clean, so all we are left to do is read it in using &lt;code&gt;read_csv()&lt;/code&gt;. I changed some variable names to make it nicer to work with, and noticed that there are a few negative quantities of money in the data, which I drop since they are impossible. Here’s a glimpse of what the data looks like:&lt;/p&gt;
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;6%&#34; /&gt;
+&lt;col width=&#34;4%&#34; /&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;8%&#34; /&gt;
+&lt;col width=&#34;8%&#34; /&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;49%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;id&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;year&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;donor&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;recipient&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;amount&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;purpose_code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;purpose_desc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414478&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1977&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;348718518&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23030&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Power generation/renewable sources&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414509&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1977&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Brazil&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;191647004&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23040&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Electrical transmission/ distribution&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414635&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1983&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;79371799&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21030&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Rail transport&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414665&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1984&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Taiwan&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;212202942&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21030&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Rail transport&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414667&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1984&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Korea&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;134511154&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21040&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Water transport&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2414684&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1985&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Saudi Arabia&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;India&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;128074768&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23000&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Energy generation and supply, combinations of activities&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;who-donates&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Who Donates?&lt;/h3&gt;
+&lt;p&gt;One of the challenges in answering this question is how to summarize across time. I chose to look at the proportion of the total money contributed to global aid that each country contributed and received.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;donated &amp;lt;-
+  data %&amp;gt;% 
+  group_by(donor) %&amp;gt;% 
+  summarise(donated = sum(amount)) %&amp;gt;% 
+  mutate(prop_donated = donated / sum(donated)) %&amp;gt;% 
+  select(country = donor, prop_donated)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` ungrouping output (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;received &amp;lt;-
+  data %&amp;gt;% 
+  group_by(recipient) %&amp;gt;% 
+  summarise(received = sum(amount)) %&amp;gt;% 
+  mutate(prop_received = received / sum(received)) %&amp;gt;% 
+  select(country = recipient, prop_received)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` ungrouping output (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;aid &amp;lt;-
+  donated %&amp;gt;% 
+  full_join(received, by = c(&amp;quot;country&amp;quot;)) %&amp;gt;% 
+  mutate_at(vars(-country), ~if_else(is.na(.), 0, .)) %&amp;gt;% 
+  gather(-country, key = direction, value = proportion_of_aid) %&amp;gt;% 
+  mutate(direction = str_extract(direction, &amp;quot;[^_]+$&amp;quot;))
+
+country_order &amp;lt;-
+  aid %&amp;gt;% 
+  spread(direction, proportion_of_aid) %&amp;gt;% 
+  mutate(diff = donated - received) %&amp;gt;% 
+  arrange(diff) %&amp;gt;% 
+  pull(country)
+
+aid &amp;lt;-
+  aid %&amp;gt;% 
+   mutate(country = factor(country, levels = country_order, ordered = TRUE))
+
+segments &amp;lt;-
+  aid %&amp;gt;% 
+  spread(direction, proportion_of_aid)
+
+aid %&amp;gt;% 
+  ggplot(aes(y = country)) +
+  geom_segment(
+    aes(yend = country, x = donated, xend = received), 
+    color = &amp;quot;grey40&amp;quot;,
+    data = segments
+  ) +
+  geom_point(aes(x = proportion_of_aid, color = direction), size = 2) +
+  scale_y_discrete(expand = expand_scale(0)) +
+  scale_x_sqrt(
+    labels = scales::percent, 
+    expand = expand_scale(0), 
+    limits = c(0,0.4),
+    breaks = c(0, 0.01, 0.025, 0.05, 0.1, 0.2, 0.3, 0.4)
+  ) +
+  scale_color_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Set1&amp;quot;, labels = str_to_title) +
+  theme_minimal() +
+  theme(legend.position = &amp;quot;top&amp;quot;) +
+  coord_cartesian(clip = &amp;quot;off&amp;quot;) +
+  labs(
+    y = NULL,
+    x = glue::glue(&amp;quot;Percentage of Total Aid {min(pull(data, year))} - {max(pull(data, year))}&amp;quot;),
+    color = NULL,
+    title = &amp;quot;The United States and Japan are the world&amp;#39;s major donors&amp;quot;,
+    subtitle = &amp;quot;India has received almost 40% of all global aid&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
+
+## Warning: `expand_scale()` is deprecated; use `expansion()` instead.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Excuse the squished y-axis. I played around with it for a while and eventually gave up. Any hints are very welcome!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;has-the-amount-donated-changed-over-time&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Has the Amount Donated Changed Over Time?&lt;/h3&gt;
+&lt;p&gt;In keeping with the same metric, proportion of aid contributed and received, we can also look at the trends over time. I’ve highlighted the top three donors and recipients in the figure. Interestingly, it seems that receiving tends to be steadier over time, while donations see more anomalous spikes&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;donated &amp;lt;-
+  data %&amp;gt;% 
+  group_by(donor, year) %&amp;gt;% 
+  summarise(donated = sum(amount)) %&amp;gt;% 
+  ungroup() %&amp;gt;% 
+  mutate(prop_donated = donated / sum(donated)) %&amp;gt;% 
+  select(country = donor, year, prop_donated)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` regrouping output by &amp;#39;donor&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;received &amp;lt;-
+  data %&amp;gt;% 
+  group_by(recipient, year) %&amp;gt;% 
+  summarise(received = sum(amount)) %&amp;gt;% 
+  ungroup() %&amp;gt;% 
+  mutate(prop_received = received / sum(received)) %&amp;gt;% 
+  select(country = recipient, year, prop_received)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` regrouping output by &amp;#39;recipient&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;timeseries &amp;lt;-
+  donated %&amp;gt;% 
+  full_join(received, by = c(&amp;quot;country&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
+  mutate_at(vars(prop_donated, prop_received), ~if_else(is.na(.), 0, .)) %&amp;gt;% 
+  gather(prop_donated, prop_received, key = direction, value = proportion) %&amp;gt;% 
+  mutate(
+    proportion = if_else(direction == &amp;quot;prop_donated&amp;quot;, proportion, -proportion)
+  )
+  
+top_3 &amp;lt;- 
+  aid %&amp;gt;% 
+  filter(direction == &amp;quot;donated&amp;quot;) %&amp;gt;% 
+  top_n(3, proportion_of_aid) %&amp;gt;% 
+  pull(country)
+
+bottom_3 &amp;lt;-
+  aid %&amp;gt;% 
+  filter(direction == &amp;quot;received&amp;quot;) %&amp;gt;% 
+  top_n(3, proportion_of_aid) %&amp;gt;% 
+  pull(country)
+
+timeseries_main &amp;lt;-
+  timeseries %&amp;gt;%
+  filter(country %in% top_3 &amp;amp; direction == &amp;quot;prop_donated&amp;quot; | 
+           country %in% bottom_3 &amp;amp; direction == &amp;quot;prop_received&amp;quot;)
+
+country_order &amp;lt;- 
+  timeseries_main %&amp;gt;% 
+  filter(year == max(pull(data, year))) %&amp;gt;% 
+  arrange(desc(proportion)) %&amp;gt;% 
+  pull(country)
+
+timeseries_main &amp;lt;-
+  timeseries_main %&amp;gt;% 
+  mutate(country = factor(country, levels = country_order, ordered = TRUE))
+
+labeller &amp;lt;-
+  function(y) {
+    y = if_else(y &amp;lt; 0, -y, y)
+    scales::percent(y)
+  }
+
+timeseries %&amp;gt;% 
+  unite(group, country, direction, remove = FALSE) %&amp;gt;% 
+  ggplot(aes(year, proportion)) +
+  geom_line(aes(group = group), alpha = 0.2) +
+  geom_line(aes(color = country), data = timeseries_main) +
+  scale_x_continuous(breaks = seq(1970, 2015, by = 5)) +
+  scale_y_continuous(labels = labeller) +
+  scale_color_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Dark2&amp;quot;) +
+  theme_minimal() +
+  labs(
+    x = NULL,
+    color = NULL,
+    y = glue::glue(&amp;quot;Percentage of Annual Aid&amp;quot;),
+    title = &amp;quot;Contributions from significant donors is not constant over time&amp;quot;,
+    subtitle = &amp;quot;Major events like war and recession drive spikes in aid&amp;quot;
+  ) +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 1974,
+    y = 0.0275,
+    label = &amp;quot;Proportion Donated&amp;quot;,
+    hjust = 0
+  ) +
+  annotate(
+    geom = &amp;quot;text&amp;quot;,
+    x = 1974,
+    y = -0.0175,
+    label = &amp;quot;Proportion Received&amp;quot;,
+    hjust = 0
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Visualizing Course Descriptions</title>
+      <link>https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions/</link>
+      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions/</guid>
+      <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/d3/d3.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/forceNetwork-binding/forceNetwork.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;As my senior year at Stanford nears the end, I’ve started to think more and more about what I’ve really learned here, and what I’ll be taking away from my undergraduate experience. Sure, there’s plenty of sappy stuff about coming of age and figuring out what I want to start doing with my life (spoiler: haven’t figured it out), but what about concrete knowledge I’ve gained from my classes. Being the data nerd that I am, I decided to take a “data-driven” approach to this question, and see what I could find. Here’s the results!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(googlesheets)
+library(rvest)
+library(tidytext)
+library(wordcloud)
+library(tm)
+library(igraph)
+library(networkD3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FILE.googlesheets &amp;lt;- &amp;quot;~/Data/course-descriptions/myclasses.Rds&amp;quot;
+FILE.explorecourses &amp;lt;- &amp;quot;~/Data/course-descriptions/courses1819raw.Rds&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;collating-the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Collating the data&lt;/h1&gt;
+&lt;p&gt;First, we need some data! Although I played around with trying to scrape my transcript, it proved not worth the effort with all the Stanford security, so I created a Google Sheets document and manually recorded each class I have taken, including the department code e.g. “CS”, the course code e.g. “106A”, the school e.g. “School of Engineering”, the number of units I took the class for, and the quarter I took the class (recorded as an integer from 1-12).&lt;/p&gt;
+&lt;p&gt;Then I was able to use the &lt;code&gt;googlesheets&lt;/code&gt; package to pull this data into R with only a few lines of code:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Log in to Google
+gs_auth(new_user = TRUE)
+
+# Find the document we want
+sheet_key &amp;lt;- 
+  gs_ls() %&amp;gt;% 
+  filter(sheet_title == &amp;quot;courses&amp;quot;) %&amp;gt;% 
+  pull(sheet_key)
+
+# Read the document
+df &amp;lt;- 
+  gs_key(sheet_key) %&amp;gt;%
+  gs_read()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To avoid authentication over and over, I saved the resulting dataframe, and we’ll use the saved version.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes &amp;lt;- read_rds(FILE.googlesheets)
+head(classes) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;school&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;units&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;quarter&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;esf&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Office of Vice Provost for Undergraduate Education&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;lawgen&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;116n&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Law School&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;math&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;cs&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;106a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;physics&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;physics&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Let’s clean up the formatting a little first. We’ll also add a variable that contains just the numeric part of the course code, in case we want to look at how advanced the coursework is by the course number.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes &amp;lt;-
+  classes %&amp;gt;% 
+  mutate(
+    dept = str_to_upper(dept),
+    code = str_to_upper(code),
+    school = str_to_title(school),
+    code_numeric = parse_number(code)
+  )
+head(classes) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;school&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;units&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;quarter&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;code_numeric&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ESF&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Office Of Vice Provost For Undergraduate Education&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;LAWGEN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;116N&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Law School&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;116&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;MATH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;51&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;106A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;106&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PHYSICS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PHYSICS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Just with this data we can already do some cool analysis. For example, let’s look at the distribution of units over the course of my degree, divided by school…&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;total_unit_count &amp;lt;-
+  classes %&amp;gt;% 
+  group_by(quarter) %&amp;gt;% 
+  summarise(total_units = sum(units))
+## `summarise()` ungrouping output (override with `.groups` argument)
+
+fall_quarters &amp;lt;-
+  tribble(
+    ~quarter, ~label,
+    1, &amp;quot;2015-2016&amp;quot;,
+    4, &amp;quot;2016-2017&amp;quot;,
+    7, &amp;quot;2017-2018&amp;quot;,
+    10, &amp;quot;2018-2019&amp;quot;
+  )
+
+classes %&amp;gt;%
+  group_by(school, quarter) %&amp;gt;% 
+  summarise(total_units = sum(units)) %&amp;gt;% 
+  ggplot(aes(quarter, total_units)) +
+  geom_vline(aes(xintercept = quarter), data = fall_quarters, color = &amp;quot;grey90&amp;quot;) +
+  geom_point(aes(group = school, color = school)) +
+  geom_line(aes(group = school, color = school)) +
+  geom_line(data = total_unit_count, color = &amp;quot;grey80&amp;quot;) +
+  geom_text(
+    aes(x = quarter + 0.2, label = label), 
+    y = 14,  
+    color = &amp;quot;grey40&amp;quot;, 
+    angle = 90,
+    data = fall_quarters,
+    hjust = 0
+  ) +
+  theme(
+    legend.position = &amp;quot;bottom&amp;quot;,
+    legend.direction = &amp;quot;vertical&amp;quot;,
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_blank()
+  ) +
+  labs(
+    x = &amp;quot;Quarter&amp;quot;,
+    y = &amp;quot;Units&amp;quot;,
+    color = NULL,
+    title = &amp;quot;Over Time I&amp;#39;ve started to take more classes in Engineering\nand fewer in Humanities and Sciences&amp;quot;
+  )
+## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;…what about by Department?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes %&amp;gt;% 
+  group_by(school, dept) %&amp;gt;% 
+  summarise(total_units = sum(units)) %&amp;gt;% 
+  ggplot(aes(reorder(dept, total_units), total_units)) +
+  geom_segment(aes(xend = dept, y = 0, yend = total_units), color = &amp;quot;grey60&amp;quot;) +
+  geom_point(aes(color = school), size = 3) +
+  scale_y_continuous(limits = c(0, 42), expand = c(0,0)) +
+  theme_minimal() +
+  theme(
+    legend.position = &amp;quot;bottom&amp;quot;,
+    legend.direction = &amp;quot;vertical&amp;quot;
+  ) +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = &amp;quot;Total Units&amp;quot;,
+    color = NULL,
+    title = &amp;quot;Computer Science Dominates My Unit Count&amp;quot;,
+    subtitle = &amp;quot;Math, MS&amp;amp;E and Statistics classes are also required of my major&amp;quot;
+  )
+## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;scraping-course-descriptions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Scraping Course Descriptions&lt;/h1&gt;
+&lt;p&gt;What I am really curious about, though, is whether we can see any themes in my interests from the course descriptions of the classes I’ve taken, as listed in &lt;a href=&#34;https://explorecourses.stanford.edu/&#34;&gt;Explore Courses&lt;/a&gt;. I wasn’t about to copy and paste all of these by hand, plus this was a great opportunity to practice web scraping with &lt;code&gt;rvest&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;I scraped ALL of the course descriptions from every page of Explore Courses, so that I can join the descriptions to my dataframe of classes. This took an hour or so to run, but I made sure to save the result!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;explore_courses &amp;lt;- read_rds(FILE.explorecourses)
+head(explore_courses)
+## # A tibble: 6 x 4
+##   num    title             desc                       attrs                     
+##   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;             &amp;lt;chr&amp;gt;                      &amp;lt;chr&amp;gt;                     
+## 1 AA 47… Why Go To Space?  &amp;quot;Why do we spend billions… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 2 AA 93: Building Trust i… &amp;quot;Preparatory course for B… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 3 AA 10… Introduction to … &amp;quot;This class introduces th… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 4 AA 10… Introduction to … &amp;quot;This course explores the… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 5 AA 10… Air and Space Pr… &amp;quot;This course is designed … &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 6 AA 10… Surviving Space   &amp;quot;Space is dangerous. Anyt… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Clearly, the results are a little messy! For now, though all we want is the description to join to the datafram of my classes, and maybe the title of the classes might be fun too. To join to our dataset we need to split the &lt;code&gt;num&lt;/code&gt; variable into department and code. While we’re at it, let’s drop any prerequisites from the &lt;code&gt;desc&lt;/code&gt; variable. We don’t care about them for analysing the descriptions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;explore_courses &amp;lt;- 
+  explore_courses %&amp;gt;% 
+  mutate(num = str_extract(num, &amp;quot;^[^:]*&amp;quot;)) %&amp;gt;% 
+  separate(num, into = c(&amp;quot;dept&amp;quot;, &amp;quot;code&amp;quot;), sep = &amp;quot; &amp;quot;, extra = &amp;quot;merge&amp;quot;) %&amp;gt;%
+  mutate(dept = str_to_upper(dept), code = str_to_upper(code)) %&amp;gt;% 
+  separate(
+    desc, 
+    into = c(&amp;quot;desc&amp;quot;), 
+    sep = &amp;quot;(Prerequisites:|Prerequisite:|prerequisite:|prerequisites:)&amp;quot;, 
+    extra = &amp;quot;drop&amp;quot;
+  ) %&amp;gt;% 
+  select(dept, code, title, desc)
+
+head(explore_courses, 2) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;0%&#34; /&gt;
+&lt;col width=&#34;0%&#34; /&gt;
+&lt;col width=&#34;2%&#34; /&gt;
+&lt;col width=&#34;95%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;title&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;desc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;47SI&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why Go To Space?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why do we spend billions of dollars exploring space? What can modern policymakers, entrepreneurs, and industrialists do to help us achieve our goals beyond planet Earth? Whether it is the object of exploration, science, civilization, or conquest, few domains have captured the imagination of a species like space. This course is an introduction to space policy issues, with an emphasis on the modern United States. We will present a historical overview of space programs from all around the world, and then spend the last five weeks discussing present policy issues, through lectures and guest speakers from NASA, the Department of Defense, new and legacy space industry companies, and more. Students will present on one issue that piques their interest, selecting from various domains including commercial concerns, military questions, and geopolitical considerations.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;93&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Building Trust in Autonomy&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Preparatory course for Bing Overseas Studies summer course in Edinburgh.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;That looks better!!&lt;/p&gt;
+&lt;p&gt;Now we can join this to &lt;code&gt;classes&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions &amp;lt;-
+  classes %&amp;gt;% 
+  left_join(explore_courses, by = c(&amp;quot;dept&amp;quot;, &amp;quot;code&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Even in the first few results, there are some &lt;code&gt;NA&lt;/code&gt; values resulting from the join. A concern is that the matching of &lt;code&gt;dept&lt;/code&gt; and &lt;code&gt;code&lt;/code&gt; isn’t working due to a formatting quirk. Sadly, it’s even worse… Explore Courses deletes classes after they haven’t been offered for a while!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions %&amp;gt;% 
+  filter(is.na(desc)) %&amp;gt;% 
+  knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;school&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;units&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;quarter&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;code_numeric&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;title&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;desc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;LAWGEN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;116N&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Law School&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;116&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PHYSICS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;THINK&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Office Of Vice Provost For Undergraduate Education&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;193X&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;193&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ECON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Most of these are classes I took a while ago, and most are for few units, so excluding these from analysis of descriptions shouldn’t be a big deal!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;analysing-course-descriptions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Analysing Course Descriptions&lt;/h1&gt;
+&lt;p&gt;Now we get to the fun part! The code in this section is adapted from &lt;a href=&#34;https://juanitorduz.github.io/text-mining-networks-and-visualization-plebiscito-tweets/&#34;&gt;this awesome blog post&lt;/a&gt; by Juan Orduz analyzing tweet data.&lt;/p&gt;
+&lt;p&gt;Let’s start with something easy and classic, a wordcloud! For this we can use the packages &lt;code&gt;tidytext&lt;/code&gt; to help with counting words, and &lt;code&gt;wordcloud&lt;/code&gt; for visualization.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions %&amp;gt;% 
+  unnest_tokens(word, desc) %&amp;gt;% 
+  anti_join(get_stopwords()) %&amp;gt;% 
+  mutate(word = str_extract(word, &amp;quot;[:alpha:]+&amp;quot;)) %&amp;gt;% 
+  count(word) %&amp;gt;% 
+  arrange(desc(n)) %&amp;gt;% 
+  with(
+    wordcloud(
+      word, 
+      n, 
+      min.freq = 5, 
+      random.order = FALSE, 
+      colors = brewer.pal(8, &amp;#39;Dark2&amp;#39;)
+    )
+  )
+## Joining, by = &amp;quot;word&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;No surprises here! But it’s still fun to see my degree described in pretty colored words.&lt;/p&gt;
+&lt;p&gt;What is perhaps most interesting to me is whether we can see relationships between topics in the course descriptions! For this, I used the &lt;code&gt;igraph&lt;/code&gt; package to create a graph, and the &lt;code&gt;networkD3&lt;/code&gt; package for visualization with D3.&lt;/p&gt;
+&lt;p&gt;First we use &lt;code&gt;tidytext&lt;/code&gt; to count the bigrams, the pairs of words that occur next to each other, in the descriptions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;word_bigrams &amp;lt;- 
+  classes_with_descriptions %&amp;gt;% 
+  unnest_tokens(
+    input = desc, 
+    output = bigram, 
+    token = &amp;#39;ngrams&amp;#39;, 
+    n = 2
+  ) %&amp;gt;%  
+  filter(!is.na(bigram)) %&amp;gt;% 
+  separate(col = bigram, into = c(&amp;#39;word1&amp;#39;, &amp;#39;word2&amp;#39;), sep = &amp;#39; &amp;#39;) %&amp;gt;% 
+  select(word1, word2)
+
+bigram_count &amp;lt;- word_bigrams %&amp;gt;% count(word1, word2, sort = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can create a graph object and use the base R (&lt;em&gt;gasp&lt;/em&gt;) &lt;code&gt;plot&lt;/code&gt; function to visualize the relationships between words. We use a threshold to include only bigrams that occur more times than the threshold. It turns out that 2 is a good threshold for this dataset.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threshold &amp;lt;- 2
+network &amp;lt;-  
+  bigram_count %&amp;gt;%
+  filter(n &amp;gt; threshold) %&amp;gt;% 
+  graph_from_data_frame(directed = FALSE)
+
+plot(
+  network, 
+  vertex.size = 1,
+  vertex.label.color = &amp;#39;black&amp;#39;, 
+  vertex.label.cex = 0.7, 
+  vertex.label.dist = 1,
+  edge.color = &amp;#39;gray&amp;#39;, 
+  main = &amp;#39;Course Descriptions&amp;#39;,
+  alpha = 50
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Even restricting the graph to bigrams that occur at least 3 times, it’s still hard to really see the relationships here. Now’s when we use D3 to take this visualization to the next level. Since there’s so much more interaction possible with a D3 graph, we’ll lower the threshold to see a little more detail.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threshold &amp;lt;- 1
+network &amp;lt;-  
+  bigram_count %&amp;gt;%
+  filter(n &amp;gt; threshold) %&amp;gt;% 
+  graph_from_data_frame(directed = FALSE)
+
+network_D3 &amp;lt;- igraph_to_networkD3(network)
+network_D3$nodes &amp;lt;-
+  network_D3$nodes %&amp;gt;% 
+  mutate(
+    degree = 10 * degree(network),
+    group = 1
+  )
+network_D3$links &amp;lt;-
+  network_D3$links %&amp;gt;% 
+  mutate(width = 10 *  E(network)$n / max(E(network)$n))
+
+forceNetwork(
+  Links = network_D3$links, 
+  Nodes = network_D3$nodes, 
+  Source = &amp;#39;source&amp;#39;, 
+  Target = &amp;#39;target&amp;#39;,
+  NodeID = &amp;#39;name&amp;#39;,
+  Group = &amp;#39;group&amp;#39;, 
+  opacity = 0.9,
+  Value = &amp;#39;width&amp;#39;,
+  Nodesize = &amp;#39;degree&amp;#39;, 
+  linkWidth = JS(&amp;quot;function(d) { return Math.sqrt(d.value); }&amp;quot;), 
+  fontSize = 12,
+  zoom = TRUE, 
+  opacityNoHover = 1
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;htmlwidget-1&#34; style=&#34;width:672px;height:480px;&#34; class=&#34;forceNetwork html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;links&#34;:{&#34;source&#34;:[58,81,2,5,25,11,36,2,10,0,3,8,17,36,20,0,20,1,20,36,28,21,2,38,13,6,11,50,84,7,33,36,28,67,1,29,1,1,102,2,2,1,36,4,7,5,12,1,2,1,0,2,35,106,11,2,14,28,28,1,5,1,1,54,83,36,1,11,5,48,0,57,36,1,36,19,2,20,2,1,1,36,1,16,36,12,4,46,2,11,66,20,1,33,1,1,108,20,7,32,2,0,2,7,20,1,2,91,2,20,115,1,110,38,36,26,26,1,30,1,89,2,1,8,5,60,90,0,111,82,72,48,2,36,20,18,66,98,13,112,1,2,2,2,1,36,2,17,14,55,36,1,2,0,2,18,95,20,77,23,17,2,20,31,15,7,38,1,10,51,25,28,2,26,20,23,11,18,15,0,5,1,93,2,20,39,0,1,11,3,7,93,61,34,98,51,17,7,5,38,13,40,42,115,93],&#34;target&#34;:[133,141,38,38,38,38,39,22,118,138,13,13,40,41,41,42,42,42,43,44,44,44,45,47,47,47,14,117,117,117,49,49,50,136,145,122,51,146,146,24,24,52,52,15,15,15,16,147,17,17,53,53,159,157,150,55,56,121,137,59,8,18,18,132,132,60,25,25,25,61,62,63,63,64,64,65,27,28,28,68,29,69,69,70,70,70,71,126,72,73,73,30,74,75,75,9,158,31,31,76,76,78,78,79,80,10,10,152,32,164,166,82,160,124,85,86,135,87,87,148,143,88,149,11,11,91,144,139,162,142,92,92,119,93,94,134,95,156,96,163,97,97,99,125,100,161,101,101,103,103,104,104,105,34,120,107,155,165,140,127,130,108,108,35,35,35,109,109,128,128,36,36,36,36,36,36,36,36,36,36,36,36,153,19,112,113,4,4,151,20,12,114,114,123,123,129,131,37,21,115,115,115,115,116,154],&#34;value&#34;:[10,9.09090909090909,8.18181818181818,8.18181818181818,8.18181818181818,7.27272727272727,5.45454545454545,5.45454545454545,4.54545454545455,4.54545454545455,4.54545454545455,4.54545454545455,4.54545454545455,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182],&#34;colour&#34;:[&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;]},&#34;nodes&#34;:{&#34;name&#34;:[&#34;in&#34;,&#34;of&#34;,&#34;and&#34;,&#34;introduction&#34;,&#34;this&#34;,&#34;is&#34;,&#34;such&#34;,&#34;will&#34;,&#34;emphasis&#34;,&#34;laws&#34;,&#34;linear&#34;,&#34;on&#34;,&#34;topics&#34;,&#34;an&#34;,&#34;based&#34;,&#34;course&#34;,&#34;covered&#34;,&#34;data&#34;,&#34;engineering&#34;,&#34;theory&#34;,&#34;to&#34;,&#34;what&#34;,&#34;abstraction&#34;,&#34;at&#34;,&#34;concepts&#34;,&#34;focus&#34;,&#34;for&#34;,&#34;historical&#34;,&#34;how&#34;,&#34;image&#34;,&#34;interest&#34;,&#34;learn&#34;,&#34;machine&#34;,&#34;programming&#34;,&#34;several&#34;,&#34;students&#34;,&#34;the&#34;,&#34;we&#34;,&#34;a&#34;,&#34;about&#34;,&#34;analysis&#34;,&#34;answers&#34;,&#34;applications&#34;,&#34;approaches&#34;,&#34;are&#34;,&#34;art&#34;,&#34;artificial&#34;,&#34;as&#34;,&#34;by&#34;,&#34;c&#34;,&#34;can&#34;,&#34;computer&#34;,&#34;context&#34;,&#34;demonstrations&#34;,&#34;differential&#34;,&#34;discussion&#34;,&#34;discussions&#34;,&#34;drawn&#34;,&#34;ee&#34;,&#34;elements&#34;,&#34;first&#34;,&#34;fostered&#34;,&#34;freedom&#34;,&#34;from&#34;,&#34;future&#34;,&#34;graph&#34;,&#34;group&#34;,&#34;health&#34;,&#34;ideas&#34;,&#34;implications&#34;,&#34;include&#34;,&#34;initiative&#34;,&#34;interaction&#34;,&#34;interactive&#34;,&#34;knowledge&#34;,&#34;language&#34;,&#34;learning&#34;,&#34;least&#34;,&#34;lecture&#34;,&#34;lectures&#34;,&#34;limited&#34;,&#34;math&#34;,&#34;mathematics&#34;,&#34;maxwell&#39;s&#34;,&#34;may&#34;,&#34;modeling&#34;,&#34;models&#34;,&#34;mutual&#34;,&#34;networks&#34;,&#34;neural&#34;,&#34;object&#34;,&#34;order&#34;,&#34;peer&#34;,&#34;physical&#34;,&#34;preference&#34;,&#34;problem&#34;,&#34;provides&#34;,&#34;race&#34;,&#34;random&#34;,&#34;reading&#34;,&#34;role&#34;,&#34;science&#34;,&#34;scientific&#34;,&#34;sections&#34;,&#34;seeds&#34;,&#34;sets&#34;,&#34;skills&#34;,&#34;software&#34;,&#34;student&#34;,&#34;subject&#34;,&#34;symmetric&#34;,&#34;their&#34;,&#34;these&#34;,&#34;thinking&#34;,&#34;understanding&#34;,&#34;with&#34;,&#34;working&#34;,&#34;be&#34;,&#34;algebra&#34;,&#34;performance&#34;,&#34;social&#34;,&#34;do&#34;,&#34;classification&#34;,&#34;variables&#34;,&#34;matrix&#34;,&#34;research&#34;,&#34;intelligence&#34;,&#34;stanford&#34;,&#34;systems&#34;,&#34;vision&#34;,&#34;structures&#34;,&#34;visualization&#34;,&#34;equations&#34;,&#34;103&#34;,&#34;principles&#34;,&#34;more&#34;,&#34;care&#34;,&#34;does&#34;,&#34;america&#34;,&#34;our&#34;,&#34;squares&#34;,&#34;104&#34;,&#34;particularly&#34;,&#34;network&#34;,&#34;oriented&#34;,&#34;change&#34;,&#34;computing&#34;,&#34;cs106a&#34;,&#34;nature&#34;,&#34;objects&#34;,&#34;developing&#34;,&#34;time&#34;,&#34;logic&#34;,&#34;theories&#34;,&#34;world&#34;,&#34;solving&#34;,&#34;processes&#34;,&#34;developed&#34;,&#34;leaders&#34;,&#34;develop&#34;,&#34;matrices&#34;,&#34;same&#34;,&#34;own&#34;,&#34;questions&#34;,&#34;make&#34;,&#34;sophomores&#34;,&#34;mathematical&#34;],&#34;group&#34;:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],&#34;nodesize&#34;:[90,290,260,20,40,70,10,70,30,10,40,90,30,50,30,50,20,60,50,20,140,20,10,20,20,50,30,10,70,20,20,30,20,20,20,40,260,10,80,20,20,20,40,10,30,10,10,30,20,20,20,30,20,20,10,20,10,10,10,10,20,20,10,20,20,10,20,10,10,20,30,10,20,20,10,20,20,10,20,10,10,10,20,10,10,10,10,20,10,10,10,20,20,40,10,20,10,20,20,10,10,20,10,20,20,10,10,10,30,20,10,10,20,10,20,60,10,30,10,10,10,10,10,20,10,10,10,10,20,10,10,10,20,10,10,10,10,10,10,10,10,10,10,10,10,10,20,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]},&#34;options&#34;:{&#34;NodeID&#34;:&#34;name&#34;,&#34;Group&#34;:&#34;group&#34;,&#34;colourScale&#34;:&#34;d3.scaleOrdinal(d3.schemeCategory20);&#34;,&#34;fontSize&#34;:12,&#34;fontFamily&#34;:&#34;serif&#34;,&#34;clickTextSize&#34;:30,&#34;linkDistance&#34;:50,&#34;linkWidth&#34;:&#34;function(d) { return Math.sqrt(d.value); }&#34;,&#34;charge&#34;:-30,&#34;opacity&#34;:0.9,&#34;zoom&#34;:true,&#34;legend&#34;:false,&#34;arrows&#34;:false,&#34;nodesize&#34;:true,&#34;radiusCalculation&#34;:&#34; Math.sqrt(d.nodesize)+6&#34;,&#34;bounded&#34;:false,&#34;opacityNoHover&#34;:1,&#34;clickAction&#34;:null}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;It’s so much fun to play around with the D3 graph visualization. Hover over nodes to read the labels more clearly. Unsurprisingly, the words cluster around the three nodes: “and”, “the” and “of”, which makes it more difficult to see relationships between domain terms. It’s fun to look at the bigrams that aren’t part of the main connected component, like “machine learning”, “maxwell’s differential equations”, “health care” and “neural networks”. Again, not surprising but kind of cute.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>improve-this-vis | Samantha Robertson</title>
+    <link>https://samrobertson.netlify.com/tag/improve-this-vis/</link>
+      <atom:link href="https://samrobertson.netlify.com/tag/improve-this-vis/index.xml" rel="self" type="application/rss+xml" />
+    <description>improve-this-vis</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 29 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
+      <title>improve-this-vis</title>
+      <link>https://samrobertson.netlify.com/tag/improve-this-vis/</link>
+    </image>
+    
+    <item>
+      <title>How Much Do Australians Know About Their Parliament?</title>
+      <link>https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll/</link>
+      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll/</guid>
+      <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see &lt;a href=&#34;http://freerangestats.info/blog/2019/04/22/AES-intro&#34;&gt;freerangestats’&lt;/a&gt; exploration of the &lt;a href=&#34;https://australianelectionstudy.org/&#34;&gt;2016 Australian Election Study&lt;/a&gt; featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare? I quickly realized that I have many qualms with this plot.&lt;/p&gt;
+&lt;p&gt;First, it takes some hunting to find the correct answers to each question (they’re listed in the subtitle), and once you’ve found them you have to go through six facets and match responses to answers. The plot shows the proportion of respondents who answered True, False or Don’t Know to each question. In my opinion, it would be far more intuitive to show only what we really care about: who was right!&lt;/p&gt;
+&lt;p&gt;Then there’s the choice of the stacked bar chart. Firstly, placing the “Don’t Know” responses at the middle, centered at 0, makes it almost impossible to see the percentages of “True” and “False” respondents, about whom we likely care far more. Secondly, the choice to make “False” go in the “negative” (labelled positive) direction on the axis, as well as the color choice, makes me intuitively assume that the orange indicates incorrect answers and green indicates correct.&lt;/p&gt;
+&lt;p&gt;Finally, what set me off in the first place: we can’t compare between parties! The orientation of the facets makes it very difficult to compare in the horizontal direction, even if the bars did all start at zero.&lt;/p&gt;
+&lt;p&gt;Here’s my proposed improvement on the visualization from freerangestats:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/improved_auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It looks from this plot like the Greens voters have outdone everyone across the board, followed by voters for the coalition. We shouldn’t draw any conclusions too quickly though, keep reading to see the code and explore how education levels influence Australian voters’ knowledge of their parliament.&lt;/p&gt;
+&lt;div id=&#34;importing-and-wrangling-the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Importing and Wrangling the Data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Libraries
+# =========
+library(tidyverse)
+library(haven)
+
+# Constants
+# =========
+FILE_DATA &amp;lt;- &amp;quot;~/Data/aus-election-poll/aes2016.sas7bdat&amp;quot;
+QUESTION_ABBRS &amp;lt;- c(
+  &amp;quot;federation_1901&amp;quot;, 
+  &amp;quot;prop_rep&amp;quot;, 
+  &amp;quot;time_between_elections&amp;quot;, 
+  &amp;quot;constitution&amp;quot;, 
+  &amp;quot;deposit&amp;quot;, 
+  &amp;quot;num_members_hrp&amp;quot;
+)
+QUESTION_LABELS &amp;lt;- c(
+  &amp;quot;Australia became a\nfederation in 1901\n(True)&amp;quot;,
+  &amp;quot;The Senate election is\nbased on proportional representation\n(True)&amp;quot;,
+  &amp;quot;The longest time allowed between\nFederal elections for the House\nof Representatives is four years\n(False)&amp;quot;,
+  &amp;quot;The Constitution can only be\nchanged by the High Court\n(False)&amp;quot;,
+  &amp;quot;No-one may stand for Federal\nparliament unless they pay a deposit\n(True)&amp;quot;,
+  &amp;quot;There are 75 members of\nthe House of Representatives\n(False)&amp;quot;
+)
+QUESTION_LABELS_SHORT &amp;lt;- c(
+  &amp;quot;Federation&amp;quot;,
+  &amp;quot;Proportional Representation&amp;quot;,
+  &amp;quot;Years Between Elections&amp;quot;,
+  &amp;quot;Changing the Constitution&amp;quot;,
+  &amp;quot;Deposit to Stand\nfor Federal Election&amp;quot;,
+  &amp;quot;Number of Members\nin the House of Reps&amp;quot;
+)
+
+PARTY_LEVELS &amp;lt;- c(
+  &amp;quot;Coalition&amp;quot;, 
+  &amp;quot;Labor Party (ALP)&amp;quot;, 
+  &amp;quot;Greens&amp;quot;, 
+  &amp;quot;Other (incl. no vote)&amp;quot;
+)
+PARTY_COLORS &amp;lt;- c(&amp;quot;#1b4f9c&amp;quot;, &amp;quot;#e43340&amp;quot;, &amp;quot;#009c3d&amp;quot;, &amp;quot;grey60&amp;quot;)
+
+EDUCATION_LEVELS &amp;lt;- c(
+  &amp;quot;some secondary&amp;quot;,
+  &amp;quot;secondary&amp;quot;,
+  &amp;quot;trade&amp;quot;,
+  &amp;quot;university&amp;quot;
+)
+EDUCATION_LABELS &amp;lt;- c(
+  &amp;quot;Some secondary school\nor less&amp;quot;,
+  &amp;quot;Secondary school only&amp;quot;,
+  &amp;quot;Trade Qualification\nor other Diploma&amp;quot;,
+  &amp;quot;Bachelor&amp;#39;s Degree\nor higher&amp;quot;
+)
+
+# Functions
+# =========
+recode_truefalse &amp;lt;- function(x, answer) {
+  recode(
+    x,
+    `1` = TRUE,
+    `2` = FALSE,
+    .default = NA
+  ) %in% answer
+}
+
+recode_party &amp;lt;- function(x) {
+  recode(
+    x,
+    `1` = &amp;quot;Coalition&amp;quot;,
+    `2` = &amp;quot;Labor Party (ALP)&amp;quot;,
+    `3` = &amp;quot;Coalition&amp;quot;,
+    `4` = &amp;quot;Greens&amp;quot;,
+    `997` = NA_character_,
+    `998` = NA_character_,
+    .default = &amp;quot;Other (incl. no vote)&amp;quot;
+  )
+}
+
+recode_01 &amp;lt;- function(x) {
+  if_else(x %in% 997:999, NA_real_, x)
+}
+
+import_vars &amp;lt;- list(
+  weight = list(var = &amp;quot;wt_enrol&amp;quot;, fun = identity),
+  senate_vote = list(var = &amp;quot;B9_2&amp;quot;, fun = recode_party),
+  schooling = list(var = &amp;quot;G1&amp;quot;, fun = recode_01),
+  tertiary = list(var = &amp;quot;G3&amp;quot;, fun = recode_01),
+  federation_1901 = list(var = &amp;quot;F10_1&amp;quot;, fun = function(.) recode_truefalse(., TRUE)),
+  num_members_hrp = list(var = &amp;quot;F10_2&amp;quot;, fun = function(.) recode_truefalse(., FALSE)),
+  constitution = list(var = &amp;quot;F10_3&amp;quot;, fun = function(.) recode_truefalse(., FALSE)),
+  prop_rep = list(var = &amp;quot;F10_4&amp;quot;, fun = function(.) recode_truefalse(., TRUE)),
+  deposit = list(var = &amp;quot;F10_5&amp;quot;, fun = function(.) recode_truefalse(., TRUE)),
+  time_between_elections = list(var = &amp;quot;F10_6&amp;quot;, fun = function(.) recode_truefalse(., FALSE))
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first step is to read in and wrangle the data. I downloaded the data in SAS format, so I use &lt;code&gt;haven::read_sas&lt;/code&gt; to read the raw data. The list &lt;code&gt;import_vars&lt;/code&gt; specifies the columns we would like to keep, the column names we would like to assign, and the functions we would like to apply to recode the survey response variables to a readable format.&lt;/p&gt;
+&lt;p&gt;There are many encodings in the survey data that should be recoded. For example, AES encodes “Item skipped” and “Does not apply”, responses we would like to encode as &lt;code&gt;NA&lt;/code&gt;, as numbers 997 and 999. I also define functions to redefine the “True”/“False”/“Don’t Know” responses into logical vectors representing whether the respondent answered correctly, and to give names to the political parties. I chose to collapse the Liberal Party and the National (Country) Party into the Coalition, and drop One Nation to make the visualizations easier to digest.&lt;/p&gt;
+&lt;p&gt;I define my own &lt;code&gt;education&lt;/code&gt; variable based on responses to two questions: “How old were you when you left secondary school?” and “Have you obtained a trade qualification, a degree or a diploma, or any other qualification since leaving school?”&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- 
+  read_sas(data_file = FILE_DATA)
+
+true_false &amp;lt;-
+  import_vars %&amp;gt;% 
+  map_dfc(~ .$fun(pull(df, .$var))) %&amp;gt;% 
+  mutate(
+    education = 
+      case_when(
+        schooling &amp;gt; 1 ~ &amp;quot;some secondary&amp;quot;,
+        tertiary == 1 ~ &amp;quot;secondary&amp;quot;,
+        tertiary %in% c(2, 3) ~ &amp;quot;university&amp;quot;,
+        tertiary %in% c(4, 5, 6, 7) ~ &amp;quot;trade&amp;quot;,
+        TRUE ~ NA_character_
+      ),
+    education = 
+      factor(
+        education, 
+        levels = EDUCATION_LEVELS,
+        labels =  EDUCATION_LABELS,
+        ordered = TRUE
+      ),
+    senate_vote = factor(senate_vote, levels = PARTY_LEVELS)
+  ) %&amp;gt;% 
+  select(-schooling, -tertiary)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualizing-responses-by-party&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Visualizing Responses by Party&lt;/h2&gt;
+&lt;p&gt;Now that the data has been cleaned up, I can create my version of the freerangestats visualization.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;responses &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  select(-weight, -education) %&amp;gt;% 
+  group_by(senate_vote) %&amp;gt;%
+  summarise_all(mean, na.rm = TRUE) %&amp;gt;% 
+  gather(
+    key = &amp;quot;question&amp;quot;, 
+    value = &amp;quot;prop_correct&amp;quot;,
+    -senate_vote
+  ) %&amp;gt;% 
+  mutate(
+    question = factor(
+      question, 
+      levels = QUESTION_ABBRS,
+      labels = QUESTION_LABELS
+    )
+  )
+
+responses %&amp;gt;% 
+  ggplot(
+    aes(
+      reorder(question, -prop_correct), 
+      prop_correct, 
+      color = senate_vote
+    )
+  ) +
+  geom_hline(yintercept = 0.5, color = &amp;quot;white&amp;quot;, size = 2) +
+  geom_line(aes(group = senate_vote)) +
+  geom_point() +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  theme(
+    axis.text.x = element_text(size = 7),
+    legend.position = &amp;quot;top&amp;quot;,
+    legend.title = element_blank()
+  ) +
+  labs(
+    title = &amp;quot;Australians&amp;#39; Knowledge of Constitutional Issues&amp;quot;,
+    subtitle = &amp;quot;By Senate Vote in the 2013 Federal Election&amp;quot;,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;,
+    x = &amp;quot;True/False Question (Answer)&amp;quot;,
+    y = &amp;quot;Percentage of respondents who answered correctly&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/plot1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I think this plot is an improvement for a few reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;We can very easily compare between parties, and can very quickly identify parties by their official colors&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We can quickly see the percentage of &lt;strong&gt;correct&lt;/strong&gt; respondents&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We can see which questions were easier and which were more difficult for the respondents&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The answers are listed with the questions&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is some information lost, for example we can no longer see how many people said they didn’t know the answer, and it is much more difficult to figure out the raw responses. However, in my opinion this is far less important information in this context.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;controlling-for-education-level&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Controlling for Education Level&lt;/h2&gt;
+&lt;p&gt;The AES gives us lots of details about the respondents including their education level. Although the plot above appears to indicate that Greens voters know the most about the parliamentary system, I was wary to jump to this conclusion without controlling for the level of education of the voters.&lt;/p&gt;
+&lt;p&gt;To make inferences about the enrolled population, we need to use the provided weights. Then we are able to calculate the proportion of the electorate and the proportion of voters for each of the Coalition, ALP and the Greens at each level of education.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;total_ed_props &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;%
+  count(education, wt = weight) %&amp;gt;% 
+  mutate(prop_educated = n / sum(n), group = &amp;quot;All respondents&amp;quot;)
+
+ed_props_by_party &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  filter(senate_vote != &amp;quot;Other (incl. no vote)&amp;quot;) %&amp;gt;% 
+  count(senate_vote, education, wt = weight) %&amp;gt;% 
+  group_by(senate_vote) %&amp;gt;% 
+  mutate(prop_educated = n / sum(n)) %&amp;gt;% 
+  ungroup()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plotting these proportions shows dramatic disparities:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ed_props_by_party %&amp;gt;% 
+  ggplot(aes(education, prop_educated)) +
+  geom_line(
+    aes(group = group), 
+    color = &amp;quot;grey60&amp;quot;, 
+    data = total_ed_props
+  ) +
+  geom_point(color = &amp;quot;grey60&amp;quot;, data = total_ed_props) +
+  geom_line(aes(group = senate_vote, color = senate_vote)) +
+  geom_point(aes(color = senate_vote)) +
+  scale_y_continuous(
+    breaks = seq(0, 0.5, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  theme(
+    legend.position = &amp;quot;top&amp;quot;,
+    axis.text.x = element_text(size = 8)
+  ) +
+  labs(
+    title = &amp;quot;The highly educated are far overrepresented amongst Greens voters&amp;quot;,
+    subtitle = &amp;quot;Over 55% of Greens voters are university graduates, compared to 37% of the\n enrolled population (shown in grey)&amp;quot;,
+    x = NULL,
+    y = &amp;quot;Percentage of voters by party\nweighted to match enrolled population&amp;quot;,
+    color = NULL,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As we see in the plot above, university graduates are far overrepresented amongst Greens voters, while voters for Labor and the Coalition are reflective of national trends in education levels.&lt;/p&gt;
+&lt;p&gt;To understand whether educational differences account for the variation in performance on the True/False questions, we need to do some further exploration. To simplify this, I decided to calculate a score for each respondent. A simple and interpretable score is the proportion of correct answers to the 6 True/False questions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  mutate(
+    frac_correct = (federation_1901 + prop_rep + time_between_elections +
+                        constitution + deposit + num_members_hrp) / 6
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can then visualize the distribution of scores at each education level.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores %&amp;gt;% 
+  ggplot(aes(education, frac_correct)) +
+  geom_hline(yintercept = 0.5, size = 2, color = &amp;quot;white&amp;quot;) +
+  geom_boxplot(varwidth = TRUE) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    x = &amp;quot;Highest Level of Education Attained&amp;quot;,
+    y = &amp;quot;Percentage of questions answered correctly (of 6 total)&amp;quot;,
+    title = &amp;quot;Median Performance Increases with Education Level&amp;quot;,
+    subtitle = &amp;quot;But performance varies widely at all levels&amp;quot;,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Despite the wide variation at every level of education, it does appear that university graduates performed the best on the multiple choice questions, with the top half of respondents with a Bachelor’s degree or higher getting at least half of the questions correct.&lt;/p&gt;
+&lt;p&gt;Finally, we can visualize the joint distribution of performance across the six questions, across the levels of education and across the party preferences. I chose to leave out those with less than a secondary school education, as this was a very small sample.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;responses_with_ed &amp;lt;-
+  true_false %&amp;gt;% 
+  drop_na() %&amp;gt;% 
+  select(-weight) %&amp;gt;% 
+  filter(education != &amp;quot;Some secondary school\nor less&amp;quot;) %&amp;gt;% 
+  group_by(senate_vote, education) %&amp;gt;%
+  summarise_all(mean, na.rm = TRUE) %&amp;gt;% 
+  gather(
+    key = &amp;quot;question&amp;quot;, 
+    value = &amp;quot;prop_correct&amp;quot;, 
+    -senate_vote, 
+    -education
+  ) %&amp;gt;% 
+  mutate(
+    question = factor(
+      question, 
+      levels = QUESTION_ABBRS,
+      labels = QUESTION_LABELS_SHORT
+    )
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;responses_with_ed %&amp;gt;% 
+  ggplot(
+    aes(
+      reorder(question, -prop_correct), 
+      prop_correct, 
+      color = senate_vote
+    )
+  ) +
+  geom_hline(yintercept = 0.5, color = &amp;quot;white&amp;quot;, size = 2) +
+  geom_line(aes(group = senate_vote)) +
+  geom_point() +
+  scale_color_manual(
+    breaks = PARTY_LEVELS,
+    values = PARTY_COLORS
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, by = 0.1),
+    labels = scales::percent_format(accuracy = 1)
+  ) +
+  theme(
+    axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+    legend.position = &amp;quot;top&amp;quot;,
+    legend.title = element_blank()
+  ) +
+  labs(
+    title = &amp;quot;Australians&amp;#39; Knowledge of Constitutional Issues by 2013 Senate Vote and Education Level&amp;quot;,
+    subtitle = &amp;quot;University graduates outperform those less educated regardless of party affiliation&amp;quot;,
+    caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;,
+    x = &amp;quot;Question Topic&amp;quot;,
+    y = &amp;quot;Percentage of respondents who answered correctly&amp;quot;
+  ) +
+  facet_grid(cols = vars(education))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As we might’ve expected, the gap between voters across party preferences closes entirely with education level. Though it appears that accuracy amongst those with only a secondary school education does vary with party affiliation, this variation is much less pronounced amongst those with trade or other non-degree qualifications and completely indistinguishable amongst those with a university degree.&lt;/p&gt;
+&lt;p&gt;I will certainly be continuing to explore this data. I’m excited to think more about why the variation remains amongst secondary school graduates, or perhaps how socioeconomic status comes into play. It would also be interesting to break down the Coalition into Liberal voters and National Party voters. I’ll also be looking into some longitudinal analysis with the AES data!&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

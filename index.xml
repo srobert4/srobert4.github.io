@@ -1,53 +1,73 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Samantha Robertson on Samantha Robertson</title>
-    <link>/</link>
-    <description>Recent content in Samantha Robertson on Samantha Robertson</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 20 Apr 2021 00:00:00 -0700</lastBuildDate>
-    <atom:link href="/" rel="self" type="application/rss+xml" />
+    <title>Samantha Robertson</title>
+    <link>https://samrobertson.netlify.com/</link>
+      <atom:link href="https://samrobertson.netlify.com/index.xml" rel="self" type="application/rss+xml" />
+    <description>Samantha Robertson</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
+      <title>Samantha Robertson</title>
+      <link>https://samrobertson.netlify.com/</link>
+    </image>
     
     <item>
-      <title>Three Directions for the Design of Human-Centered Machine Translation</title>
-      <link>/publication/hcmt/</link>
-      <pubDate>Tue, 20 Apr 2021 00:00:00 -0700</pubDate>
-      
-      <guid>/publication/hcmt/</guid>
-      <description></description>
+      <title>Example Talk</title>
+      <link>https://samrobertson.netlify.com/talk/example-talk/</link>
+      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/talk/example-talk/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Wowchemy&amp;rsquo;s &lt;a href=&#34;https://wowchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Further event details, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;page elements&lt;/a&gt; such as image galleries, can be added to the body of this page.&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Modeling Assumptions Clash with the Real World: Transparency, Equity, and Community Challenges for Student Assignment Algorithms</title>
-      <link>/publication/modeling_assumptions_clash/</link>
-      <pubDate>Thu, 28 Jan 2021 00:00:00 -0800</pubDate>
-      
-      <guid>/publication/modeling_assumptions_clash/</guid>
+      <link>https://samrobertson.netlify.com/publication/modeling_assumptions_clash/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/modeling_assumptions_clash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Three Directions for the Design of Human-Centered Machine Translation</title>
+      <link>https://samrobertson.netlify.com/publication/hcmt/</link>
+      <pubDate>Tue, 20 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/hcmt/</guid>
       <description></description>
     </item>
     
     <item>
       <title>What If I Don&#39;t Like Any Of The Choices? The Limits of Preference Elicitation for Participatory Algorithm Design</title>
-      <link>/publication/limits_of_prefs/</link>
-      <pubDate>Wed, 10 Jun 2020 00:00:00 -0700</pubDate>
-      
-      <guid>/publication/limits_of_prefs/</guid>
+      <link>https://samrobertson.netlify.com/publication/limits_of_prefs/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/limits_of_prefs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Replicating WHO Visualizations of Global Immunization Coverage</title>
-      <link>/post/2019-08-09-who-immunizations/</link>
+      <link>https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-08-09-who-immunizations/</guid>
+      <guid>https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/</guid>
       <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the &lt;a href=&#34;datalab.stanford.edu&#34;&gt;Stanford Data Lab&lt;/a&gt; which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.&lt;/p&gt;
 &lt;p&gt;I replicated three visualizations. Below are the comparisons of WHO’s vis against mine. All the code to create my plots is at the bottom of this post! I’m not fully convinced that the WHO visualizations are the most effective, for example two of them use redundant color, but for the challenge I tried to replicate them as faithfully as possible.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/comparison.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/comparison.jpg&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Below is the code for the three plots my way!&lt;/p&gt;
 &lt;p&gt;First, I load the data and libraries and define some functions and constants for all three plots.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Libraries
@@ -196,7 +216,7 @@ subnational &amp;lt;- read_csv(file_subnational)&lt;/code&gt;&lt;/pre&gt;
     color = NULL,
     title = &amp;quot;Global MCV1 and MCV2 Coverage&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;national-dtp3-coverage&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;National DTP3 Coverage&lt;/h3&gt;
@@ -322,7 +342,7 @@ weunic &amp;lt;-
     y = NULL,
     title = &amp;quot;Trends in DTPcv3 Coverage since\n2010 for Selected Countries&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;subnational-dtp3-coverage&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Subnational DTP3 Coverage&lt;/h3&gt;
@@ -426,1552 +446,18 @@ weunic &amp;lt;-
     expand = FALSE, 
     clip = &amp;quot;off&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-09-who-immunizations_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Translating Tidyverse to Python</title>
-      <link>/post/2019-08-08-tidyversetopandas/</link>
-      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-08-08-tidyversetopandas/</guid>
-      <description>
-
-&lt;p&gt;I started this jupyter notebook to help me learn to (1) use both Python and R in one Jupyter notebook and (2) translate tidyverse syntax into Python (specifically pandas &amp;amp; seaborn) syntax. I figured I would post it in the hopes it might be helpful to someone else. Also, I wanted to learn how to post a jupyter notebook on this website.&lt;/p&gt;
-
-&lt;p&gt;Helpful links:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://ipython.org/ipython-doc/2/config/extensions/rmagic.html&#34; target=&#34;_blank&#34;&gt;Rmagic&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://seaborn.pydata.org/introduction.html#introduction&#34; target=&#34;_blank&#34;&gt;Seaborn&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://towardsdatascience.com/tidying-up-pandas-4572bfa38776&#34; target=&#34;_blank&#34;&gt;Tidyverse -&amp;gt; Pandas&lt;/a&gt; (Most of this is actually taken straight from this post)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.datacamp.com/community/blog/jupyter-notebook-r?utm_source=adwords_ppc&amp;amp;utm_campaignid=898687156&amp;amp;utm_adgroupid=48947256715&amp;amp;utm_device=c&amp;amp;utm_keyword=&amp;amp;utm_matchtype=b&amp;amp;utm_network=g&amp;amp;utm_adpostion=1t1&amp;amp;utm_creative=229765585186&amp;amp;utm_targetid=aud-299261629574:dsa-473406574235&amp;amp;utm_loc_interest_ms=&amp;amp;utm_loc_physical_ms=1000286&amp;amp;gclid=CjwKCAjw7anqBRALEiwAgvGgm8sI-Ddl4V7GaVRcbznYgpeQBSk1-izJk7yKZOD2uuy0oWUSOJe5SxoChl8QAvD_BwE&#34; target=&#34;_blank&#34;&gt;R + Jupyter&lt;/a&gt; This link helped me set up my environment so that I could use R and Python in one notebook.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;setup&#34;&gt;Setup&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import warnings
-warnings.filterwarnings(&#39;ignore&#39;)
-%reload_ext rpy2.ipython
-%R library(tidyverse)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;array([&#39;bindrcpp&#39;, &#39;dplyr&#39;, &#39;purrr&#39;, &#39;readr&#39;, &#39;tidyr&#39;, &#39;tibble&#39;, &#39;ggplot2&#39;,
-       &#39;tidyverse&#39;, &#39;tools&#39;, &#39;stats&#39;, &#39;graphics&#39;, &#39;grDevices&#39;, &#39;utils&#39;,
-       &#39;datasets&#39;, &#39;methods&#39;, &#39;base&#39;],
-      dtype=&#39;|S9&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Load in the pandas library
-import pandas as pd 
-import matplotlib.pyplot as plt
-import seaborn as sns
-%matplotlib inline
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;make-some-fake-data&#34;&gt;Make some fake data&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df = pd.DataFrame({&#39;Alphabet&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;,&#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;,&#39;i&#39;],
-                   &#39;A&#39;: [4, 3, 5, 2, 1, 7, 7, 5, 9],
-                   &#39;B&#39;: [0, 4, 3, 6, 7, 10,11, 9, 13],
-                   &#39;C&#39;: [1, 2, 3, 1, 2, 3, 1, 2, 3]})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;glimpse-summarize&#34;&gt;Glimpse &amp;amp; Summarize&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%R glimpse(df)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;function (x, df1, df2, ncp, log = FALSE)  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.head()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;%%R -i df 
-summary(df)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;       A            Alphabet       B            C    
- Min.   :1.000   a      :1   Min.   : 0   Min.   :1  
- 1st Qu.:3.000   b      :1   1st Qu.: 4   1st Qu.:1  
- Median :5.000   c      :1   Median : 7   Median :2  
- Mean   :4.778   d      :1   Mean   : 7   Mean   :2  
- 3rd Qu.:7.000   e      :1   3rd Qu.:10   3rd Qu.:3  
- Max.   :9.000   f      :1   Max.   :13   Max.   :3  
-                 (Other):3                           
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.info(null_counts = True)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;class &#39;pandas.core.frame.DataFrame&#39;&amp;gt;
-RangeIndex: 9 entries, 0 to 8
-Data columns (total 4 columns):
-A           9 non-null int64
-Alphabet    9 non-null object
-B           9 non-null int64
-C           9 non-null int64
-dtypes: int64(3), object(1)
-memory usage: 360.0+ bytes
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;filtering&#34;&gt;Filtering&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%R df %&amp;gt;% filter(A &amp;gt; 2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df[df.A &amp;gt; 2]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&#34;slice-select&#34;&gt;Slice &amp;amp; Select&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%R df %&amp;gt;% slice(4:5)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.loc[3:4,:] # Note: if slicing only one row, use df.loc[[3],:]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%R df %&amp;gt;% select(A:B)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.loc[:, &amp;quot;A&amp;quot;:&amp;quot;B&amp;quot;] # Select non-adjacent columns with df.loc[:, [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;]]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%R df %&amp;gt;% select(-A)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.drop(labels = [&amp;quot;A&amp;quot;], axis = 1) # Can use columns = [&amp;quot;A&amp;quot;] in Python 3 / Pandas 0.21.0.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&#34;arrange-sort&#34;&gt;Arrange / Sort&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%R df %&amp;gt;% arrange(desc(A))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;9&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.sort_values(by=&amp;quot;A&amp;quot;, ascending=False) 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&#34;mutate&#34;&gt;Mutate&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;%R df %&amp;gt;% mutate(AoverC = A / C, Bplus1 = B + 1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-      &lt;th&gt;AoverC&lt;/th&gt;
-      &lt;th&gt;Bplus1&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;4.000000&lt;/td&gt;
-      &lt;td&gt;1.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;1.500000&lt;/td&gt;
-      &lt;td&gt;5.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;1.666667&lt;/td&gt;
-      &lt;td&gt;4.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;2.000000&lt;/td&gt;
-      &lt;td&gt;7.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;0.500000&lt;/td&gt;
-      &lt;td&gt;8.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;2.333333&lt;/td&gt;
-      &lt;td&gt;11.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;7.000000&lt;/td&gt;
-      &lt;td&gt;12.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;2.500000&lt;/td&gt;
-      &lt;td&gt;10.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;9&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3.000000&lt;/td&gt;
-      &lt;td&gt;14.0&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.assign(AoverC = df.A / df.C, Bplus1 = lambda df: df[&amp;quot;B&amp;quot;] + 1 )
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-      &lt;th&gt;AoverC&lt;/th&gt;
-      &lt;th&gt;Bplus1&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;4.000000&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;1.500000&lt;/td&gt;
-      &lt;td&gt;5&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;1.666667&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;2.000000&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;0.500000&lt;/td&gt;
-      &lt;td&gt;8&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;2.333333&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;7.000000&lt;/td&gt;
-      &lt;td&gt;12&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;2.500000&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3.000000&lt;/td&gt;
-      &lt;td&gt;14&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;p&gt;To use functions that are NOT vectorized&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;%%R -i df
-is_b &amp;lt;- function(letter) { letter == &amp;quot;b&amp;quot; } # Pretend this function doesn&#39;t work on vectors
-df %&amp;gt;% 
-    rowwise %&amp;gt;% 
-    mutate(is_Alphabet_b = is_b(Alphabet))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;Source: local data frame [9 x 5]
-Groups: &amp;lt;by row&amp;gt;
-
-# A tibble: 9 x 5
-      A Alphabet     B     C is_Alphabet_b
-  &amp;lt;int&amp;gt;   &amp;lt;fctr&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;         &amp;lt;lgl&amp;gt;
-1     4        a     0     1         FALSE
-2     3        b     4     2          TRUE
-3     5        c     3     3         FALSE
-4     2        d     6     1         FALSE
-5     1        e     7     2         FALSE
-6     7        f    10     3         FALSE
-7     7        g    11     1         FALSE
-8     5        h     9     2         FALSE
-9     9        i    13     3         FALSE
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def is_b(letter):
-    return letter == &amp;quot;b&amp;quot; # Again, pretend not vectorized
-
-df.assign( 
-    is_Alphabet_b = lambda df: df.Alphabet.apply(is_b) 
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-      &lt;th&gt;is_Alphabet_b&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;True&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;False&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&#34;grouping-summarizing&#34;&gt;Grouping &amp;amp; Summarizing&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;%%R -i df
-df %&amp;gt;% 
-    group_by(C) %&amp;gt;%
-    summarize(avg_A = mean(A), mean_B = mean(B))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;# A tibble: 3 x 3
-      C    avg_A   mean_B
-  &amp;lt;int&amp;gt;    &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
-1     1 4.333333 5.666667
-2     2 3.000000 6.666667
-3     3 7.000000 8.666667
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.groupby(&amp;quot;C&amp;quot;)\
-  .agg({&#39;A&#39; : [&#39;mean&#39;], &#39;B&#39; : [&#39;mean&#39;]})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;mean&lt;/th&gt;
-      &lt;th&gt;mean&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;C&lt;/th&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;4.333333&lt;/td&gt;
-      &lt;td&gt;5.666667&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;3.000000&lt;/td&gt;
-      &lt;td&gt;6.666667&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;7.000000&lt;/td&gt;
-      &lt;td&gt;8.666667&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This is super nasty. I hope I can find something better or will need to practice with this a lot.&lt;/p&gt;
-
-&lt;h3 id=&#34;joins&#34;&gt;Joins&lt;/h3&gt;
-
-&lt;p&gt;First I&amp;rsquo;ll create a second fake dataset to join&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df2 = pd.DataFrame({&#39;Group&#39;: [&amp;quot;First&amp;quot;, &amp;quot;Second&amp;quot;, &amp;quot;Third&amp;quot;],
-                   &#39;C&#39;: [1, 2, 3]})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;%%R -i df,df2
-df %&amp;gt;% left_join(df2, by = &amp;quot;C&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;  A Alphabet  B C  Group
-1 4        a  0 1  First
-2 3        b  4 2 Second
-3 5        c  3 3  Third
-4 2        d  6 1  First
-5 1        e  7 2 Second
-6 7        f 10 3  Third
-7 7        g 11 1  First
-8 5        h  9 2 Second
-9 9        i 13 3  Third
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;df.merge(df2, how = &amp;quot;left&amp;quot;, on = &amp;quot;C&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div&gt;
-&lt;style&gt;
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&lt;/style&gt;
-&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;
-  &lt;thead&gt;
-    &lt;tr style=&#34;text-align: right;&#34;&gt;
-      &lt;th&gt;&lt;/th&gt;
-      &lt;th&gt;A&lt;/th&gt;
-      &lt;th&gt;Alphabet&lt;/th&gt;
-      &lt;th&gt;B&lt;/th&gt;
-      &lt;th&gt;C&lt;/th&gt;
-      &lt;th&gt;Group&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;First&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;b&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;Second&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;Third&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;First&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;Second&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;Third&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;First&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;Second&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;i&lt;/td&gt;
-      &lt;td&gt;13&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;Third&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&#34;plotting&#34;&gt;Plotting&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;%%R -i df
-df %&amp;gt;%
-    ggplot() + 
-    geom_point(aes(x=A, y=B, color=factor(C)), size = 2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-08-tidyversetopandas_files/Tidyverse%20to%20Pandas_38_0.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sns.set(style=&amp;quot;darkgrid&amp;quot;)
-sns.relplot(x=&amp;quot;A&amp;quot;, y=&amp;quot;B&amp;quot;, hue=&amp;quot;C&amp;quot;, data=df,
-           palette = sns.color_palette(n_colors = 3))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;seaborn.axisgrid.FacetGrid at 0x11cd56e10&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-08-tidyversetopandas_files/Tidyverse%20to%20Pandas_39_1.png&#34; alt=&#34;png&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Women in Parliament Worldwide</title>
-      <link>/post/2019-08-07-womeninparliament/</link>
+      <link>https://samrobertson.netlify.com/post/2019-08-07-womeninparliament/</link>
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-08-07-womeninparliament/</guid>
+      <guid>https://samrobertson.netlify.com/post/2019-08-07-womeninparliament/</guid>
       <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;This week’s RWeekly digest included an &lt;a href=&#34;https://data.worldbank.org/indicator/SG.GEN.PARL.ZS&#34;&gt;awesome dataset from the World Bank&lt;/a&gt; that documents the percentage of women in lower house parliament across the globe from 1997 to 2018. The dataset is nearly complete and also includes summary statistics for numerous geographic aggregations.&lt;/p&gt;
@@ -2153,7 +639,7 @@ sns.relplot(x=&amp;quot;A&amp;quot;, y=&amp;quot;B&amp;quot;, hue=&amp;quot;C&am
     x = NULL,
     y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It is encouraging to see that female representation has increased every year when we look at the whole world aggregated.&lt;/p&gt;
 &lt;div id=&#34;by-region&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;By region&lt;/h2&gt;
@@ -2194,7 +680,7 @@ wip %&amp;gt;%
     title = &amp;quot;All regions but South Asia have had increasing representation since 1997&amp;quot;,
     subtitle = &amp;quot;Latin America &amp;amp; Caribbean and Middle East &amp;amp; North Africa have seen large incerases&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Notably, Latin America &amp;amp; the Caribbean went from the fourth leading region in terms of female representation in the late 1990s to the leading region by a relatively significant margin by 2014. The Middle East &amp;amp; North Africa, though still lagging behind the rest of the world, also has experienced a marked increase since 1997. Interestingly, South Asia is the only region that has shown a decrease, with representation plateauing in 2009, and then beginning to decrease.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;by-income-level&#34; class=&#34;section level2&#34;&gt;
@@ -2239,7 +725,7 @@ wip %&amp;gt;%
     x = NULL,
     y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Unsurprisingly, based on the previous two plots, representation is increasing over time at all income levels. There is something very striking about this plot, though. Representation has been higher with higher income, with the obvious exception of low income regions. Representation in low income regions has been higher than in lower middle income regions every year recorded, and in three different years has been second only to high income regions.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;by-country&#34; class=&#34;section level2&#34;&gt;
@@ -2282,7 +768,7 @@ wip %&amp;gt;%
     legend.title.align = 1
   ) +
   labs(fill = &amp;quot;Proportion of seats\nheld by women&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;case-study-rwanda&#34; class=&#34;section level1&#34;&gt;
@@ -2316,7 +802,7 @@ wip %&amp;gt;%
     x = NULL,
     y = &amp;quot;Percentage of parliament seats held by women&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;quota-systems&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Quota Systems&lt;/h1&gt;
@@ -2350,7 +836,7 @@ world %&amp;gt;%
   theme(legend.position = &amp;quot;top&amp;quot;) +
   coord_sf(datum = NA) +
   labs(x = NULL, y = NULL, fill = &amp;quot;Quota Type&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can see that South &amp;amp; Central America have almost completely adopted quotas. As we noticed above, this region has had particularly notable improvement in female representation since 1997.&lt;/p&gt;
 &lt;p&gt;Now to make any causal claims about quotas and representation trends would need much more careful analysis, so I should emphasize I am not trying to do that. There are a couple of simple questions we could answer with this data, though.&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
@@ -2470,7 +956,7 @@ largest_jumps %&amp;gt;%
     title = &amp;quot;More countries with quota systems saw large year-to-year jumps\nin female  representation&amp;quot;,
     subtitle = &amp;quot;Though some very large jumps occurred in countries without quotas&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-08-07-womeninparliament_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;To make this plot, I calculated the largest jump in percentage of seats held by women from one year to the next for each country. The distribution of these jumps by quota system is then plotted as a violin plot. The white reference line shows the median largest jump size across all countries. Each line within a violin plot shows the median largest jump size for countries with that type of quota system in place.&lt;/p&gt;
 &lt;p&gt;Two things are clear:&lt;/p&gt;
 &lt;ul&gt;
@@ -2487,21 +973,21 @@ largest_jumps %&amp;gt;%
     
     <item>
       <title>How Much Do Australians Know About Their Parliament?</title>
-      <link>/post/2019-04-29-auselectionpoll/</link>
+      <link>https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-04-29-auselectionpoll/</guid>
+      <guid>https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll/</guid>
       <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;It’s not often I see a cool data project focused on Australia, and in particular Australian politics, so I was especially excited to see &lt;a href=&#34;http://freerangestats.info/blog/2019/04/22/AES-intro&#34;&gt;freerangestats’&lt;/a&gt; exploration of the &lt;a href=&#34;https://australianelectionstudy.org/&#34;&gt;2016 Australian Election Study&lt;/a&gt; featured in RWeekly this week! The RWeekly email included this visualization, showing the responses to 6 questions about Australia’s parliamentary system, organized by party preference for Senate in the 2013 Federal Election.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-04-29-auselectionpoll_files/auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;At first, I was excited to see where voters for my party came in relative to other voters in parliamentary trivia, but then… how can I even compare? I quickly realized that I have many qualms with this plot.&lt;/p&gt;
 &lt;p&gt;First, it takes some hunting to find the correct answers to each question (they’re listed in the subtitle), and once you’ve found them you have to go through six facets and match responses to answers. The plot shows the proportion of respondents who answered True, False or Don’t Know to each question. In my opinion, it would be far more intuitive to show only what we really care about: who was right!&lt;/p&gt;
 &lt;p&gt;Then there’s the choice of the stacked bar chart. Firstly, placing the “Don’t Know” responses at the middle, centered at 0, makes it almost impossible to see the percentages of “True” and “False” respondents, about whom we likely care far more. Secondly, the choice to make “False” go in the “negative” (labelled positive) direction on the axis, as well as the color choice, makes me intuitively assume that the orange indicates incorrect answers and green indicates correct.&lt;/p&gt;
 &lt;p&gt;Finally, what set me off in the first place: we can’t compare between parties! The orientation of the facets makes it very difficult to compare in the horizontal direction, even if the bars did all start at zero.&lt;/p&gt;
 &lt;p&gt;Here’s my proposed improvement on the visualization from freerangestats:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-04-29-auselectionpoll_files/improved_auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/improved_auselecsurvey.png&#34; style=&#34;width:100.0%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It looks from this plot like the Greens voters have outdone everyone across the board, followed by voters for the coalition. We shouldn’t draw any conclusions too quickly though, keep reading to see the code and explore how education levels influence Australian voters’ knowledge of their parliament.&lt;/p&gt;
 &lt;div id=&#34;importing-and-wrangling-the-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Importing and Wrangling the Data&lt;/h2&gt;
@@ -2681,7 +1167,7 @@ responses %&amp;gt;%
     x = &amp;quot;True/False Question (Answer)&amp;quot;,
     y = &amp;quot;Percentage of respondents who answered correctly&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-04-29-auselectionpoll_files/figure-html/plot1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/plot1-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;I think this plot is an improvement for a few reasons:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;We can very easily compare between parties, and can very quickly identify parties by their official colors&lt;/p&gt;&lt;/li&gt;
@@ -2740,7 +1226,7 @@ ed_props_by_party &amp;lt;-
     color = NULL,
     caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As we see in the plot above, university graduates are far overrepresented amongst Greens voters, while voters for Labor and the Coalition are reflective of national trends in education levels.&lt;/p&gt;
 &lt;p&gt;To understand whether educational differences account for the variation in performance on the True/False questions, we need to do some further exploration. To simplify this, I decided to calculate a score for each respondent. A simple and interpretable score is the proportion of correct answers to the 6 True/False questions.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;scores &amp;lt;-
@@ -2763,7 +1249,7 @@ ed_props_by_party &amp;lt;-
     subtitle = &amp;quot;But performance varies widely at all levels&amp;quot;,
     caption = &amp;quot;Source: Australian Election Study 2016&amp;quot;
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Despite the wide variation at every level of education, it does appear that university graduates performed the best on the multiple choice questions, with the top half of respondents with a Bachelor’s degree or higher getting at least half of the questions correct.&lt;/p&gt;
 &lt;p&gt;Finally, we can visualize the joint distribution of performance across the six questions, across the levels of education and across the party preferences. I chose to leave out those with less than a secondary school education, as this was a very small sample.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;responses_with_ed &amp;lt;-
@@ -2818,7 +1304,7 @@ ed_props_by_party &amp;lt;-
     y = &amp;quot;Percentage of respondents who answered correctly&amp;quot;
   ) +
   facet_grid(cols = vars(education))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-04-29-auselectionpoll_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As we might’ve expected, the gap between voters across party preferences closes entirely with education level. Though it appears that accuracy amongst those with only a secondary school education does vary with party affiliation, this variation is much less pronounced amongst those with trade or other non-degree qualifications and completely indistinguishable amongst those with a university degree.&lt;/p&gt;
 &lt;p&gt;I will certainly be continuing to explore this data. I’m excited to think more about why the variation remains amongst secondary school graduates, or perhaps how socioeconomic status comes into play. It would also be interesting to break down the Coalition into Liberal voters and National Party voters. I’ll also be looking into some longitudinal analysis with the AES data!&lt;/p&gt;
 &lt;/div&gt;
@@ -2827,11 +1313,11 @@ ed_props_by_party &amp;lt;-
     
     <item>
       <title>#SWDChallenge March 2019</title>
-      <link>/post/2019-03-07-swdchallenge/</link>
+      <link>https://samrobertson.netlify.com/post/2019-03-07-swdchallenge/</link>
       <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-03-07-swdchallenge/</guid>
+      <guid>https://samrobertson.netlify.com/post/2019-03-07-swdchallenge/</guid>
       <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;This month I decided to take part in the &lt;a href=&#34;http://www.storytellingwithdata.com/swdchallenge&#34;&gt;Storytelling With Data monthly challenge&lt;/a&gt; for the first time! The dataset we were given to explore contains global aid exchanges between 47 countries across the world across the years 1973-2013. The goal is to create visualizations that answers the broad question: &lt;strong&gt;Who Donates?&lt;/strong&gt;, as well as some bonus questions about distribution of donations geographically, temporally and by purpose of donation. Here’s my initial attempt! Along with some code. (The only package I use here is &lt;code&gt;tidyverse&lt;/code&gt;).&lt;/p&gt;
@@ -2985,7 +1471,7 @@ aid %&amp;gt;%
 &lt;pre&gt;&lt;code&gt;## Warning: `expand_scale()` is deprecated; use `expansion()` instead.
 
 ## Warning: `expand_scale()` is deprecated; use `expansion()` instead.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Excuse the squished y-axis. I played around with it for a while and eventually gave up. Any hints are very welcome!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;has-the-amount-donated-changed-over-time&#34; class=&#34;section level3&#34;&gt;
@@ -3079,21 +1565,21 @@ timeseries %&amp;gt;%
     label = &amp;quot;Proportion Received&amp;quot;,
     hjust = 0
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-03-07-swdchallenge_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Visualizing Course Descriptions</title>
-      <link>/post/2019-02-28-visualizing-course-descriptions/</link>
+      <link>https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019-02-28-visualizing-course-descriptions/</guid>
+      <guid>https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;/rmarkdown-libs/d3/d3.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;/rmarkdown-libs/forceNetwork-binding/forceNetwork.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/d3/d3.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/forceNetwork-binding/forceNetwork.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;As my senior year at Stanford nears the end, I’ve started to think more and more about what I’ve really learned here, and what I’ll be taking away from my undergraduate experience. Sure, there’s plenty of sappy stuff about coming of age and figuring out what I want to start doing with my life (spoiler: haven’t figured it out), but what about concrete knowledge I’ve gained from my classes. Being the data nerd that I am, I decided to take a “data-driven” approach to this question, and see what I could find. Here’s the results!&lt;/p&gt;
@@ -3299,7 +1785,7 @@ classes %&amp;gt;%
     title = &amp;quot;Over Time I&amp;#39;ve started to take more classes in Engineering\nand fewer in Humanities and Sciences&amp;quot;
   )
 ## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;…what about by Department?&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes %&amp;gt;% 
   group_by(school, dept) %&amp;gt;% 
@@ -3322,7 +1808,7 @@ classes %&amp;gt;%
     subtitle = &amp;quot;Math, MS&amp;amp;E and Statistics classes are also required of my major&amp;quot;
   )
 ## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;scraping-course-descriptions&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Scraping Course Descriptions&lt;/h1&gt;
@@ -3491,7 +1977,7 @@ head(explore_courses, 2) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
     )
   )
 ## Joining, by = &amp;quot;word&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;No surprises here! But it’s still fun to see my degree described in pretty colored words.&lt;/p&gt;
 &lt;p&gt;What is perhaps most interesting to me is whether we can see relationships between topics in the course descriptions! For this, I used the &lt;code&gt;igraph&lt;/code&gt; package to create a graph, and the &lt;code&gt;networkD3&lt;/code&gt; package for visualization with D3.&lt;/p&gt;
 &lt;p&gt;First we use &lt;code&gt;tidytext&lt;/code&gt; to count the bigrams, the pairs of words that occur next to each other, in the descriptions.&lt;/p&gt;
@@ -3525,7 +2011,7 @@ plot(
   main = &amp;#39;Course Descriptions&amp;#39;,
   alpha = 50
 )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Even restricting the graph to bigrams that occur at least 3 times, it’s still hard to really see the relationships here. Now’s when we use D3 to take this visualization to the next level. Since there’s so much more interaction possible with a D3 graph, we’ll lower the threshold to see a little more detail.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threshold &amp;lt;- 1
 network &amp;lt;-  
@@ -3567,106 +2053,160 @@ forceNetwork(
     </item>
     
     <item>
-      <title>A SimVascular Plug-in</title>
-      <link>/project/simvascular/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
-      
-      <guid>/project/simvascular/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;SimVascular is an open-source software project partly based in the Stanford Cardiovascular Biomechanics Computation Lab, where I spent the Summer of 2018 with support from the Stanford Bioengineering REU program. SimVascular enables segmentation of medical image data to develop 3-dimensional cardiovascular models, which can then be used for patient-specific simulation and analysis of bloodflow.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Overview&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;My summer project involved developing a GUI plug-in for the software that would allow researchers to rapidly prototype and run simulations on lumped parameter models of the cardiovascular system. Lumped parameter modelling uses electrical circuit diagrams as an analogy to the cardiovascular system, allowing analysis of fundamental quantities such as pressure and flow. These models are often used in early stages of model development, as the simulations are relatively computationally inexpensive. They are also often used to provide boundary conditions to more complex, 3-D models.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Motivation&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Under the current architecture, researchers had to manually derive the ODEs that governed their LPN models, and write custom simulation code. This was extremely tedious for large models. In order to use lumped parameter models as boundary conditions, researchers needed to edit FORTRAN code. My goal was to streamline this process by designing a simple drag-and-drop graphical user interface within SimVascular. This interface allows researchers to quickly and easily design models, run simulations, and visualize the results all within the easy-to-use plug-in.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Execution&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;The simulator plug-in is written in C++ with Qt for easy integration into the existing SimVascular architecture. Promising future directions involve specialization of the simulator for cardiovascular modelling by including large components such as a &lt;a href=&#34;https://en.wikipedia.org/wiki/Windkessel_effect&#34; target=&#34;_blank&#34;&gt;Windkessel model&lt;/a&gt; or even a &amp;ldquo;heart model&amp;rdquo;, which are composed of multiple traditional electrical components.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>LiCoRICE</title>
-      <link>/project/licorice/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
-      
-      <guid>/project/licorice/</guid>
-      <description>&lt;p&gt;LiCoRICE is an &lt;strong&gt;open-source, realtime computation platform specialized for systems neuroscience experimentation&lt;/strong&gt;. It has been developed in the Brain Interfacing Lab is now the system used to run the group&amp;rsquo;s closed-loop brain interface experiments. The platform is written in &lt;strong&gt;C and Python&lt;/strong&gt;, and is specifically designed with a modular architecture to allow easy prototyping of models by experimenters using only Python.&lt;/p&gt;
-
-&lt;p&gt;I joined the LiCoRICE project in the Summer of 2017. My role has been focused on specializing the platform for systems neuroscience, which has included:&lt;/p&gt;
-
+      <title>Slides</title>
+      <link>https://samrobertson.netlify.com/slides/example/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/slides/example/</guid>
+      <description>&lt;h1 id=&#34;create-slides-in-markdown-with-wowchemy&#34;&gt;Create slides in Markdown with Wowchemy&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wowchemy&lt;/a&gt; | &lt;a href=&#34;https://owchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Testing and implementing graphics (using Pygame) and USB joystick input to the system&lt;/li&gt;
-&lt;li&gt;Developing a realistic systems neuroscience simulation experiment. This includes writing LiCoRICE modules to generate synthetic neural activity from joystick movement input and to decode this synthetic neural data using a pre-trained Kalman filter with steady state gain.&lt;/li&gt;
-&lt;li&gt;Organizing, executing and collecting data from a human trial of the simulation with 7 human participants&lt;/li&gt;
-&lt;li&gt;Analysis of the experimental data and comparison to previous findings to validate the system&lt;/li&gt;
-&lt;li&gt;Contribution to the conference paper published in LCTES&amp;rsquo; 18, and more significantly to a second publication currently in progress, focusing on the systems neuroscience applications of the system.&lt;/li&gt;
+&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
+&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
+&lt;li&gt;Supports speaker notes&lt;/li&gt;
+&lt;li&gt;Mobile friendly slides&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Race, Wealth and Education in America</title>
-      <link>/project/race-educ/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
-      
-      <guid>/project/race-educ/</guid>
-      <description>&lt;p&gt;Students in &lt;a href=&#34;https://datalab.stanford.edu&#34; target=&#34;_blank&#34;&gt;Data Challenge Lab&lt;/a&gt;, the data science intensive course taught by Bill Behrman and Hadley Wickham, pursue a quarter-long data exploration and analysis project of their choice using the Tidyverse R skills they learn in the course. My project explored the dataset released by the &lt;a href=&#34;https://cepa.stanford.edu/seda/overview&#34; target=&#34;_blank&#34;&gt;Stanford Education Data Archive&lt;/a&gt; along with the publication &lt;a href=&#34;https://cepa.stanford.edu/sites/default/files/wp16-10-v201712.pdf&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;The Geography of Racial/Ethic Test Score Gaps&lt;/em&gt;&lt;/a&gt;, (Reardon, Kalogrides and Shores, 2017). Using a number of creative data visualization techniques, including some inspired by the &lt;a href=&#34;https://www.nytimes.com/interactive/2016/04/29/upshot/money-race-and-success-how-your-school-district-compares.html&#34; target=&#34;_blank&#34;&gt;New York Times interactive&lt;/a&gt; based on the paper, I was able to explore the education achievement gap between students of different races and with parents of different income and education levels geographically, by subject and by student age.&lt;/p&gt;
-
-&lt;p&gt;I am unable to share any results or code in accordance with the class policy and the &lt;a href=&#34;https://communitystandards.stanford.edu/policies-and-guidance/honor-code&#34; target=&#34;_blank&#34;&gt;Stanford Honor Code&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>The Stanford Open Policing Project</title>
-      <link>/project/opp/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
-      
-      <guid>/project/opp/</guid>
-      <description>&lt;p&gt;In the Fall of 2018, I worked with the researchers at the &lt;a href=&#34;https://openpolicing.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Open Policing Project&lt;/a&gt; (OPP) in the &lt;a href=&#34;https://policylab.stanford.edu/&#34; target=&#34;_blank&#34;&gt;Stanford Computational Policy Lab&lt;/a&gt;, to implement and run the Veil of Darkness Test, as proposed by &lt;a href=&#34;https://www.rand.org/pubs/reprints/RP1253.html&#34; target=&#34;_blank&#34;&gt;Grogger &amp;amp; Ridgeway in 2006&lt;/a&gt; using the large OPP dataset.  The premise of the test is that the race of a driver is less visible to the police when it is dark outside than when it is light. Therefore, in the presence of racial bias, there should be a greater disparity in the racial breakdown of drivers stopped during daylight hours than at night. There are a number of factors to control for, most critically time of day, location of the stop.&lt;/p&gt;
-
-&lt;p&gt;My responsibilities included:&lt;/p&gt;
-
+&lt;hr&gt;
+&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Finding states and cities for which the data had the necessary covariates for the test, e.g. driver race and stop location&lt;/li&gt;
-&lt;li&gt;Developing raw data visualizations to provide context and intuition for regression models&lt;/li&gt;
-&lt;li&gt;Implementing the test in R for a large dataset aggregated across cities and states&lt;/li&gt;
-&lt;li&gt;Analysing the results of the visualizations and regression models and drawing conclusions about the existence of racial bias and the statistical strengths and limitations of the method&lt;/li&gt;
+&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
+&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Code block:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
+if porridge == &amp;quot;blueberry&amp;quot;:
+    print(&amp;quot;Eating...&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
+&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
+&lt;p&gt;Block math:&lt;/p&gt;
+&lt;p&gt;$$
+f\left( x \right) = ;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
+$$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
+&lt;p&gt;Make content appear incrementally&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
+{{% fragment %}} **Two** {{% /fragment %}}
+{{% fragment %}} Three {{% /fragment %}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
+One
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+&lt;strong&gt;Two&lt;/strong&gt;
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+Three
+&lt;/span&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
+&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
+- Only the speaker can read these notes
+- Press `S` key to view
+{{% /speaker_note %}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
+&lt;aside class=&#34;notes&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
+&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/aside&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
+&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
+&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
+&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
+&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
+&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+
+&lt;section data-noprocess data-shortcode-slide
+  
+      
+      data-background-image=&#34;/media/boards.jpg&#34;
+  &gt;
+
+&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
+&lt;p&gt;Customize the slide style and background&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/media/boards.jpg&amp;quot; &amp;gt;}}
+{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
+{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
+&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
+.reveal section h2,
+.reveal section h3 {
+  color: navy;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/discussions&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Example Page</title>
-      <link>/tutorial/example/</link>
-      <pubDate>Sun, 09 Sep 2018 00:00:00 -0700</pubDate>
-      
-      <guid>/tutorial/example/</guid>
-      <description>
-
-&lt;p&gt;In this tutorial, I&amp;rsquo;ll share my top 10 tips for getting started with Academic:&lt;/p&gt;
-
-&lt;h2 id=&#34;tip-1&#34;&gt;Tip 1&lt;/h2&gt;
-
-&lt;p&gt;&amp;hellip;&lt;/p&gt;
-
-&lt;h2 id=&#34;tip-2&#34;&gt;Tip 2&lt;/h2&gt;
-
-&lt;p&gt;&amp;hellip;&lt;/p&gt;
+      <title>An Open-Source Realtime Computation Platform (Short WIP Paper)</title>
+      <link>https://samrobertson.netlify.com/publication/licorice/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/licorice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Example Project</title>
+      <link>https://samrobertson.netlify.com/project/example/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/project/example/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>An Open-Source Realtime Computation Platform</title>
-      <link>/publication/licorice-one/</link>
-      <pubDate>Sun, 15 Apr 2018 00:00:00 -0700</pubDate>
-      
-      <guid>/publication/licorice-one/</guid>
+      <title></title>
+      <link>https://samrobertson.netlify.com/admin/config.yml</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/admin/config.yml</guid>
       <description></description>
     </item>
     

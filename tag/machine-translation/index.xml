@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>machine translation | Samantha Robertson</title>
+    <link>https://samrobertson.netlify.com/tag/machine-translation/</link>
+      <atom:link href="https://samrobertson.netlify.com/tag/machine-translation/index.xml" rel="self" type="application/rss+xml" />
+    <description>machine translation</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 20 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
+      <title>machine translation</title>
+      <link>https://samrobertson.netlify.com/tag/machine-translation/</link>
+    </image>
+    
+    <item>
+      <title>Three Directions for the Design of Human-Centered Machine Translation</title>
+      <link>https://samrobertson.netlify.com/publication/hcmt/</link>
+      <pubDate>Tue, 20 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/hcmt/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

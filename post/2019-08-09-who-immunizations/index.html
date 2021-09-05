@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!DOCTYPE html><html lang="en-us" >
+
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.0.0">
-  <meta name="generator" content="Hugo 0.54.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
 
   
 
@@ -21,48 +23,68 @@
   
   
 
-  <meta name="author" content="Sam Robertson">
+  <meta name="author" content="Sam Robertson" />
 
   
   
   
     
   
-  <meta name="description" content="Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the Stanford Data Lab which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.">
+  <meta name="description" content="Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly." />
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/2019-08-09-who-immunizations/">
-
-  
-
+  <link rel="alternate" hreflang="en-us" href="https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/" />
 
   
 
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#707070" />
+  
+
+  
   
 
   
 
-  
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
 
-  
-
-  
-
-  
-  
-  
-  <meta name="theme-color" content="#2962ff">
-  
-
-  
   
   
   
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
 
     
     
@@ -73,41 +95,193 @@
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
         
       
     
 
     
+    
+    
 
     
 
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
   
 
   
   
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap" media="print" onload="this.media='all'">
+    
   
 
-  <link rel="stylesheet" href="/styles.css">
   
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.158f1771ad6c653d3791ec089e605c0e.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
 
   
   
   
 
   
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
-  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Samantha Robertson">
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
   
 
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  <link rel="icon" type="image/png" href="/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="/post/2019-08-09-who-immunizations/">
+  <link rel="canonical" href="https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/" />
 
+  
+  
+  
+  
   
   
   
@@ -115,31 +289,102 @@
     
     
   
-  <meta property="twitter:card" content="summary">
   
-  <meta property="twitter:site" content="@samanthaa_rr">
-  <meta property="twitter:creator" content="@samanthaa_rr">
+  <meta property="twitter:card" content="summary" />
   
-  <meta property="og:site_name" content="Samantha Robertson">
-  <meta property="og:url" content="/post/2019-08-09-who-immunizations/">
-  <meta property="og:title" content="Replicating WHO Visualizations of Global Immunization Coverage | Samantha Robertson">
-  <meta property="og:description" content="Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the Stanford Data Lab which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report."><meta property="og:image" content="/img/icon-192.png">
-  <meta property="og:locale" content="en-us">
+  <meta property="og:site_name" content="Samantha Robertson" />
+  <meta property="og:url" content="https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/" />
+  <meta property="og:title" content="Replicating WHO Visualizations of Global Immunization Coverage | Samantha Robertson" />
+  <meta property="og:description" content="Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly." /><meta property="og:image" content="https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
-  <meta property="article:published_time" content="2019-08-09T00:00:00&#43;00:00">
+    
+      <meta
+        property="article:published_time"
+        content="2019-08-09T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2019-08-09T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2019-08-09T00:00:00&#43;00:00">
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/"
+  },
+  "headline": "Replicating WHO Visualizations of Global Immunization Coverage",
+  
+  "datePublished": "2019-08-09T00:00:00Z",
+  "dateModified": "2019-08-09T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Sam Robertson"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Samantha Robertson",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly."
+}
+</script>
+
+  
+
   
 
   
 
   
+
+
+
+
 
   <title>Replicating WHO Visualizations of Global Immunization Coverage | Samantha Robertson</title>
-
 </head>
-<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
-  <aside class="search-results" id="search">
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="dd08d9566fabafc6365a60f91b12ef6d" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
   <div class="container">
     <section class="search-header">
 
@@ -148,16 +393,22 @@
           <h1>Search</h1>
         </div>
         <div class="col-6 col-search-close">
-          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
         </div>
       </div>
 
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
         
       </div>
+
+      
+      
+
+      
 
     </section>
     <section class="section-search-results">
@@ -171,150 +422,282 @@
 </aside>
 
 
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
-  <div class="container">
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
 
     
+    <div class="d-none d-lg-inline-flex">
       <a class="navbar-brand" href="/">Samantha Robertson</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
 
-      
-      
-      <ul class="navbar-nav mr-auto">
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#about">
-            
-            <span>Home</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#publications">
-            
-            <span>Publications</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#teaching">
-            
-            <span>Teaching</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#posts">
-            
-            <span>Posts</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/files/cv.pdf">
-            
-            <span>CV</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-      
-      </ul>
-      <ul class="navbar-nav ml-auto">
-      
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
-      </ul>
-
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Samantha Robertson</a>
     </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/uploads/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-<article class="article" itemscope itemtype="http://schema.org/Article">
+  </div>
+
+  <div class="page-body">
+    <article class="article">
 
   
 
@@ -335,17 +718,13 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Replicating WHO Visualizations of Global Immunization Coverage</h1>
+  <h1>Replicating WHO Visualizations of Global Immunization Coverage</h1>
 
   
 
   
     
 
-
-
-<meta content="2019-08-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-<meta content="2019-08-09 00:00:00 &#43;0000 UTC" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -358,7 +737,7 @@
     
       
     
-    <time>Aug 9, 2019</time>
+    Aug 9, 2019
   </span>
   
 
@@ -373,66 +752,17 @@
 
   
   
-
+  
+  
+  
   
 
   
-    
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    <li>
-      <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage&amp;url=%2fpost%2f2019-08-09-who-immunizations%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-    <li>
-      <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2019-08-09-who-immunizations%2f"
-         target="_blank" rel="noopener">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-    </li>
-    <li>
-      <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-08-09-who-immunizations%2f&amp;title=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage"
-         target="_blank" rel="noopener">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </li>
-    <li>
-      <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-08-09-who-immunizations%2f&amp;title=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage"
-         target="_blank" rel="noopener">
-        <i class="fab fa-weibo"></i>
-      </a>
-    </li>
-    <li>
-      <a class="email"
-         href="mailto:?subject=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage&amp;body=%2fpost%2f2019-08-09-who-immunizations%2f">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  </ul>
-</div>
-
-
   
 
 </div>
 
     
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -445,8 +775,9 @@
 
   <div class="article-container">
 
-    <div class="article-style" itemprop="articleBody">
+    <div class="article-style">
       
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>Each year, the World Health Organization releases a report with estimates of global immunization coverage. The report lots of visualizations of their data, and they release the data used for each visualization publicly. About a year ago, fresh out of Data Challenge Lab, the class offered by the <a href="datalab.stanford.edu">Stanford Data Lab</a> which I then TA’d a year later, I decided to practice some of my new vis skills by trying to replicate some of the visualizations in the 2016 report.</p>
@@ -838,177 +1169,313 @@ weunic &lt;-
     
 
 
+
+
+
+
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/r/">R</a>
+  <a class="badge badge-light" href="/tag/r/">R</a>
   
-  <a class="badge badge-light" href="/tags/data-visualization/">data-visualization</a>
+  <a class="badge badge-light" href="/tag/data-visualization/">data-visualization</a>
   
-  <a class="badge badge-light" href="/tags/tidyverse/">tidyverse</a>
+  <a class="badge badge-light" href="/tag/tidyverse/">tidyverse</a>
   
 </div>
 
 
 
-
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
     
       
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-<div class="media author-card" itemscope itemtype="http://schema.org/Person">
-  
-  
-  <img class="portrait mr-3" src="/author/admin/avatar_hua162f16de09a3951536942805fb74cf7_189781_250x250_fill_q75_box_center.jpg" itemprop="image" alt="Avatar">
-  
-
-  <div class="media-body">
-    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Sam Robertson</a></h5>
-    <h6 class="card-subtitle">Ph.D. Student</h6>
-    
-    <ul class="network-icon" aria-hidden="true">
-      
-      
       
       
         
       
       
-      
-      
-      
-        
       
       <li>
-        <a itemprop="sameAs" href="/#contact" >
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://twitter.com/samanthaa_rr" target="_blank" rel="noopener">
+        <a href="https://twitter.com/intent/tweet?url=https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/&amp;text=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
-      
-      
-      
-      
-        
-      
-      
+    
       
       
       
         
+      
+      
       
       <li>
-        <a itemprop="sameAs" href="https://github.com/srobert4" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i>
+        <a href="https://www.facebook.com/sharer.php?u=https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/&amp;t=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
         </a>
       </li>
-      
-      
-      
-      
-        
-      
-      
+    
       
       
       
         
+      
+      
       
       <li>
-        <a itemprop="sameAs" href="https://www.linkedin.com/in/samantha-robertson-8a17a2166/" target="_blank" rel="noopener">
-          <i class="fab fa-linkedin"></i>
+        <a href="mailto:?subject=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage&amp;body=https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
         </a>
       </li>
+    
       
-    </ul>
-  </div>
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/&amp;title=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage%20https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://samrobertson.netlify.com/post/2019-08-09-who-immunizations/&amp;title=Replicating%20WHO%20Visualizations%20of%20Global%20Immunization%20Coverage" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
 </div>
 
 
 
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
       
-      
-      <div class="article-widget">
-        <div class="hr-light"></div>
-        <h3>Related</h3>
-        <ul>
-          
-          <li><a href="/post/2019-08-07-womeninparliament/">Women in Parliament Worldwide</a></li>
-          
-          <li><a href="/post/2019-04-29-auselectionpoll/">How Much Do Australians Know About Their Parliament?</a></li>
-          
-          <li><a href="/post/2019-03-07-swdchallenge/">#SWDChallenge March 2019</a></li>
-          
-          <li><a href="/post/2019-02-28-visualizing-course-descriptions/">Visualizing Course Descriptions</a></li>
-          
-          <li><a href="/post/2019-08-08-tidyversetopandas/">Translating Tidyverse to Python</a></li>
-          
-        </ul>
-      </div>
-      
+      <a href="https://samrobertson.netlify.com/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hua162f16de09a3951536942805fb74cf7_189781_270x270_fill_q75_lanczos_center.jpg" alt="Sam Robertson"></a>
     
 
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://samrobertson.netlify.com/">Sam Robertson</a></h5>
+      <h6 class="card-subtitle">Ph.D. Student</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
     
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/samanthaa_rr" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0002-0386-4555" target="_blank" rel="noopener">
+        <i class="ai ai-orcid"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/srobert4" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/samantha-robertson-8a17a2166/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
 
-    
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/2019-08-07-womeninparliament/">Women in Parliament Worldwide</a></li>
+      
+      <li><a href="/post/2019-04-29-auselectionpoll/">How Much Do Australians Know About Their Parliament?</a></li>
+      
+      <li><a href="/post/2019-03-07-swdchallenge/">#SWDChallenge March 2019</a></li>
+      
+      <li><a href="/post/2019-02-28-visualizing-course-descriptions/">Visualizing Course Descriptions</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
 
 
   </div>
 </article>
+  </div>
 
-<div class="container">
-  <footer class="site-footer">
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
   
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
 
   <p class="powered-by">
     
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
     
-    <span class="float-right" aria-hidden="true">
-      <a href="#" id="back_to_top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
     
   </p>
 </footer>
 
-</div>
+    </div>
+    
+  </div>
 
-
+  
 <div id="modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -1034,92 +1501,84 @@ weunic &lt;-
   </div>
 </div>
 
+      
+
     
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
 
     
     
     
-    <script src="/js/mathjax-config.js"></script>
-    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
 
-    
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+      
+      
+
+      
 
       
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
         
       
 
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
       
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
-    
-
-    
-    
-
-    
-    
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-
-    
-    
-    <script>
-      const search_index_filename = "/index.json";
-      const i18n = {
-        'placeholder': "Search...",
-        'results': "results found",
-        'no_results': "No results found"
-      };
-      const content_type = {
-        'post': "Posts",
-        'project': "Projects",
-        'publication' : "Publications",
-        'talk' : "Talks"
-        };
-    </script>
-    
-
-    
-    
-
-    
-    
-    <script id="search-hit-fuse-template" type="text/x-template">
-      <div class="search-hit" id="summary-{{key}}">
-      <div class="search-hit-content">
-        <div class="search-hit-name">
-          <a href="{{relpermalink}}">{{title}}</a>
-          <div class="article-metadata search-hit-type">{{type}}</div>
-          <p class="search-hit-description">{{snippet}}</p>
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-    </script>
-    
-
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
     
 
     
     
 
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
     
     
     
@@ -1128,12 +1587,17 @@ weunic &lt;-
     
     
       
+      
     
     
-    
-    
-    <script src="/js/academic.min.c1b0baf12cd491effaeeb294faf1e83e.js"></script>
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
 
-  </body>
+    
+
+
+
+
+
+
+</body>
 </html>
-

@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>text-analysis | Samantha Robertson</title>
+    <link>https://samrobertson.netlify.com/tag/text-analysis/</link>
+      <atom:link href="https://samrobertson.netlify.com/tag/text-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <description>text-analysis</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 28 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
+      <title>text-analysis</title>
+      <link>https://samrobertson.netlify.com/tag/text-analysis/</link>
+    </image>
+    
+    <item>
+      <title>Visualizing Course Descriptions</title>
+      <link>https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions/</link>
+      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions/</guid>
+      <description>
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/d3/d3.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://samrobertson.netlify.com/rmarkdown-libs/forceNetwork-binding/forceNetwork.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;As my senior year at Stanford nears the end, I’ve started to think more and more about what I’ve really learned here, and what I’ll be taking away from my undergraduate experience. Sure, there’s plenty of sappy stuff about coming of age and figuring out what I want to start doing with my life (spoiler: haven’t figured it out), but what about concrete knowledge I’ve gained from my classes. Being the data nerd that I am, I decided to take a “data-driven” approach to this question, and see what I could find. Here’s the results!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(googlesheets)
+library(rvest)
+library(tidytext)
+library(wordcloud)
+library(tm)
+library(igraph)
+library(networkD3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FILE.googlesheets &amp;lt;- &amp;quot;~/Data/course-descriptions/myclasses.Rds&amp;quot;
+FILE.explorecourses &amp;lt;- &amp;quot;~/Data/course-descriptions/courses1819raw.Rds&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;collating-the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Collating the data&lt;/h1&gt;
+&lt;p&gt;First, we need some data! Although I played around with trying to scrape my transcript, it proved not worth the effort with all the Stanford security, so I created a Google Sheets document and manually recorded each class I have taken, including the department code e.g. “CS”, the course code e.g. “106A”, the school e.g. “School of Engineering”, the number of units I took the class for, and the quarter I took the class (recorded as an integer from 1-12).&lt;/p&gt;
+&lt;p&gt;Then I was able to use the &lt;code&gt;googlesheets&lt;/code&gt; package to pull this data into R with only a few lines of code:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Log in to Google
+gs_auth(new_user = TRUE)
+
+# Find the document we want
+sheet_key &amp;lt;- 
+  gs_ls() %&amp;gt;% 
+  filter(sheet_title == &amp;quot;courses&amp;quot;) %&amp;gt;% 
+  pull(sheet_key)
+
+# Read the document
+df &amp;lt;- 
+  gs_key(sheet_key) %&amp;gt;%
+  gs_read()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To avoid authentication over and over, I saved the resulting dataframe, and we’ll use the saved version.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes &amp;lt;- read_rds(FILE.googlesheets)
+head(classes) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;school&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;units&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;quarter&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;esf&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Office of Vice Provost for Undergraduate Education&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;lawgen&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;116n&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Law School&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;math&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;cs&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;106a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;physics&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;physics&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Let’s clean up the formatting a little first. We’ll also add a variable that contains just the numeric part of the course code, in case we want to look at how advanced the coursework is by the course number.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes &amp;lt;-
+  classes %&amp;gt;% 
+  mutate(
+    dept = str_to_upper(dept),
+    code = str_to_upper(code),
+    school = str_to_title(school),
+    code_numeric = parse_number(code)
+  )
+head(classes) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;school&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;units&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;quarter&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;code_numeric&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ESF&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Office Of Vice Provost For Undergraduate Education&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;LAWGEN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;116N&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Law School&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;116&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;MATH&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;51&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;51&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;106A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;106&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PHYSICS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PHYSICS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Just with this data we can already do some cool analysis. For example, let’s look at the distribution of units over the course of my degree, divided by school…&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;total_unit_count &amp;lt;-
+  classes %&amp;gt;% 
+  group_by(quarter) %&amp;gt;% 
+  summarise(total_units = sum(units))
+## `summarise()` ungrouping output (override with `.groups` argument)
+
+fall_quarters &amp;lt;-
+  tribble(
+    ~quarter, ~label,
+    1, &amp;quot;2015-2016&amp;quot;,
+    4, &amp;quot;2016-2017&amp;quot;,
+    7, &amp;quot;2017-2018&amp;quot;,
+    10, &amp;quot;2018-2019&amp;quot;
+  )
+
+classes %&amp;gt;%
+  group_by(school, quarter) %&amp;gt;% 
+  summarise(total_units = sum(units)) %&amp;gt;% 
+  ggplot(aes(quarter, total_units)) +
+  geom_vline(aes(xintercept = quarter), data = fall_quarters, color = &amp;quot;grey90&amp;quot;) +
+  geom_point(aes(group = school, color = school)) +
+  geom_line(aes(group = school, color = school)) +
+  geom_line(data = total_unit_count, color = &amp;quot;grey80&amp;quot;) +
+  geom_text(
+    aes(x = quarter + 0.2, label = label), 
+    y = 14,  
+    color = &amp;quot;grey40&amp;quot;, 
+    angle = 90,
+    data = fall_quarters,
+    hjust = 0
+  ) +
+  theme(
+    legend.position = &amp;quot;bottom&amp;quot;,
+    legend.direction = &amp;quot;vertical&amp;quot;,
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_blank()
+  ) +
+  labs(
+    x = &amp;quot;Quarter&amp;quot;,
+    y = &amp;quot;Units&amp;quot;,
+    color = NULL,
+    title = &amp;quot;Over Time I&amp;#39;ve started to take more classes in Engineering\nand fewer in Humanities and Sciences&amp;quot;
+  )
+## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;…what about by Department?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes %&amp;gt;% 
+  group_by(school, dept) %&amp;gt;% 
+  summarise(total_units = sum(units)) %&amp;gt;% 
+  ggplot(aes(reorder(dept, total_units), total_units)) +
+  geom_segment(aes(xend = dept, y = 0, yend = total_units), color = &amp;quot;grey60&amp;quot;) +
+  geom_point(aes(color = school), size = 3) +
+  scale_y_continuous(limits = c(0, 42), expand = c(0,0)) +
+  theme_minimal() +
+  theme(
+    legend.position = &amp;quot;bottom&amp;quot;,
+    legend.direction = &amp;quot;vertical&amp;quot;
+  ) +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = &amp;quot;Total Units&amp;quot;,
+    color = NULL,
+    title = &amp;quot;Computer Science Dominates My Unit Count&amp;quot;,
+    subtitle = &amp;quot;Math, MS&amp;amp;E and Statistics classes are also required of my major&amp;quot;
+  )
+## `summarise()` regrouping output by &amp;#39;school&amp;#39; (override with `.groups` argument)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;scraping-course-descriptions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Scraping Course Descriptions&lt;/h1&gt;
+&lt;p&gt;What I am really curious about, though, is whether we can see any themes in my interests from the course descriptions of the classes I’ve taken, as listed in &lt;a href=&#34;https://explorecourses.stanford.edu/&#34;&gt;Explore Courses&lt;/a&gt;. I wasn’t about to copy and paste all of these by hand, plus this was a great opportunity to practice web scraping with &lt;code&gt;rvest&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;I scraped ALL of the course descriptions from every page of Explore Courses, so that I can join the descriptions to my dataframe of classes. This took an hour or so to run, but I made sure to save the result!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;explore_courses &amp;lt;- read_rds(FILE.explorecourses)
+head(explore_courses)
+## # A tibble: 6 x 4
+##   num    title             desc                       attrs                     
+##   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;             &amp;lt;chr&amp;gt;                      &amp;lt;chr&amp;gt;                     
+## 1 AA 47… Why Go To Space?  &amp;quot;Why do we spend billions… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 2 AA 93: Building Trust i… &amp;quot;Preparatory course for B… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 3 AA 10… Introduction to … &amp;quot;This class introduces th… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 4 AA 10… Introduction to … &amp;quot;This course explores the… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 5 AA 10… Air and Space Pr… &amp;quot;This course is designed … &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…
+## 6 AA 10… Surviving Space   &amp;quot;Space is dangerous. Anyt… &amp;quot;\r\n\t\t\t\t\t\r\n\t\t\t…&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Clearly, the results are a little messy! For now, though all we want is the description to join to the datafram of my classes, and maybe the title of the classes might be fun too. To join to our dataset we need to split the &lt;code&gt;num&lt;/code&gt; variable into department and code. While we’re at it, let’s drop any prerequisites from the &lt;code&gt;desc&lt;/code&gt; variable. We don’t care about them for analysing the descriptions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;explore_courses &amp;lt;- 
+  explore_courses %&amp;gt;% 
+  mutate(num = str_extract(num, &amp;quot;^[^:]*&amp;quot;)) %&amp;gt;% 
+  separate(num, into = c(&amp;quot;dept&amp;quot;, &amp;quot;code&amp;quot;), sep = &amp;quot; &amp;quot;, extra = &amp;quot;merge&amp;quot;) %&amp;gt;%
+  mutate(dept = str_to_upper(dept), code = str_to_upper(code)) %&amp;gt;% 
+  separate(
+    desc, 
+    into = c(&amp;quot;desc&amp;quot;), 
+    sep = &amp;quot;(Prerequisites:|Prerequisite:|prerequisite:|prerequisites:)&amp;quot;, 
+    extra = &amp;quot;drop&amp;quot;
+  ) %&amp;gt;% 
+  select(dept, code, title, desc)
+
+head(explore_courses, 2) %&amp;gt;% knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;0%&#34; /&gt;
+&lt;col width=&#34;0%&#34; /&gt;
+&lt;col width=&#34;2%&#34; /&gt;
+&lt;col width=&#34;95%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;title&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;desc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;47SI&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why Go To Space?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why do we spend billions of dollars exploring space? What can modern policymakers, entrepreneurs, and industrialists do to help us achieve our goals beyond planet Earth? Whether it is the object of exploration, science, civilization, or conquest, few domains have captured the imagination of a species like space. This course is an introduction to space policy issues, with an emphasis on the modern United States. We will present a historical overview of space programs from all around the world, and then spend the last five weeks discussing present policy issues, through lectures and guest speakers from NASA, the Department of Defense, new and legacy space industry companies, and more. Students will present on one issue that piques their interest, selecting from various domains including commercial concerns, military questions, and geopolitical considerations.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;93&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Building Trust in Autonomy&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Preparatory course for Bing Overseas Studies summer course in Edinburgh.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;That looks better!!&lt;/p&gt;
+&lt;p&gt;Now we can join this to &lt;code&gt;classes&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions &amp;lt;-
+  classes %&amp;gt;% 
+  left_join(explore_courses, by = c(&amp;quot;dept&amp;quot;, &amp;quot;code&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Even in the first few results, there are some &lt;code&gt;NA&lt;/code&gt; values resulting from the join. A concern is that the matching of &lt;code&gt;dept&lt;/code&gt; and &lt;code&gt;code&lt;/code&gt; isn’t working due to a formatting quirk. Sadly, it’s even worse… Explore Courses deletes classes after they haven’t been offered for a while!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions %&amp;gt;% 
+  filter(is.na(desc)) %&amp;gt;% 
+  knitr::kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;dept&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;code&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;school&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;units&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;quarter&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;code_numeric&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;title&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;desc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;LAWGEN&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;116N&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Law School&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;116&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PHYSICS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41A&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;THINK&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Office Of Vice Provost For Undergraduate Education&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;52&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;41&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;193X&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Engineering&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;193&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ECON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;School Of Humanities &amp;amp; Sciences&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Most of these are classes I took a while ago, and most are for few units, so excluding these from analysis of descriptions shouldn’t be a big deal!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;analysing-course-descriptions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Analysing Course Descriptions&lt;/h1&gt;
+&lt;p&gt;Now we get to the fun part! The code in this section is adapted from &lt;a href=&#34;https://juanitorduz.github.io/text-mining-networks-and-visualization-plebiscito-tweets/&#34;&gt;this awesome blog post&lt;/a&gt; by Juan Orduz analyzing tweet data.&lt;/p&gt;
+&lt;p&gt;Let’s start with something easy and classic, a wordcloud! For this we can use the packages &lt;code&gt;tidytext&lt;/code&gt; to help with counting words, and &lt;code&gt;wordcloud&lt;/code&gt; for visualization.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;classes_with_descriptions %&amp;gt;% 
+  unnest_tokens(word, desc) %&amp;gt;% 
+  anti_join(get_stopwords()) %&amp;gt;% 
+  mutate(word = str_extract(word, &amp;quot;[:alpha:]+&amp;quot;)) %&amp;gt;% 
+  count(word) %&amp;gt;% 
+  arrange(desc(n)) %&amp;gt;% 
+  with(
+    wordcloud(
+      word, 
+      n, 
+      min.freq = 5, 
+      random.order = FALSE, 
+      colors = brewer.pal(8, &amp;#39;Dark2&amp;#39;)
+    )
+  )
+## Joining, by = &amp;quot;word&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;No surprises here! But it’s still fun to see my degree described in pretty colored words.&lt;/p&gt;
+&lt;p&gt;What is perhaps most interesting to me is whether we can see relationships between topics in the course descriptions! For this, I used the &lt;code&gt;igraph&lt;/code&gt; package to create a graph, and the &lt;code&gt;networkD3&lt;/code&gt; package for visualization with D3.&lt;/p&gt;
+&lt;p&gt;First we use &lt;code&gt;tidytext&lt;/code&gt; to count the bigrams, the pairs of words that occur next to each other, in the descriptions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;word_bigrams &amp;lt;- 
+  classes_with_descriptions %&amp;gt;% 
+  unnest_tokens(
+    input = desc, 
+    output = bigram, 
+    token = &amp;#39;ngrams&amp;#39;, 
+    n = 2
+  ) %&amp;gt;%  
+  filter(!is.na(bigram)) %&amp;gt;% 
+  separate(col = bigram, into = c(&amp;#39;word1&amp;#39;, &amp;#39;word2&amp;#39;), sep = &amp;#39; &amp;#39;) %&amp;gt;% 
+  select(word1, word2)
+
+bigram_count &amp;lt;- word_bigrams %&amp;gt;% count(word1, word2, sort = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can create a graph object and use the base R (&lt;em&gt;gasp&lt;/em&gt;) &lt;code&gt;plot&lt;/code&gt; function to visualize the relationships between words. We use a threshold to include only bigrams that occur more times than the threshold. It turns out that 2 is a good threshold for this dataset.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threshold &amp;lt;- 2
+network &amp;lt;-  
+  bigram_count %&amp;gt;%
+  filter(n &amp;gt; threshold) %&amp;gt;% 
+  graph_from_data_frame(directed = FALSE)
+
+plot(
+  network, 
+  vertex.size = 1,
+  vertex.label.color = &amp;#39;black&amp;#39;, 
+  vertex.label.cex = 0.7, 
+  vertex.label.dist = 1,
+  edge.color = &amp;#39;gray&amp;#39;, 
+  main = &amp;#39;Course Descriptions&amp;#39;,
+  alpha = 50
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://samrobertson.netlify.com/post/2019-02-28-visualizing-course-descriptions_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Even restricting the graph to bigrams that occur at least 3 times, it’s still hard to really see the relationships here. Now’s when we use D3 to take this visualization to the next level. Since there’s so much more interaction possible with a D3 graph, we’ll lower the threshold to see a little more detail.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threshold &amp;lt;- 1
+network &amp;lt;-  
+  bigram_count %&amp;gt;%
+  filter(n &amp;gt; threshold) %&amp;gt;% 
+  graph_from_data_frame(directed = FALSE)
+
+network_D3 &amp;lt;- igraph_to_networkD3(network)
+network_D3$nodes &amp;lt;-
+  network_D3$nodes %&amp;gt;% 
+  mutate(
+    degree = 10 * degree(network),
+    group = 1
+  )
+network_D3$links &amp;lt;-
+  network_D3$links %&amp;gt;% 
+  mutate(width = 10 *  E(network)$n / max(E(network)$n))
+
+forceNetwork(
+  Links = network_D3$links, 
+  Nodes = network_D3$nodes, 
+  Source = &amp;#39;source&amp;#39;, 
+  Target = &amp;#39;target&amp;#39;,
+  NodeID = &amp;#39;name&amp;#39;,
+  Group = &amp;#39;group&amp;#39;, 
+  opacity = 0.9,
+  Value = &amp;#39;width&amp;#39;,
+  Nodesize = &amp;#39;degree&amp;#39;, 
+  linkWidth = JS(&amp;quot;function(d) { return Math.sqrt(d.value); }&amp;quot;), 
+  fontSize = 12,
+  zoom = TRUE, 
+  opacityNoHover = 1
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;htmlwidget-1&#34; style=&#34;width:672px;height:480px;&#34; class=&#34;forceNetwork html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;links&#34;:{&#34;source&#34;:[58,81,2,5,25,11,36,2,10,0,3,8,17,36,20,0,20,1,20,36,28,21,2,38,13,6,11,50,84,7,33,36,28,67,1,29,1,1,102,2,2,1,36,4,7,5,12,1,2,1,0,2,35,106,11,2,14,28,28,1,5,1,1,54,83,36,1,11,5,48,0,57,36,1,36,19,2,20,2,1,1,36,1,16,36,12,4,46,2,11,66,20,1,33,1,1,108,20,7,32,2,0,2,7,20,1,2,91,2,20,115,1,110,38,36,26,26,1,30,1,89,2,1,8,5,60,90,0,111,82,72,48,2,36,20,18,66,98,13,112,1,2,2,2,1,36,2,17,14,55,36,1,2,0,2,18,95,20,77,23,17,2,20,31,15,7,38,1,10,51,25,28,2,26,20,23,11,18,15,0,5,1,93,2,20,39,0,1,11,3,7,93,61,34,98,51,17,7,5,38,13,40,42,115,93],&#34;target&#34;:[133,141,38,38,38,38,39,22,118,138,13,13,40,41,41,42,42,42,43,44,44,44,45,47,47,47,14,117,117,117,49,49,50,136,145,122,51,146,146,24,24,52,52,15,15,15,16,147,17,17,53,53,159,157,150,55,56,121,137,59,8,18,18,132,132,60,25,25,25,61,62,63,63,64,64,65,27,28,28,68,29,69,69,70,70,70,71,126,72,73,73,30,74,75,75,9,158,31,31,76,76,78,78,79,80,10,10,152,32,164,166,82,160,124,85,86,135,87,87,148,143,88,149,11,11,91,144,139,162,142,92,92,119,93,94,134,95,156,96,163,97,97,99,125,100,161,101,101,103,103,104,104,105,34,120,107,155,165,140,127,130,108,108,35,35,35,109,109,128,128,36,36,36,36,36,36,36,36,36,36,36,36,153,19,112,113,4,4,151,20,12,114,114,123,123,129,131,37,21,115,115,115,115,116,154],&#34;value&#34;:[10,9.09090909090909,8.18181818181818,8.18181818181818,8.18181818181818,7.27272727272727,5.45454545454545,5.45454545454545,4.54545454545455,4.54545454545455,4.54545454545455,4.54545454545455,4.54545454545455,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,3.63636363636364,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,2.72727272727273,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182,1.81818181818182],&#34;colour&#34;:[&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;,&#34;#666&#34;]},&#34;nodes&#34;:{&#34;name&#34;:[&#34;in&#34;,&#34;of&#34;,&#34;and&#34;,&#34;introduction&#34;,&#34;this&#34;,&#34;is&#34;,&#34;such&#34;,&#34;will&#34;,&#34;emphasis&#34;,&#34;laws&#34;,&#34;linear&#34;,&#34;on&#34;,&#34;topics&#34;,&#34;an&#34;,&#34;based&#34;,&#34;course&#34;,&#34;covered&#34;,&#34;data&#34;,&#34;engineering&#34;,&#34;theory&#34;,&#34;to&#34;,&#34;what&#34;,&#34;abstraction&#34;,&#34;at&#34;,&#34;concepts&#34;,&#34;focus&#34;,&#34;for&#34;,&#34;historical&#34;,&#34;how&#34;,&#34;image&#34;,&#34;interest&#34;,&#34;learn&#34;,&#34;machine&#34;,&#34;programming&#34;,&#34;several&#34;,&#34;students&#34;,&#34;the&#34;,&#34;we&#34;,&#34;a&#34;,&#34;about&#34;,&#34;analysis&#34;,&#34;answers&#34;,&#34;applications&#34;,&#34;approaches&#34;,&#34;are&#34;,&#34;art&#34;,&#34;artificial&#34;,&#34;as&#34;,&#34;by&#34;,&#34;c&#34;,&#34;can&#34;,&#34;computer&#34;,&#34;context&#34;,&#34;demonstrations&#34;,&#34;differential&#34;,&#34;discussion&#34;,&#34;discussions&#34;,&#34;drawn&#34;,&#34;ee&#34;,&#34;elements&#34;,&#34;first&#34;,&#34;fostered&#34;,&#34;freedom&#34;,&#34;from&#34;,&#34;future&#34;,&#34;graph&#34;,&#34;group&#34;,&#34;health&#34;,&#34;ideas&#34;,&#34;implications&#34;,&#34;include&#34;,&#34;initiative&#34;,&#34;interaction&#34;,&#34;interactive&#34;,&#34;knowledge&#34;,&#34;language&#34;,&#34;learning&#34;,&#34;least&#34;,&#34;lecture&#34;,&#34;lectures&#34;,&#34;limited&#34;,&#34;math&#34;,&#34;mathematics&#34;,&#34;maxwell&#39;s&#34;,&#34;may&#34;,&#34;modeling&#34;,&#34;models&#34;,&#34;mutual&#34;,&#34;networks&#34;,&#34;neural&#34;,&#34;object&#34;,&#34;order&#34;,&#34;peer&#34;,&#34;physical&#34;,&#34;preference&#34;,&#34;problem&#34;,&#34;provides&#34;,&#34;race&#34;,&#34;random&#34;,&#34;reading&#34;,&#34;role&#34;,&#34;science&#34;,&#34;scientific&#34;,&#34;sections&#34;,&#34;seeds&#34;,&#34;sets&#34;,&#34;skills&#34;,&#34;software&#34;,&#34;student&#34;,&#34;subject&#34;,&#34;symmetric&#34;,&#34;their&#34;,&#34;these&#34;,&#34;thinking&#34;,&#34;understanding&#34;,&#34;with&#34;,&#34;working&#34;,&#34;be&#34;,&#34;algebra&#34;,&#34;performance&#34;,&#34;social&#34;,&#34;do&#34;,&#34;classification&#34;,&#34;variables&#34;,&#34;matrix&#34;,&#34;research&#34;,&#34;intelligence&#34;,&#34;stanford&#34;,&#34;systems&#34;,&#34;vision&#34;,&#34;structures&#34;,&#34;visualization&#34;,&#34;equations&#34;,&#34;103&#34;,&#34;principles&#34;,&#34;more&#34;,&#34;care&#34;,&#34;does&#34;,&#34;america&#34;,&#34;our&#34;,&#34;squares&#34;,&#34;104&#34;,&#34;particularly&#34;,&#34;network&#34;,&#34;oriented&#34;,&#34;change&#34;,&#34;computing&#34;,&#34;cs106a&#34;,&#34;nature&#34;,&#34;objects&#34;,&#34;developing&#34;,&#34;time&#34;,&#34;logic&#34;,&#34;theories&#34;,&#34;world&#34;,&#34;solving&#34;,&#34;processes&#34;,&#34;developed&#34;,&#34;leaders&#34;,&#34;develop&#34;,&#34;matrices&#34;,&#34;same&#34;,&#34;own&#34;,&#34;questions&#34;,&#34;make&#34;,&#34;sophomores&#34;,&#34;mathematical&#34;],&#34;group&#34;:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],&#34;nodesize&#34;:[90,290,260,20,40,70,10,70,30,10,40,90,30,50,30,50,20,60,50,20,140,20,10,20,20,50,30,10,70,20,20,30,20,20,20,40,260,10,80,20,20,20,40,10,30,10,10,30,20,20,20,30,20,20,10,20,10,10,10,10,20,20,10,20,20,10,20,10,10,20,30,10,20,20,10,20,20,10,20,10,10,10,20,10,10,10,10,20,10,10,10,20,20,40,10,20,10,20,20,10,10,20,10,20,20,10,10,10,30,20,10,10,20,10,20,60,10,30,10,10,10,10,10,20,10,10,10,10,20,10,10,10,20,10,10,10,10,10,10,10,10,10,10,10,10,10,20,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]},&#34;options&#34;:{&#34;NodeID&#34;:&#34;name&#34;,&#34;Group&#34;:&#34;group&#34;,&#34;colourScale&#34;:&#34;d3.scaleOrdinal(d3.schemeCategory20);&#34;,&#34;fontSize&#34;:12,&#34;fontFamily&#34;:&#34;serif&#34;,&#34;clickTextSize&#34;:30,&#34;linkDistance&#34;:50,&#34;linkWidth&#34;:&#34;function(d) { return Math.sqrt(d.value); }&#34;,&#34;charge&#34;:-30,&#34;opacity&#34;:0.9,&#34;zoom&#34;:true,&#34;legend&#34;:false,&#34;arrows&#34;:false,&#34;nodesize&#34;:true,&#34;radiusCalculation&#34;:&#34; Math.sqrt(d.nodesize)+6&#34;,&#34;bounded&#34;:false,&#34;opacityNoHover&#34;:1,&#34;clickAction&#34;:null}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;It’s so much fun to play around with the D3 graph visualization. Hover over nodes to read the labels more clearly. Unsurprisingly, the words cluster around the three nodes: “and”, “the” and “of”, which makes it more difficult to see relationships between domain terms. It’s fun to look at the bigrams that aren’t part of the main connected component, like “machine learning”, “maxwell’s differential equations”, “health care” and “neural networks”. Again, not surprising but kind of cute.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
