@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>social justice | Samantha Robertson</title>
+    <link>https://samrobertson.netlify.com/tag/social-justice/</link>
+      <atom:link href="https://samrobertson.netlify.com/tag/social-justice/index.xml" rel="self" type="application/rss+xml" />
+    <description>social justice</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 12 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
+      <title>social justice</title>
+      <link>https://samrobertson.netlify.com/tag/social-justice/</link>
+    </image>
+    
+    <item>
+      <title>Not Another School Resource Map: Meeting Underserved Families’ Information Needs Requires Trusting Relationships and Personalized Care</title>
+      <link>https://samrobertson.netlify.com/publication/not_another_resource_map/</link>
+      <pubDate>Sat, 12 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/not_another_resource_map/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

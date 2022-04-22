@@ -5,12 +5,44 @@
     <link>https://samrobertson.netlify.com/publication-type/1/</link>
       <atom:link href="https://samrobertson.netlify.com/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
     <description>1</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 12 Nov 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
       <title>1</title>
       <link>https://samrobertson.netlify.com/publication-type/1/</link>
     </image>
+    
+    <item>
+      <title>Not Another School Resource Map: Meeting Underserved Families’ Information Needs Requires Trusting Relationships and Personalized Care</title>
+      <link>https://samrobertson.netlify.com/publication/not_another_resource_map/</link>
+      <pubDate>Sat, 12 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/not_another_resource_map/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reliable and Safe Use of Machine Translation in Medical Settings</title>
+      <link>https://samrobertson.netlify.com/publication/medical_mt/</link>
+      <pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/medical_mt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Understanding and Being Understood: User Strategies for Identifying and Recovering From Mistranslations in Machine Translation-Mediated Chat</title>
+      <link>https://samrobertson.netlify.com/publication/understanding_and_being_understood/</link>
+      <pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/understanding_and_being_understood/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Beyond General Purpose Machine Translation: The Need for Context-specific Empirical Research to Design for Appropriate User Trust</title>
+      <link>https://samrobertson.netlify.com/publication/trait_22/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/trait_22/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Modeling Assumptions Clash with the Real World: Transparency, Equity, and Community Challenges for Student Assignment Algorithms</title>
