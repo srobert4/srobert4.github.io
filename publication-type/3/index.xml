@@ -5,12 +5,20 @@
     <link>https://samrobertson.netlify.com/publication-type/3/</link>
       <atom:link href="https://samrobertson.netlify.com/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
     <description>3</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 20 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 07 Jun 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
       <title>3</title>
       <link>https://samrobertson.netlify.com/publication-type/3/</link>
     </image>
+    
+    <item>
+      <title>Engaging Research Participants with Self-Logged Menstrual Health Data at Scale: Opportunities, Risks, and Open Visualization Research Questions</title>
+      <link>https://samrobertson.netlify.com/publication/engaging_menstrual_health/</link>
+      <pubDate>Tue, 07 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/engaging_menstrual_health/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Three Directions for the Design of Human-Centered Machine Translation</title>

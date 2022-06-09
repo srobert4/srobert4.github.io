@@ -57,10 +57,18 @@
     </item>
     
     <item>
+      <title>Engaging Research Participants with Self-Logged Menstrual Health Data at Scale: Opportunities, Risks, and Open Visualization Research Questions</title>
+      <link>https://samrobertson.netlify.com/publication/engaging_menstrual_health/</link>
+      <pubDate>Tue, 07 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>https://samrobertson.netlify.com/publication/engaging_menstrual_health/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Beyond General Purpose Machine Translation: The Need for Context-specific Empirical Research to Design for Appropriate User Trust</title>
-      <link>https://samrobertson.netlify.com/publication/trait_22/</link>
+      <link>https://samrobertson.netlify.com/publication/beyond_general_mt/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>https://samrobertson.netlify.com/publication/trait_22/</guid>
+      <guid>https://samrobertson.netlify.com/publication/beyond_general_mt/</guid>
       <description></description>
     </item>
     
@@ -2135,15 +2143,15 @@ $$&lt;/p&gt;
 {{% fragment %}} Three {{% /fragment %}}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
-One
+&lt;span class=&#34;fragment &#34; &gt;
+   One 
 &lt;/span&gt;
 &lt;span class=&#34;fragment &#34; &gt;
-&lt;strong&gt;Two&lt;/strong&gt;
+   **Two** 
 &lt;/span&gt;
 &lt;span class=&#34;fragment &#34; &gt;
-Three
-&lt;/span&gt;&lt;/p&gt;
+   Three 
+&lt;/span&gt;
 &lt;hr&gt;
 &lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
 &lt;ul&gt;
