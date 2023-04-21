@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>machine translation | Samantha Robertson</title>
-    <link>https://samrobertson.netlify.com/tag/machine-translation/</link>
-      <atom:link href="https://samrobertson.netlify.com/tag/machine-translation/index.xml" rel="self" type="application/rss+xml" />
-    <description>machine translation</description>
+    <title>visual analytics | Samantha Robertson</title>
+    <link>https://samrobertson.netlify.com/tag/visual-analytics/</link>
+      <atom:link href="https://samrobertson.netlify.com/tag/visual-analytics/index.xml" rel="self" type="application/rss+xml" />
+    <description>visual analytics</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 21 Apr 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://samrobertson.netlify.com/media/icon_hu02dbb127c06b76da8ba32187b19c719f_820_512x512_fill_lanczos_center_3.png</url>
-      <title>machine translation</title>
-      <link>https://samrobertson.netlify.com/tag/machine-translation/</link>
+      <title>visual analytics</title>
+      <link>https://samrobertson.netlify.com/tag/visual-analytics/</link>
     </image>
     
     <item>
@@ -17,14 +17,6 @@
       <link>https://samrobertson.netlify.com/publication/angler/</link>
       <pubDate>Fri, 21 Apr 2023 00:00:00 +0000</pubDate>
       <guid>https://samrobertson.netlify.com/publication/angler/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Three Directions for the Design of Human-Centered Machine Translation</title>
-      <link>https://samrobertson.netlify.com/publication/hcmt/</link>
-      <pubDate>Tue, 20 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>https://samrobertson.netlify.com/publication/hcmt/</guid>
       <description></description>
     </item>
     
